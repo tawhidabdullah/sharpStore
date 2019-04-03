@@ -1,6 +1,9 @@
-//////////////////////// Some key features of this website ////////////////////////////////
+Some key features of this website :=>
+--------------------------------
 
-// UnCover
+
+UnCover :=>
+-------
 1.Social Media Integration
 2.High Resolution Photo and/or Video
 3.User Reviews
@@ -16,5 +19,5 @@
 13. Content Management Systems
 
 
-Cover : ====>>>
-
+Cover :=>
+-----
