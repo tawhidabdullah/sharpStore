@@ -3,6 +3,7 @@ import {SET_CURRENT_USER} from '../actions/types'
 
 const initialState = {
   isAuthenticate : false,
+  isAdmin: false,
   user : {}
 }
 
@@ -15,6 +16,7 @@ const authReducer = (state = initialState,action) => {
       return {
         ...state,
         isAuthenticate : !isEmpty(action.payload),
+        isAdmin : !isEmpty(action.payload.isAdmin),
         user: action.payload
       }
     default : 

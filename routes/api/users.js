@@ -31,8 +31,6 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  console.log("get a life");
-
   // check if the user has already an account or not
   // if has return error
   // other wise create a new user in the database
@@ -42,6 +40,8 @@ router.post("/register", (req, res) => {
       return res.status(400).json(errors);
     } else {
       const { name, email, password } = req.body;
+      let isAdmin = false; 
+    
       const avatar = gravatar.url(req.body.email, {
         // decleare the avatar or setting the avatar
         s: "200", // size
@@ -49,11 +49,16 @@ router.post("/register", (req, res) => {
         d: "mm" // default
       });
 
+      if(password === keys.adiminKey){
+        isAdmin = true; 
+      }
+
       const newUser = new User({
         // create new user in the data base document
         name,
         email,
         avatar,
+        isAdmin,
         password
       });
 
@@ -122,6 +127,7 @@ router.post("/login", (req, res) => {
           const payload = {
             id: user.id,
             name: user.name,
+            isAdmin: user.isAdmin,
             avatar: user.avatar // CREATE JWT PAYLOAD
           };
 

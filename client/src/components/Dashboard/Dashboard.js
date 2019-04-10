@@ -13,8 +13,9 @@ class Dashbord extends Component {
 
   render() {
     let dashboardContents;
+    let adminDashBoardContents;
 
-    const { user } = this.props.auth;
+    const { user, isAdmin } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
     if (profile === null || loading) {
@@ -34,10 +35,16 @@ class Dashbord extends Component {
       } else {
         dashboardContents = (
           <div>
-            <p className=" text-muted">Wecome <h3 className='text-muted'>{user.name}</h3></p>
-            <p className='lead'>Seems like you are enjoing are service!</p>
+            <p className=" text-muted">
+              Wecome <h3 className="text-muted">{user.name}</h3>
+            </p>
+            <p className="lead">Seems like you are enjoing are service!</p>
           </div>
         );
+      }
+
+      if (isAdmin) {
+        adminDashBoardContents = <h1>You must be The Great Tawhid Abdullah</h1>;
       }
     }
 
@@ -48,6 +55,7 @@ class Dashbord extends Component {
             <div className="col-md-12">
               <h1 className="display-4">DashBoard</h1>
               {dashboardContents}
+              {adminDashBoardContents}
             </div>
           </div>
         </div>
