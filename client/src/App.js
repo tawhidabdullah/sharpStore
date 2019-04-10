@@ -57,7 +57,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path={"/products"} component={Home} />
               <Route exact path={"/products/:id"} component={ProductDetail} />
-              <Route exact patr={"/cart"} component={ShoppingCart} />
+              <Route exact path={"/cart"} component={ShoppingCart} />
             </Switch>
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />

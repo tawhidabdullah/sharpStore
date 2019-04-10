@@ -113,7 +113,4 @@ const mapStateToProps = state => {
   return { products: filterByOrderArr };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(ProductList);
+export default connect( mapStateToProps, null)(ProductList);

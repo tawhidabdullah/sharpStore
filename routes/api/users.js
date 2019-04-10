@@ -28,13 +28,15 @@ router.post("/register", (req, res) => {
 
   // check validation of client and sever // REGISTER FORM
   if (!isValid) {
-    res.status(400).json(errors);
+    return res.status(400).json(errors);
   }
+
+  console.log("get a life");
 
   // check if the user has already an account or not
   // if has return error
   // other wise create a new user in the database
-  User.findOne({ email: req.body.email}) .then(user => {
+  User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = "Email already exist";
       return res.status(400).json(errors);
@@ -150,7 +152,10 @@ router.post("/login", (req, res) => {
 // @decription return current user
 // @access Private
 
-router.get( "/current", passport.authenticate("jwt", { session: false }),(req, res) => {
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
     res.json({
       id: req.user.id,
       name: req.user.name,

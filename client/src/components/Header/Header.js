@@ -14,12 +14,6 @@ class Header extends Component {
     const logedInUserLinks = (
       <React.Fragment>
         <li className="nav-item">
-          <Link className="nav-link" to="/feed">
-            {" "}
-            PostsFeed{" "}
-          </Link>
-        </li>
-        <li className="nav-item">
           <Link className="nav-link" to="/dashboard">
             {" "}
             Dashboard{" "}

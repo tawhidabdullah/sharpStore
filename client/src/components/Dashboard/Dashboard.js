@@ -34,11 +34,8 @@ class Dashbord extends Component {
       } else {
         dashboardContents = (
           <div>
-            <p className="lead text-muted">Wecome {user.name}</p>
-            <p>Seems like you have'nt setup you profile, Go and SETUP!</p>
-            <Link to="/createProfile" className="btn btn-lg btn-outline-info">
-              create profile
-            </Link>
+            <p className=" text-muted">Wecome <h3 className='text-muted'>{user.name}</h3></p>
+            <p className='lead'>Seems like you are enjoing are service!</p>
           </div>
         );
       }

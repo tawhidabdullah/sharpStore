@@ -56,7 +56,6 @@ class Register extends Component {
 
   render() {
     const {errors} = this.state;
-    console.log(errors); 
     return (
       <div className="register">
       <div className="container mt-5">
@@ -72,7 +71,7 @@ class Register extends Component {
             type="text"
             value={this.state.name}
             onChange={this.onChange}
-            error={errors.name}
+            errors={errors.name}
             />
 
             <TextFeildGroup 
@@ -81,7 +80,7 @@ class Register extends Component {
             type="email"
             value={this.state.email}
             onChange={this.onChange}
-            error={errors.email}
+            errors={errors.email}
             info='This site uses Gravatar 
             so if you want a profile image, use a Gravatar email'
             />
@@ -92,7 +91,7 @@ class Register extends Component {
             type="password"
             value={this.state.password}
             onChange={this.onChange}
-            error={errors.password}
+            errors={errors.password}
             />
             
             <TextFeildGroup 
@@ -101,7 +100,7 @@ class Register extends Component {
             type="password"
             value={this.state.password2}
             onChange={this.onChange}
-            error={errors.password2}
+            errors={errors.password2}
             
             />
 
