@@ -27,7 +27,7 @@ mongoose
 app.use(passport.initialize());
 
 // PASSPORT CONFIG
-require("./config/passport")(passport); 
+require("./config/passport")(passport);
 
 // Use Routes
 // Go to this File for this Routes
@@ -40,3 +40,5 @@ app.listen(port, () => {
     `Tawhid Abdullah is a great programmer, server is runnig on ${port}...`
   );
 });
+
+//
