@@ -1,110 +1,125 @@
-import React, { Fragment, useState } from "react";
-import axios from "axios";
+import React, { Fragment, Component } from "react";
 import TextFeildGroup from "../commonFeilds/TextFeildGroup";
 import TextAreaFeildGroup from "../commonFeilds/TextAreaFeildGroup";
 import SelectListGroup from "../commonFeilds/SelectListGroup";
+import { connect } from "react-redux";
+import { addProductAction } from "../../actions/addProductAction";
 
-const FileUploads = () => {
-  const [file, setFile] = useState("");
-  const [filename, setFileName] = useState("Choose file buddy");
-  const [uploadedFile, setUploadedFile] = useState({});
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [errors, setErrors] = useState({});
-  const [imgData, setimgData] = useState("");
-
-  const onChange = e => {
-    setFile(e.target.files[0].name);
-    setFileName(e.target.files[0].name);
+class FileUploads extends Component {
+  state = {
+    title: "",
+    desc: "",
+    category: "",
+    price: 0,
+    productImage: "",
+    errors: {}
   };
 
-  const onInputChange = e => {
-    if (e.target.name === "title") setTitle(e.target.value);
-    if (e.target.name === "desc") setDesc(e.target.value);
-    if (e.target.name === "category") setCategory(e.target.value);
-    if (e.target.name === "price") setPrice(e.target.value);
+  onChange = e => {
+    let productImage;
+    if (e.target.name === "productImage") {
+      productImage = e.target.files[0];
+    }
+
+    this.setState({
+      productImage: productImage
+    });
   };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-
-    let formData = new FormData();
-    formData.append("file", file);
-
-
-    const res = await axios.post("/api/admin/products/addProducts", {
-      title: title,
-      desc: desc,
-      price: price,
-      category: category,
-      file
+  onInputChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     });
   };
 
-  const options = [
-    { label: "Select Categories", value: 0 },
-    { label: "Phone", value: "Phone" },
-    { label: "Computer", value: "Computer" }
-  ];
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
 
-  return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <TextFeildGroup
-          name="title"
-          placeholder="title"
-          type="text"
-          value={title}
-          onChange={onInputChange}
-          errors={errors.title}
-        />
-        <TextAreaFeildGroup
-          name="desc"
-          placeholder="desc"
-          value={desc}
-          onChange={onInputChange}
-          errors={errors.desc}
-        />
-        <TextFeildGroup
-          type="number"
-          placeholder="price"
-          name="price"
-          value={price}
-          onChange={onInputChange}
-          errors={errors.price}
-          info="Type you price here.."
-        />
-        <SelectListGroup
-          placeholder="category"
-          name="category"
-          value={category}
-          onChange={onInputChange}
-          options={options}
-          errors={errors.category}
-          info="Give Product a catagory"
-        />
-        <div className="custom-file mb-4">
-          <input
-            name="file"
-            type="file"
-            className="custom-file-input"
-            id="customFile"
-            onChange={onChange}
+  onSubmit = e => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", this.state.title);
+    formData.append("desc", this.state.desc);
+    formData.append("price", this.state.price);
+    formData.append("category", this.state.category);
+    formData.append("productImage", this.state.productImage);
+
+    this.props.addProductAction(formData);
+  };
+  render() {
+    const errors = this.state.errors;
+
+    const options = [
+      { label: "Select Categories", value: 0 },
+      { label: "Phone", value: "Phone" },
+      { label: "Computer", value: "Computer" }
+    ];
+
+    return (
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <TextFeildGroup
+            name="title"
+            placeholder="title"
+            type="text"
+            value={this.state.title}
+            onChange={this.onInputChange}
+            errors={errors.title}
           />
-          <lable className="custom-file-label" htmlFor="customFile">
-            {filename}
-          </lable>
-        </div>
-        <input
-          type="submit"
-          value="upload"
-          className="btn btn-primary btn-block mt-4"
-        />{" "}
-      </form>
-    </div>
-  );
-};
+          <TextAreaFeildGroup
+            name="desc"
+            placeholder="desc"
+            value={this.state.desc}
+            onChange={this.onInputChange}
+            errors={errors.desc}
+          />
+          <TextFeildGroup
+            type="number"
+            placeholder="price"
+            name="price"
+            value={this.state.price}
+            onChange={this.onInputChange}
+            errors={errors.price}
+            info="Type you price here.."
+          />
+          <SelectListGroup
+            placeholder="category"
+            name="category"
+            value={this.state.category}
+            onChange={this.onInputChange}
+            options={options}
+            errors={errors.category}
+            info="Give Product a catagory"
+          />
+          <div className="custom-file mb-4">
+            <input
+              name="productImage"
+              type="file"
+              className="custom-file-input"
+              id="customFile"
+              onChange={this.onChange}
+            />
+            <lable className="custom-file-label" htmlFor="customFile">
+              Choose image file
+            </lable>
+          </div>
+          <input
+            type="submit"
+            value="upload"
+            className="btn btn-primary btn-block mt-4"
+          />{" "}
+        </form>
+      </div>
+    );
+  }
+}
 
-export default FileUploads;
+export default connect(
+  null,
+  { addProductAction }
+)(FileUploads);

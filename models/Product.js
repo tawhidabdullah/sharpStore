@@ -19,8 +19,9 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
-  image: {
+  productImage: {
     type: String,
+    required: true
   }
 });
 

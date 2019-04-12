@@ -15,31 +15,15 @@ const Catagory = require("../../models/Catagory");
 // load input register  validation
 const validateProdctInput = require("../../validation/products");
 
-// @route GET /api/admin/products
-// @decription get products show at the admin panel
-// @access Private
-
-route.get("/", (req, res) => {
-  let count;
-  Product.count((err, cnt) => {
-    count = cnt;
-  });
-
-  Product.find().then((err, products) => {
-    res.json({
-      products: products,
-      count: count
-    });
-  });
-});
-
 // @route POST /api/admin/products/addProducts
 // @decription add products and save to database
 // @access Private
 
-route.post("/addProducts", (req, res) => {
- 
-  const imageFile = req.body.file ? req.body.file : "";
+route.post("/addProduct", (req, res) => {
+  const imageFile =
+    typeof req.files.productImage !== "undefined"
+      ? req.files.productImage.name
+      : "";
   // bringing the validations : error , isValid
   const { errors, isValid } = validateProdctInput(req.body);
 
@@ -54,13 +38,15 @@ route.post("/addProducts", (req, res) => {
     desc: req.body.desc,
     category: req.body.category,
     price: req.body.price,
-    image: req.body.file
+    productImage: imageFile
   });
 
   newProduct.save(function(err, product) {
     if (err) {
-      return err;
+      return res.status(500).json({ msg: " database error" });
     }
+
+
 
     mkdirp(`${__dirname}/client/public/uploads/${product._id}`, err => {
       return err;
@@ -78,7 +64,7 @@ route.post("/addProducts", (req, res) => {
     );
 
     if (imageFile !== "") {
-      const productImage = req.files;
+      const productImage = req.files.productImage;
       const path = `${__dirname}/client/public/uploads/${
         product._id
       }/${imageFile}`;
@@ -86,7 +72,12 @@ route.post("/addProducts", (req, res) => {
       productImage.mv(path, err => {
         return err;
       });
+      
     }
+
+    res.json({
+      product: product
+    })
   });
 });
 

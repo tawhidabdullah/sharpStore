@@ -1,23 +1,22 @@
 import axios from "axios";
 
 import {
-  ADD_POST,
+  ADD_PRODUCT,
   GET_ERRORS,
   CLEAR_ERRORS,
-  GET_POSTS,
-  GET_POST,
-  POST_LOADING,
-  DELETE_POST
+  GET_PRODUCTS,
+  GET_PRODUCT,
+  PRODUCT_LOADING,
+  DELETE_PRODUCT
 } from "./types";
 
 // Add Post
-export const addPost = postData => dispatch => {
-  dispatch(clearErrors());
+export const addProductAction = PrductData => dispatch => {
   axios
-    .post("/api/posts", postData)
+    .post("/api/admin/product/addProduct", PrductData)
     .then(res =>
       dispatch({
-        type: ADD_POST,
+        type: ADD_PRODUCT,
         payload: res.data
       })
     )

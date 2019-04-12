@@ -13,11 +13,10 @@ const adminProducts = require("./routes/adminRoutes/adminProducts");
 // initialize app
 const app = express();
 
-
+app.use(fileUploader());
 // Body parser middleware
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-app.use(fileUploader());
 
 // Db config
 const db = require("./config/keys").mongoURI;
@@ -63,7 +62,7 @@ app.use(
 );
 
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
-app.use("/api/admin/products", adminProducts);
+app.use("/api/admin/product", adminProducts);
 
 const port = process.env.PORT || 5000;
 
