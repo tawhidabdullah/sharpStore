@@ -1,36 +1,14 @@
-const mongoose = require('mongoose'); 
-const {Schema} = mongoose;
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-
-// creat category schema 
+// creat category schema
 const categorySchema = new Schema({
-  title : {
+  title: {
     type: String,
-    required : true,
-  },
-  slug : {
-      type: String
-  },
-  desc: {
-      type: String,
-      required: true
-  },
-  category: {
-      type: String,
-      required: true
-  },
-  price: {
-      type: Number,
-      required: true
-  },
-  image: {
-      type: String,
-      required: true
+    required: true
   }
-
-})
-
+});
 
 // with user schema , load the user model for User collection
-const Category = mongoose.model('catagories', categorySchema); 
-module.exports = Category; 
+const Category = mongoose.model("catagories", categorySchema);
+module.exports = Category;

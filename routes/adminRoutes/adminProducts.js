@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const route = express.Router();
 const mkdirp = require("mkdirp");
 const fs = require("fs-extra");
@@ -9,6 +10,10 @@ const Product = require("../../models/Product");
 
 // GET CATEGORY MODEL
 const Catagory = require("../../models/Catagory");
+
+// LOAD VALIDATAION
+// load input register  validation
+const validateProdctInput = require("../../validation/products");
 
 // @route GET /api/admin/products
 // @decription get products show at the admin panel
@@ -28,4 +33,80 @@ route.get("/", (req, res) => {
   });
 });
 
+// @route POST /api/admin/products/addProducts
+// @decription add products and save to database
+// @access Private
+
+route.post("/addProducts", (req, res) => {
+ 
+  const imageFile = req.body.file ? req.body.file : "";
+  // bringing the validations : error , isValid
+  const { errors, isValid } = validateProdctInput(req.body);
+
+  // if input is not valid then send and error response
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  // create a new post by Post classs / post model
+  const newProduct = new Product({
+    title: req.body.title,
+    desc: req.body.desc,
+    category: req.body.category,
+    price: req.body.price,
+    image: req.body.file
+  });
+
+  newProduct.save(function(err, product) {
+    if (err) {
+      return err;
+    }
+
+    mkdirp(`${__dirname}/client/public/uploads/${product._id}`, err => {
+      return err;
+    });
+
+    mkdirp(`${__dirname}/client/public/uploads/${product._id}/gallery`, err => {
+      return err;
+    });
+
+    mkdirp(
+      `${__dirname}/client/public/uploads/${product._id}/gallery/thumbs`,
+      err => {
+        return err;
+      }
+    );
+
+    if (imageFile !== "") {
+      const productImage = req.files;
+      const path = `${__dirname}/client/public/uploads/${
+        product._id
+      }/${imageFile}`;
+
+      productImage.mv(path, err => {
+        return err;
+      });
+    }
+  });
+});
+
 module.exports = route;
+
+// if (req.files === null) {
+//   return res.status(404).json({ msg: "No File uploaded" });
+// }
+
+// const file = req.files.file;
+// file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+//   if (err) {
+//     console.error(err);
+//     return res.status(500).send(err);
+//   }
+// });
+
+// req.files.
+
+// res.json({
+//   fileName: file.name,
+//   filePath: `/uploads/${file.name}`
+// });

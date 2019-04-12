@@ -2,7 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const passport = require("passport");
-const fileUpload = require("express-fileupload");
+const expressValidator = require("express-validator");
+const path = require("path");
+const fileUploader = require("express-fileupload");
 
 // relative import
 // importing the router of USERS
@@ -11,12 +13,11 @@ const adminProducts = require("./routes/adminRoutes/adminProducts");
 // initialize app
 const app = express();
 
-// express fileUplead middlewar
-app.use(fileUpload());
 
 // Body parser middleware
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
+app.use(fileUploader());
 
 // Db config
 const db = require("./config/keys").mongoURI;
@@ -31,10 +32,36 @@ mongoose
 app.use(passport.initialize());
 
 // PASSPORT CONFIG
+
 require("./config/passport")(passport);
 
-// Use Routes
-// Go to this File for this Routes
+app.use(
+  expressValidator({
+    customValidators: {
+      isImage: function(value, filename) {
+        var extension = path.extname(filename).toLowerCase();
+        switch (extension) {
+          case ".jpg":
+            return ".jpg";
+            break;
+          case ".jpeg":
+            return ".jpeg";
+            break;
+          case ".PNG":
+            return ".png";
+            break;
+          case "":
+            return ".jpg";
+            break;
+
+          default:
+            return false;
+        }
+      }
+    }
+  })
+);
+
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
 app.use("/api/admin/products", adminProducts);
 

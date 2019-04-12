@@ -11,6 +11,9 @@ import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ShoppingCart from "./pages/ShopingCart/ShoppingCart";
 import Dashboard from "./components/Dashboard/Dashboard";
+import AddProducts from './components/Dashboard/AddProducts'; 
+
+
 
 // AUTH COMPONENTS
 import Register from "./components/auth/Register";
@@ -23,8 +26,6 @@ import PrivateRoute from "./components/commonFeilds/privateRoute";
 import store from "./store";
 import { setCurrentUser, logoutUser } from "./actions/authAction";
 
-
-
 // CHECK FOR TOKEN
 if (localStorage.jwttoken) {
   // set auth token to header Authorization
@@ -35,7 +36,6 @@ if (localStorage.jwttoken) {
   store.dispatch(setCurrentUser(decoded)); // fired the action and set the user into state
 
   /////////// MAKE LOGOUT THE USER BASED on expired  tIme
-
 }
 
 class App extends Component {
@@ -61,6 +61,13 @@ class App extends Component {
             </Switch>
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path={"/addProducts"}
+                component={AddProducts}
+              />
             </Switch>
             <Footer />
           </React.Fragment>
