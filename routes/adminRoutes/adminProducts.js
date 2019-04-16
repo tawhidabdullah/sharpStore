@@ -15,22 +15,37 @@ const Catagory = require("../../models/Catagory");
 // load input register  validation
 const validateProdctInput = require("../../validation/products");
 
+route.get("/addProduct", (req, res) => {
+  Product.findById("5cb08239c7561128fc97ad8b")
+
+    .then(product => {
+      res.json({
+        imageProducts: `uploads/${product._id}/${product.productImage}`
+      });
+    })
+    .catch(err => console.log(err));
+});
+
 // @route POST /api/admin/products/addProducts
 // @decription add products and save to database
 // @access Private
 
 route.post("/addProduct", (req, res) => {
-  const imageFile =
-    typeof req.files.productImage !== "undefined"
-      ? req.files.productImage.name
-      : "";
   // bringing the validations : error , isValid
   const { errors, isValid } = validateProdctInput(req.body);
+
+  let image = req.file;
+
+  if (!image) {
+    errors.imgError = "img shoud be send buddy";
+  }
 
   // if input is not valid then send and error response
   if (!isValid) {
     return res.status(400).json(errors);
   }
+
+  let imgUrl = image.path;
 
   // create a new post by Post classs / post model
   const newProduct = new Product({
@@ -38,15 +53,40 @@ route.post("/addProduct", (req, res) => {
     desc: req.body.desc,
     category: req.body.category,
     price: req.body.price,
-    productImage: imageFile
+    productImage: imgUrl
   });
 
-  newProduct.save(function(err, product) {
+  newProduct.save();
+});
+
+module.exports = route;
+
+// if (req.files === null) {
+//   return res.status(404).json({ msg: "No File uploaded" });
+// }
+
+// const file = req.files.file;
+// file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+//   if (err) {
+//     console.error(err);
+//     return res.status(500).send(err);
+//   }
+// });
+
+// req.files.
+
+// res.json({
+//   fileName: file.name,
+//   filePath: `/uploads/${file.name}`
+// });
+
+////////////////////////////////////////////////////////
+
+/*
+function(err, product) {
     if (err) {
       return res.status(500).json({ msg: " database error" });
     }
-
-
 
     mkdirp(`${__dirname}/client/public/uploads/${product._id}`, err => {
       return err;
@@ -72,32 +112,19 @@ route.post("/addProduct", (req, res) => {
       productImage.mv(path, err => {
         return err;
       });
-      
     }
 
     res.json({
       product: product
-    })
-  });
-});
+    });
+  }
 
-module.exports = route;
 
-// if (req.files === null) {
-//   return res.status(404).json({ msg: "No File uploaded" });
-// }
 
-// const file = req.files.file;
-// file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
-//   if (err) {
-//     console.error(err);
-//     return res.status(500).send(err);
-//   }
-// });
 
-// req.files.
 
-// res.json({
-//   fileName: file.name,
-//   filePath: `/uploads/${file.name}`
-// });
+
+
+
+
+*/

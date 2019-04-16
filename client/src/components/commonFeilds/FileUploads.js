@@ -62,7 +62,7 @@ class FileUploads extends Component {
 
     return (
       <div>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} encType='multipart/form-data'>
           <TextFeildGroup
             name="title"
             placeholder="title"

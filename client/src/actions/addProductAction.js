@@ -27,3 +27,21 @@ export const addProductAction = PrductData => dispatch => {
       })
     );
 };
+
+// Add Post
+export const getProductAction = () => dispatch => {
+  axios
+    .get("/api/admin/product/addProduct")
+    .then(res =>
+      dispatch({
+        type: GET_PRODUCTS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
