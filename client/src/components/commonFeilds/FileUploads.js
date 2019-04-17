@@ -104,9 +104,9 @@ class FileUploads extends Component {
               id="customFile"
               onChange={this.onChange}
             />
-            <lable className="custom-file-label" htmlFor="customFile">
+            <label className="custom-file-label" htmlFor="customFile">
               Choose image file
-            </lable>
+            </label>
           </div>
           <input
             type="submit"

@@ -10,23 +10,47 @@ const path = require("path");
 // importing the router of USERS
 const users = require("./routes/api/users");
 const adminProducts = require("./routes/adminRoutes/adminProducts");
+const adminCategory = require("./routes/adminRoutes/adminCategory");
 // initialize app
 const app = express();
-const fileStorage = multer.
+app.use("/images", express.static("images"));
 
-({
-  destination: function(req, file, cb) {
+// const fileStorage = multer.diskStorage({
+//   destination: function(req, file, cb) {
+//     cb(null, path.join(__dirname, "/images/"));
+//     multer.memoryStorage;
+//   },
+//   filename: function(req, file, cb) {
+//     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+//   }
+// });
 
-    
-    cb(null, "images"); multer.memoryStorage
-  },
+const storage = multer.diskStorage({
+  destination: "images",
   filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + "-" + file.originalname);
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
   }
 });
 
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 // Body parser middleware
-app.use(multer({ storage: fileStorage }).single("productImage"));
+app.use(
+  multer({ storage: storage, fileFilter: fileFilter }).single("productImage")
+);
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -40,19 +64,6 @@ app.use(bodyparser.json());
 //     cb(null, new Date().toISOString() + "-" + file.originalname);
 //   }
 // });
-
-// const fileFilter = (req, file, cb) => {
-//   if (
-//     file.mimetype === "image/png" ||
-//     file.mimetype === "image/jpg" ||
-//     file.mimetype === "image/jpeg"
-//   ) {
-//     cb(null, true);
-//   } else {
-//     cb(null, false);
-//   }
-// };
-
 app.use("/images", express.static(path.join(__dirname, "images")));
 // Db config
 const db = require("./config/keys").mongoURI;
@@ -72,6 +83,7 @@ require("./config/passport")(passport);
 
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
 app.use("/api/admin/product", adminProducts);
+app.use("/api/admin/category", adminCategory);
 
 const port = process.env.PORT || 5000;
 

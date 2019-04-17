@@ -113,8 +113,3 @@ const Product = props => {
 };
 
 export default connect()(Product);
-
-//
-{
-  /**/
-}

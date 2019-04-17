@@ -24,19 +24,19 @@ class AddProducts extends Component {
 
   render() {
     const { products, loading } = this.props.product;
-    let images;
-    if (products) {
-      for (let i in products) {
-        console.log(products[i]);
-        images = <ShowImage imgData={products[i]} />;
-      }
-    }
+    let prods = products.product; 
+    let images; 
+   if(prods){
+    prods.forEach(element => {
+     images =  <ShowImage imgData={element.productImage} />
+    });
+   }
 
     return (
       <div className="container mt-5">
         <h4 className="display-4 text-center mb-4">Add your Product</h4>
         <FileUploads />
-        {images}
+       {images}
       </div>
     );
   }

@@ -1,84 +1,84 @@
+import { phones } from "../data/phones";
+
 import {
-    ADD_PRODUCT_TO_CART,
-    DECREMENT_CART_ITEM_QUANTITY,
-    INCREMENT_CART_ITEM_QUANTITY,
-    REMOVE_PRODUCT_FROM_CART
-} from '../actions';
-import {phones} from "../data/phones";
+  ADD_PRODUCT_TO_CART,
+  DECREMENT_CART_ITEM_QUANTITY,
+  INCREMENT_CART_ITEM_QUANTITY,
+  REMOVE_PRODUCT_FROM_CART
+} from "../actions";
 
 const initialState = {
-    products: phones,
-    cart: []
+  products: phones,
+  cart: []
 };
 
+const shopReducer = (state = initialState, action) => {
+  let updatedCart;
+  let updatedItemIndex;
 
-const shopReducer = (state = initialState, action ) => {
-    let updatedCart;
-    let updatedItemIndex;
+  switch (action.type) {
+    case INCREMENT_CART_ITEM_QUANTITY:
+      updatedCart = [...state.cart];
+      updatedItemIndex = updatedCart.findIndex(
+        item => item.id === action.payload
+      );
 
-    switch (action.type) {
-        case INCREMENT_CART_ITEM_QUANTITY:
-            updatedCart = [...state.cart];
-            updatedItemIndex = updatedCart.findIndex(
-                item => item.id === action.payload
-            );
+      const incrementedItem = {
+        ...updatedCart[updatedItemIndex]
+      };
 
-            const incrementedItem = {
-                ...updatedCart[updatedItemIndex]
-            };
+      incrementedItem.quantity++;
 
-            incrementedItem.quantity++;
+      updatedCart[updatedItemIndex] = incrementedItem;
 
-            updatedCart[updatedItemIndex] = incrementedItem;
+      return { ...state, cart: updatedCart };
 
+    case DECREMENT_CART_ITEM_QUANTITY:
+      updatedCart = [...state.cart];
+      updatedItemIndex = updatedCart.findIndex(
+        item => item.id === action.payload
+      );
 
-            return {...state, cart: updatedCart};
+      const decrementedItem = {
+        ...updatedCart[updatedItemIndex]
+      };
 
-        case DECREMENT_CART_ITEM_QUANTITY:
-            updatedCart = [...state.cart];
-            updatedItemIndex = updatedCart.findIndex(
-                item => item.id === action.payload
-            );
+      decrementedItem.quantity--;
 
-            const decrementedItem = {
-                ...updatedCart[updatedItemIndex]
-            };
+      updatedCart[updatedItemIndex] = decrementedItem;
 
-            decrementedItem.quantity--;
+      return { ...state, cart: updatedCart };
 
-            updatedCart[updatedItemIndex] = decrementedItem;
+    case ADD_PRODUCT_TO_CART:
+      updatedCart = [...state.cart];
+      updatedItemIndex = updatedCart.findIndex(
+        item => item.id === action.payload.id
+      );
 
-            return {...state, cart: updatedCart};
+      if (updatedItemIndex < 0) {
+        updatedCart.push({ ...action.payload, quantity: 1 });
+      } else {
+        const updatedItem = {
+          ...updatedCart[updatedItemIndex]
+        };
 
-        case ADD_PRODUCT_TO_CART:
-            updatedCart = [...state.cart];
-            updatedItemIndex = updatedCart.findIndex(item => item.id === action.payload.id);
+        updatedItem.quantity++;
+        updatedCart[updatedItemIndex] = updatedItem;
+      }
 
-            if(updatedItemIndex < 0) {
-                updatedCart.push({...action.payload, quantity: 1});
-            } else {
-                const updatedItem = {
-                    ...updatedCart[updatedItemIndex]
-                };
+      return { ...state, cart: updatedCart };
+    case REMOVE_PRODUCT_FROM_CART:
+      updatedCart = [...state.cart];
+      updatedItemIndex = updatedCart.findIndex(
+        item => item.id === action.payload
+      );
 
-                updatedItem.quantity++;
-                updatedCart[updatedItemIndex] = updatedItem;
-            }
+      updatedCart.splice(updatedItemIndex, 1);
 
-            return {...state, cart: updatedCart};
-        case REMOVE_PRODUCT_FROM_CART:
-            updatedCart = [...state.cart];
-            updatedItemIndex = updatedCart.findIndex(
-                item => item.id === action.payload
-            );
-
-            updatedCart.splice(updatedItemIndex, 1);
-
-            return {...state, cart: updatedCart};
-        default:
-            return state;
-
-    }
+      return { ...state, cart: updatedCart };
+    default:
+      return state;
+  }
 };
 
 export default shopReducer;

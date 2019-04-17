@@ -16,14 +16,12 @@ const Catagory = require("../../models/Catagory");
 const validateProdctInput = require("../../validation/products");
 
 route.get("/addProduct", (req, res) => {
-  Product.findById("5cb08239c7561128fc97ad8b")
-
-    .then(product => {
+  
+    Product.find().then(product => {
       res.json({
-        imageProducts: `uploads/${product._id}/${product.productImage}`
-      });
-    })
-    .catch(err => console.log(err));
+        product: product
+      })
+    }).catch(err => console.log(err)); 
 });
 
 // @route POST /api/admin/products/addProducts

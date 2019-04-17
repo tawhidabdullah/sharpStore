@@ -51,10 +51,10 @@ class Header extends Component {
       </React.Fragment>
     );
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
-            Ecommerce
+            <span className="lead">SharpStore</span>
           </NavLink>
           <div>
             <ul className="navbar-nav ml-auto">
