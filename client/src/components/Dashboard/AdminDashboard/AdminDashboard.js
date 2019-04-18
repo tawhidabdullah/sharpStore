@@ -4,6 +4,8 @@ import { Link, withRouter } from "react-router-dom";
 import "../Dashboard.scss";
 import AddProducts from "../AddProducts";
 import Spinner from "../../commonFeilds/Spinner";
+import DashboardContent from "./DashboardContent/DashboardContent";
+import "./AdminDashboard.scss";
 
 // import ACTIONS
 import { getCurrentProfile } from "../../../actions/profileAction";
@@ -107,13 +109,16 @@ class AdminDashboard extends Component {
 
     return (
       <div>
-        <div id="nav">
-          <div className="user-banner">
-            <img src="../../imgs/me.jpg" />
-            <h5 className="username">Tawhid Abdullah</h5>
+        <div id="nav" className="side-nav sidenav">
+          <div class="sidenav__profile">
+            <div class="sidenav__profile-avatar" />
+            <div class="sidenav__profile-title text-light">Tawhid</div>
           </div>
           <ul>
-            <li className="head">General</li>
+            <div class="search">
+              <input type="text" placeholder="Type here" />
+              <i class="fa fa-search" />
+            </div>
             <li
               className={this.state.isDashboardClicked ? "active" : "deactive"}
               onClick={this.renderDashboard}
@@ -174,7 +179,7 @@ class AdminDashboard extends Component {
           <div id="content">
             <div className="box">
               {this.state.isProductClicked ? <AddProducts /> : ""}
-              {/* {this.state.isUserClicked ? <Users /> : ""} */}
+              {this.state.isDashboardClicked ? <DashboardContent /> : ""}
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ const path = require("path");
 // importing the router of USERS
 const users = require("./routes/api/users");
 const adminProducts = require("./routes/adminRoutes/adminProducts");
-const adminCategory = require("./routes/adminRoutes/adminCategory");
+const adminCategory = require("./routes/adminRoutes/adminCategory"); 
 // initialize app
 const app = express();
 app.use("/images", express.static("images"));

@@ -8,13 +8,18 @@ class AddProducts extends Component {
   render() {
     return (
       <div>
-        <h4 className="display-4 text-center mb-4">Add your Product</h4>
+       <div style={{
+         background: "whitesmoke",
+         padding: "5px 20px"
+       }}>
+       <h4 className="display-3 text-center mb-4">Add your Product</h4>
+       </div>
         <div className="row">
           <div className="col-md-6">
             {" "}
             <FileUploads />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 pt-4">
             <p className="lead text-muted">
               A wonderful serenity has taken possession of my entire soul, like
               these sweet mornings of spring which I enjoy with my whole heart.
