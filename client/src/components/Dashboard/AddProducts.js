@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FileUploads from "../commonFeilds/FileUploads";
 import { connect } from "react-redux";
 import { getProductAction } from "../../actions/addProductAction";
-import ShowImage from "../commonFeilds/ShowImage";
+
 
 class AddProducts extends Component {
   state = {
