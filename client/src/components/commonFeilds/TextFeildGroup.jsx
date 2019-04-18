@@ -14,7 +14,7 @@ const TextFeildGroup = ({
   errors
 }) => {
   return (
-    <div className="form-group form-g">
+    <div className="form">
       <input
         type={type}
         className={classnames("form-control form-control-lg", {

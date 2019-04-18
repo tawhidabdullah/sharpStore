@@ -11,9 +11,7 @@ import Footer from "./components/Footer/Footer";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ShoppingCart from "./pages/ShopingCart/ShoppingCart";
 import Dashboard from "./components/Dashboard/Dashboard";
-import AddProducts from './components/Dashboard/AddProducts'; 
-
-
+import AddProducts from "./components/Dashboard/AddProducts";
 
 // AUTH COMPONENTS
 import Register from "./components/auth/Register";
@@ -60,15 +58,16 @@ class App extends Component {
               <Route exact path={"/cart"} component={ShoppingCart} />
             </Switch>
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            </Switch>
-            <Switch>
               <PrivateRoute
                 exact
                 path={"/addProducts"}
                 component={AddProducts}
               />
             </Switch>
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
+
             <Footer />
           </React.Fragment>
         </BrowserRouter>

@@ -2,13 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import Spinner from "../commonFeilds/Spinner";
+import "./Dashboard.scss";
+import AddProducts from "./AddProducts";
 
 // import ACTIONS
 import { getCurrentProfile } from "../../actions/profileAction";
 
 class Dashbord extends Component {
+  state = {
+    isProductClicked: false
+  };
+
   componentDidMount() {
     this.props.getCurrentProfile(); // fired the getCurrentUser action
+  }
+
+  renderAddProducts = () => {
+    this.setState({
+      isProductClicked: true
+    });
   }
 
   render() {
@@ -49,13 +61,59 @@ class Dashbord extends Component {
     }
 
     return (
-      <div className="dashboard">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1 className="display-4">DashBoard</h1>
-              {dashboardContents}
-              {adminDashBoardContents}
+      <div>
+        <div id="nav">
+          <div className="user-banner">
+            <img src="../../imgs/me.jpg" />
+            <h5 className="username">Tawhid Abdullah</h5>
+          </div>
+          <ul>
+            <li className="head">General</li>
+            <li className="active">
+              <Link to="/dashboard">
+                <i className="fa fa-fw fa-dashboard" />
+                <span>Dashboard</span>
+              </Link>
+            </li>
+            <li onClick={this.renderAddProducts}>
+              <a href='#'>
+                <i className="fa fa-fw fa-pencil" />
+                <span className="swatch light-grey">Products</span>
+              </a>
+            </li>
+            <li >
+              <a href="#">
+                <i className="fa fa-fw fa-user" />
+                <span>Users</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fa fa-fw fa-money" />
+                <span>Payments</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fa fa-fw fa-cog" />
+                <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="main">
+          <header>
+            <ol className="breadcrumb">
+              <li>
+                {" "}
+                <a href="#">haus</a>
+              </li>
+              <li className="active">dashboard</li>
+            </ol>
+          </header>
+          <div id="content">
+            <div className="box">
+              {this.state.isProductClicked ? <AddProducts /> : ""}
             </div>
           </div>
         </div>
@@ -75,3 +133,35 @@ export default connect(
   mapStateToProp,
   { getCurrentProfile }
 )(withRouter(Dashbord));
+
+// <div class="menu">
+
+// <div id="panel">
+//   <label class="text" for="toggle">Admin Settings</label>
+//   <label class="icon fa fa-cog" for="toggle"></label>
+// </div>
+
+// <input type="checkbox" id="toggle" />
+
+// <div class="dropdown">
+//   <div class="arrow"></div>
+
+//   <a href="#" class="row">
+//     <div class="text">Edit User</div>
+//     <i class="icon fa fa-user"></i>
+//   </a>
+//   <a href="#" class="row">
+//     <div class="text">Statistics</div>
+//     <i class="icon fa fa-home"></i>
+//   </a>
+//   <a href="#" class="row">
+//     <div class="text">Upload Settings</div>
+//     <i class="icon fa fa-upload"></i>
+//   </a>
+//   <a href="#" class="row">
+//     <div class="text">Edit Sliders</div>
+//     <i class="icon fa fa-pencil"></i>
+//   </a>
+// </div>
+
+// </div>

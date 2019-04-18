@@ -4,13 +4,17 @@ import TextAreaFeildGroup from "../commonFeilds/TextAreaFeildGroup";
 import SelectListGroup from "../commonFeilds/SelectListGroup";
 import { connect } from "react-redux";
 import { addProductAction } from "../../actions/addProductAction";
+import "../../components/styles_components/submit.scss"; 
+import "../../components/styles_components/fileUpload.scss"; 
 
 class FileUploads extends Component {
+
+
   state = {
     title: "",
     desc: "",
     category: "",
-    price: 0,
+    price: "",
     productImage: "",
     errors: {}
   };
@@ -61,60 +65,54 @@ class FileUploads extends Component {
     ];
 
     return (
-      <div>
-        <form onSubmit={this.onSubmit} encType='multipart/form-data'>
-          <TextFeildGroup
-            name="title"
-            placeholder="title"
-            type="text"
-            value={this.state.title}
-            onChange={this.onInputChange}
-            errors={errors.title}
-          />
-          <TextAreaFeildGroup
-            name="desc"
-            placeholder="desc"
-            value={this.state.desc}
-            onChange={this.onInputChange}
-            errors={errors.desc}
-          />
-          <TextFeildGroup
-            type="number"
-            placeholder="price"
-            name="price"
-            value={this.state.price}
-            onChange={this.onInputChange}
-            errors={errors.price}
-            info="Type you price here.."
-          />
-          <SelectListGroup
-            placeholder="category"
-            name="category"
-            value={this.state.category}
-            onChange={this.onInputChange}
-            options={options}
-            errors={errors.category}
-            info="Give Product a catagory"
-          />
-          <div className="custom-file mb-4">
-            <input
-              name="productImage"
-              type="file"
-              className="custom-file-input"
-              id="customFile"
-              onChange={this.onChange}
-            />
-            <label className="custom-file-label" htmlFor="customFile">
-              Choose image file
-            </label>
-          </div>
+      <form onSubmit={this.onSubmit} encType="multipart/form-data">
+        <TextFeildGroup
+          name="title"
+          placeholder="title"
+          type="text"
+          value={this.state.title}
+          onChange={this.onInputChange}
+          errors={errors.title}
+        />
+        <TextAreaFeildGroup
+          name="desc"
+          placeholder="Description..."
+          value={this.state.desc}
+          onChange={this.onInputChange}
+          errors={errors.desc}
+        />
+        <TextFeildGroup
+          type="number"
+          placeholder="price"
+          name="price.."
+          value={this.state.price}
+          onChange={this.onInputChange}
+          errors={errors.price}
+        />
+        <SelectListGroup
+          placeholder="category"
+          name="category"
+          value={this.state.category}
+          onChange={this.onInputChange}
+          options={options}
+          errors={errors.category}
+        />
+        <div className="custom-file">
           <input
-            type="submit"
-            value="upload"
-            className="btn btn-primary btn-block mt-4"
-          />{" "}
-        </form>
-      </div>
+            name="productImage"
+            type="file"
+            className="custom-file-input"
+            id="customFile"
+            onChange={this.onChange}
+          />
+          <label className="custom-file-label" htmlFor="customFile">
+            Choose image file
+          </label>
+        </div>
+       <div className='form'>
+       <input type="submit" value="Create Product" id="input-submit" />{" "}
+       </div>
+      </form>
     );
   }
 }
