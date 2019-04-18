@@ -65,6 +65,7 @@ app.use(bodyparser.json());
 //   }
 // });
 app.use("/images", express.static(path.join(__dirname, "images")));
+
 // Db config
 const db = require("./config/keys").mongoURI;
 

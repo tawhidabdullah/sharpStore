@@ -7,37 +7,44 @@ import {
   GET_PRODUCTS,
   GET_PRODUCT,
   PRODUCT_LOADING,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  PRODUCT_SUCCESSFULL
 } from "./types";
 
 // Add Post
 export const addProductAction = PrductData => dispatch => {
   axios
     .post("/api/admin/product/addProduct", PrductData)
-    .then(res =>
+    .then(res => {
       dispatch({
         type: ADD_PRODUCT,
         payload: res.data
-      })
-    )
-    .catch(err =>
+      });
+      dispatch({
+        type: PRODUCT_SUCCESSFULL
+      });
+      return true;
+    })
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
-      })
-    );
+      });
+      return false;
+    });
 };
 
 // Add Post
 export const getProductAction = () => dispatch => {
   axios
     .get("/api/admin/product/addProduct")
-    .then(res =>
+    .then(res => {
+      const products = res.data.product;
       dispatch({
         type: GET_PRODUCTS,
-        payload: res.data
-      })
-    )
+        payload: products
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

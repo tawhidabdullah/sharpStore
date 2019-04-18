@@ -4,21 +4,7 @@ import { formatMoney } from "../../pipes/priceFormatter";
 import { addProductToCart } from "../../actions";
 
 const ProductDetail = props => {
-  const {
-    title,
-    images,
-    brand,
-    price,
-    cpu,
-    camera,
-    size,
-    weight,
-    display,
-    battery,
-    memory,
-    description,
-    id
-  } = props.product;
+  const { title, category, price, desc } = props.product;
 
   const onCart = () => {
     props.dispatch(addProductToCart(props.product));
@@ -32,43 +18,20 @@ const ProductDetail = props => {
         <p className="price-detail-wrap">
           <span className="price h3 text-warning">
             <span className="currency">$</span>
-            <span className="num">{formatMoney(price)}</span>
+            <span className="num">{price}</span>
           </span>
         </p>
         <dl className="item-property">
           <dt>Description</dt>
           <dd>
-            <p className="text-capitalize">{description}</p>
+            <p className="text-capitalize">{desc}</p>
           </dd>
         </dl>
         <dl className="param param-feature">
           <dt>Brand</dt>
-          <dd className="text-capitalize">{brand}</dd>
+          <dd className="text-capitalize">{category}</dd>
         </dl>
-        <dl className="param param-feature">
-          <dt>Size</dt>
-          <dd>{size}</dd>
-        </dl>
-        <dl className="param param-feature">
-          <dt>Camera</dt>
-          <dd>{camera}</dd>
-        </dl>
-        <dl className="param param-feature">
-          <dt>CPU</dt>
-          <dd>{cpu}</dd>
-        </dl>
-        <dl className="param param-feature">
-          <dt>Memory</dt>
-          <dd>{memory}</dd>
-        </dl>
-        <dl className="param param-feature">
-          <dt>Display</dt>
-          <dd>{display}</dd>
-        </dl>
-        <dl className="param param-feature">
-          <dt>Battery</dt>
-          <dd>{battery}</dd>
-        </dl>
+
         <hr />
         <hr />
         <button

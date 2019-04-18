@@ -1,9 +1,10 @@
 import {
   ADD_PRODUCT,
-  GET_PRODUCTS,
   GET_PRODUCT,
   DELETE_PRODUCT,
-  PRODUCT_LOADING
+  PRODUCT_LOADING,
+  GET_PRODUCTS,
+  PRODUCT_SUCCESSFULL
 } from "../actions/types";
 
 const initialState = {
@@ -19,11 +20,9 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case GET_PRODUCTS:
+    case PRODUCT_SUCCESSFULL:
       return {
-        ...state,
-        products: action.payload,
-        loading: false
+        success: true
       };
     case GET_PRODUCT:
       return {
@@ -35,6 +34,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         products: [action.payload, ...state.products]
+      };
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload
       };
     case DELETE_PRODUCT:
       return {

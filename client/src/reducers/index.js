@@ -6,7 +6,7 @@ import { paginationReducer } from "./pagination.reducer";
 import authReducer from "./authReducer";
 import errorReducer from "./errorReducer";
 import profileReducer from "./profileReducer";
-import productReducer from "./addProducts.Reducer";
+import productReducer from "./products.Reducer";
 
 export default combineReducers({
   shop,

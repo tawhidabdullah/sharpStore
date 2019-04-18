@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import "../Dashboard.scss";
-import AddProducts from '../AddProducts'; 
+import AddProducts from "../AddProducts";
 import Spinner from "../../commonFeilds/Spinner";
 
 // import ACTIONS
@@ -10,6 +10,7 @@ import { getCurrentProfile } from "../../../actions/profileAction";
 
 class AdminDashboard extends Component {
   state = {
+    isDashboardClicked: true,
     isProductClicked: false,
     isUserClicked: false,
     isSettingClicked: false,
@@ -22,7 +23,11 @@ class AdminDashboard extends Component {
 
   renderProducts = () => {
     this.setState({
-      isProductClicked: true
+      isProductClicked: true,
+      isUserClicked: false,
+      isSettingClicked: false,
+      isPaymentsClicked: false,
+      isDashboardClicked: false
     });
   };
 
@@ -31,7 +36,8 @@ class AdminDashboard extends Component {
       isUserClicked: true,
       isProductClicked: false,
       isSettingClicked: false,
-      isPaymentsClicked: false
+      isPaymentsClicked: false,
+      isDashboardClicked: false
     });
   };
   renderPayments = () => {
@@ -39,12 +45,23 @@ class AdminDashboard extends Component {
       isPaymentsClicked: true,
       isUserClicked: false,
       isProductClicked: false,
-      isSettingClicked: false
+      isSettingClicked: false,
+      isDashboardClicked: false
     });
   };
   renderSettings = () => {
     this.setState({
       isSettingClicked: true,
+      isUserClicked: false,
+      isProductClicked: false,
+      isPaymentsClicked: false,
+      isDashboardClicked: false
+    });
+  };
+  renderDashboard = () => {
+    this.setState({
+      isDashboardClicked: true,
+      isSettingClicked: false,
       isUserClicked: false,
       isProductClicked: false,
       isPaymentsClicked: false
@@ -97,31 +114,46 @@ class AdminDashboard extends Component {
           </div>
           <ul>
             <li className="head">General</li>
-            <li className="active">
+            <li
+              className={this.state.isDashboardClicked ? "active" : "deactive"}
+              onClick={this.renderDashboard}
+            >
               <Link to="/dashboard">
                 <i className="fa fa-fw fa-dashboard" />
                 <span>Dashboard</span>
               </Link>
             </li>
-            <li onClick={this.renderProducts}>
+            <li
+              className={this.state.isProductClicked ? "active" : "deactive"}
+              onClick={this.renderProducts}
+            >
               <a href="#">
                 <i className="fa fa-fw fa-pencil" />
                 <span className="swatch light-grey">Products</span>
               </a>
             </li>
-            <li onClick={this.renderUsers}>
+            <li
+              className={this.state.isUserClicked ? "active" : "deactive"}
+              onClick={this.renderUsers}
+            >
               <a href="#">
                 <i className="fa fa-fw fa-user" />
                 <span>Users</span>
               </a>
             </li>
-            <li onClick={this.renderPayments}>
+            <li
+              className={this.state.isPaymentsClicked ? "active" : "deactive"}
+              onClick={this.renderPayments}
+            >
               <a href="#">
                 <i className="fa fa-fw fa-money" />
                 <span>Payments</span>
               </a>
             </li>
-            <li onClick={this.renderSettings}>
+            <li
+              className={this.state.isSettingClicked ? "active" : "deactive"}
+              onClick={this.renderSettings}
+            >
               <a href="#">
                 <i className="fa fa-fw fa-cog" />
                 <span>Settings</span>

@@ -57,13 +57,13 @@ class App extends Component {
               <Route exact path={"/products/:id"} component={ProductDetail} />
               <Route exact path={"/cart"} component={ShoppingCart} />
             </Switch>
-            <Switch>
+            {/* <Switch>
               <PrivateRoute
                 exact
                 path={"/addProducts"}
                 component={AddProducts}
               />
-            </Switch>
+            </Switch> */}
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>

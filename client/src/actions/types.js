@@ -21,7 +21,7 @@ export const PRODUCT_LOADING = 'PRODUCT_LOADING';
 export const ADD_PRODUCT = 'ADD_PRODUCT'; 
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'; 
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'; 
-
+export const PRODUCT_SUCCESSFULL = 'PRODUCT_SUCCESSFULL'; 
 
 
 // substribe user 

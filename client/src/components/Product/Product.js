@@ -9,60 +9,18 @@ import SlideDots from "../SlideDots/SlideDots";
 import { addProductToCart } from "../../actions";
 
 const Product = props => {
-  const { title, price, images, description, id } = props.product;
+  const { title, price, productImage, category, desc, _id } = props.product;
 
-  const imageRef = React.createRef();
-  const [img, setImg] = useState(images[0]);
-  const [aItem, setAItem] = useState(0);
-
-  const handleImageChange = e => {
-    let clientX;
-
-    if (e.type === "touchmove") {
-      clientX = e.touches[0].clientX;
-    } else {
-      clientX = e.clientX;
-    }
-
-    const currentX = clientX - cumulativeOffSet(imageRef.current).left;
-
-    // console.dir(imageRef.current);
-
-    const part = imageRef.current.clientWidth / images.length;
-    // console.log(Math.ceil(currentX / part) - 1);
-
-    let imgIndex = Math.ceil(currentX / part) - 1;
-    if (imgIndex < 0) {
-      imgIndex = 0;
-    }
-
-    if (imgIndex >= images.length) {
-      imgIndex = images.length - 1;
-    }
-    setAItem(imgIndex);
-    setImg(images[imgIndex]);
-  };
-
-  const handleMouseOut = e => {
-    setImg(images[0]);
-    setAItem(0);
-  };
-
-  const changeImage = i => {
-    setImg(images[i]);
-    setAItem(i);
-  };
 
   return (
     <div id="product_item">
       <figure class="snip1268">
         <div class="image">
-          <Link to={`/products/${id}`} className="product__link">
+          <Link to={`/products/${_id}`} className="product__link">
             <img
               className="card-img-top product__img"
-              src={img}
+              src={productImage}
               alt={title}
-              ref={imageRef}
             />
           </Link>
           <div class="icons">

@@ -1,4 +1,4 @@
-import { phones } from "../data/phones";
+// import { phones } from "../data/phones";
 
 import {
   ADD_PRODUCT_TO_CART,
@@ -7,8 +7,10 @@ import {
   REMOVE_PRODUCT_FROM_CART
 } from "../actions";
 
+import { GET_PRODUCTS } from "../actions/types";
+
 const initialState = {
-  products: phones,
+  products: [],
   cart: []
 };
 
@@ -33,6 +35,12 @@ const shopReducer = (state = initialState, action) => {
 
       return { ...state, cart: updatedCart };
 
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload
+      };
+
     case DECREMENT_CART_ITEM_QUANTITY:
       updatedCart = [...state.cart];
       updatedItemIndex = updatedCart.findIndex(
@@ -52,7 +60,7 @@ const shopReducer = (state = initialState, action) => {
     case ADD_PRODUCT_TO_CART:
       updatedCart = [...state.cart];
       updatedItemIndex = updatedCart.findIndex(
-        item => item.id === action.payload.id
+        item => item._id === action.payload._id
       );
 
       if (updatedItemIndex < 0) {
