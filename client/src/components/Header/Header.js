@@ -31,35 +31,35 @@ class Header extends Component {
           </Link>
         </li>
 
-        <div class="header__avatar" onClick={this.toggleDrodown}>
+        <div className="header__avatar" onClick={this.toggleDrodown}>
           <img
             className="header__avatar-img"
             src={user.avatar}
             title="you must have a Gravatar connect to your email for displaying image"
           />
           <div
-            class={`dropdown ${
+            className={`dropdown ${
               this.state.dropdownToggle ? "dropdown--active" : "deactive"
             }`}
           >
-            <ul class="dropdown__list ">
-              <li class="dropdown__list-item">
-                <span class="dropdown__icon">
-                  <i class="fa fa-user" />
+            <ul className="dropdown__list ">
+              <li className="dropdown__list-item">
+                <span className="dropdown__icon">
+                  <i className="fa fa-user" />
                 </span>
-                <span class="dropdown__title">my profile</span>
+                <span className="dropdown__title">my profile</span>
               </li>
-              <li class="dropdown__list-item">
-                <span class="dropdown__icon">
-                  <i class="fa fa-clipboard" />
+              <li className="dropdown__list-item">
+                <span className="dropdown__icon">
+                  <i className="fa fa-clipboard" />
                 </span>
-                <span class="dropdown__title">my account</span>
+                <span className="dropdown__title">my account</span>
               </li>
-              <li class="dropdown__list-item" onClick={this.onLogoutClick}>
-                <span class="dropdown__icon">
-                  <i class="fa fa-sign-out" />
+              <li className="dropdown__list-item" onClick={this.onLogoutClick}>
+                <span className="dropdown__icon">
+                  <i className="fa fa-sign-out" />
                 </span>
-                <span class="dropdown__title">log out</span>
+                <span className="dropdown__title">log out</span>
               </li>
             </ul>
           </div>

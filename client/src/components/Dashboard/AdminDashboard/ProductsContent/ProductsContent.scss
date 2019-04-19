@@ -32,13 +32,12 @@ a {
   bottom: -20px;
   right: 30px;
   transition: all 0.2s ease-in-out;
-  
 }
 .material-button i {
-    font-size: 25px;
-    text-align: center; 
-    padding: 12px 10px 10px 12px; 
-    font-weight: 100; 
+  font-size: 25px;
+  text-align: center;
+  padding: 12px 10px 10px 12px;
+  font-weight: 100;
 }
 .material-button:hover {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -74,53 +73,47 @@ a {
   font-size: 0.85rem;
 }
 
-.search-container{
-    width: 490px;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  input#search-bar{
-    margin: 0 auto;
-    width: 100%;
-    height: 45px;
-    padding: 0 20px;
-    font-size: 1rem;
-    border: 1px solid #D0CFCE;
-    outline: none;
-    &:focus{
-      border: 1px solid #008ABF;
-      transition: 0.35s ease;
-      color: #008ABF;
-      &::-webkit-input-placeholder{
-        transition: opacity 0.45s ease; 
-          opacity: 0;
-       }
-      &::-moz-placeholder {
-        transition: opacity 0.45s ease; 
-          opacity: 0;
-       }
-      &:-ms-placeholder {
-       transition: opacity 0.45s ease; 
-         opacity: 0;
-       }    
-     }
-   }
-  
-  .search-icon{
-    position: relative;
-    float: right;
-    width: 75px;
-    height: 75px;
-    top: -62px;
-    right: -45px;
-  }
-  
-  
-  
-  
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
 
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00b4cc;
+  border-right: none;
+  padding: 15px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9dbfaf;
+}
 
+.searchTerm:focus {
+  color: #00b4cc;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00b4cc;
+  background: #00b4cc;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  width: 30%;
+  position: absolute;
+  top: 80%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+}
 
 .content-wrapper {
   background: #eee;
@@ -191,15 +184,15 @@ a {
   padding-left: 45px;
   position: relative;
 }
-.has-image:before {
+
+li .img {
   background-color: #ddd;
   border-radius: 100%;
-  content: "";
-  height: 30px;
+  height: 40px;
   left: 0;
   position: absolute;
   top: 6px;
-  width: 30px;
+  width: 40px;
 }
 
 .table-wrapper > ul:nth-child(1) {

@@ -71,8 +71,7 @@ class FileUploads extends Component {
         price: "",
         productImage: "",
         success: false,
-        errors: {},
-        productText: "Product has created"
+        errors: {}
       });
 
       setTimeout(

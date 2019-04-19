@@ -35,7 +35,7 @@ route.post(
     }
     let imgUrl = image.path;
 
-    let productFields = {};
+    const productFields = {};
 
     // create a new post by Post classs / post model
 
@@ -60,50 +60,40 @@ route.post(
       // if dont we are gonna create a product
       else {
         // if the handle is not exist then create a new profile with the given data
-        new Product(profileFields)
+        new Product(productFields)
           .save()
           .then(product => res.json(product))
           .catch(err => res.status(404).send("some thing went wrong"));
       }
     });
+  }
+);
 
-    newProduct.save();
+// @route DELETE /api/posts/:post_id
+// @decription  DELETE a specific post by id
+// @access Private
+
+route.delete(
+  "/deleteProduct/:product_id",
+  passport.authenticate("jwt", {
+    session: false
+  }),
+  (req, res) => {
+    Product.findById(req.params.product_id)
+      .then(product => {
+        // delete
+        product
+          .remove()
+          .then(() => console.log("product deleted successfully"));
+      })
+      .catch(error => res.json(error));
+
+    Product.find().then(product =>
+      res.json({
+        product: product
+      })
+    );
   }
 );
 
 module.exports = route;
-
-////////////////////////////////////////////
-
-// route.post(
-//   "/addProduct",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     // bringing the validations : error , isValid
-//     const { errors, isValid } = validateProdctInput(req.body);
-
-//     let image = req.file;
-
-//     if (!image) {
-//       errors.imgError = "img shoud be send buddy";
-//     }
-
-//     // if input is not valid then send and error response
-//     if (!isValid) {
-//       return res.status(400).json(errors);
-//     }
-
-//     let imgUrl = image.path;
-
-//     // create a new post by Post classs / post model
-//     const newProduct = new Product({
-//       title: req.body.title,
-//       desc: req.body.desc,
-//       category: req.body.category,
-//       price: req.body.price,
-//       productImage: imgUrl
-//     });
-
-//     newProduct.save();
-//   }
-// );

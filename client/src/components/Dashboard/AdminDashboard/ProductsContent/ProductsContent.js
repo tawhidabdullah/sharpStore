@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "../../../commonFeilds/Spinner";
 import EditProducts from "../../EditProducts";
-import { getProductAction } from "../../../../actions/productAction";
+import {
+  getProductAction,
+  deleteProductAction
+} from "../../../../actions/productAction";
 import "./ProductsContent.scss";
 
 class ProductsContent extends Component {
@@ -32,67 +35,99 @@ class ProductsContent extends Component {
       productImage: product.productImage,
       editProduct: true
     });
+  }
 
-    // this.props.editProductAction(id);
+  onProductDelete = id => {
+    this.props.deleteProductAction(id);
+  };
+
+  componentWillUpdate() {
+    this.props.getProductAction();
   }
 
   render() {
     const { products } = this.props.product;
     let productsContents = <Spinner />;
-    if (products.length > 0) {
-      productsContents = products.map(product => {
-        return (
-          <ul class="data col horizontal">
-            <li class="content">
-              <div>Nov 3</div>
-              <div class="secondary">4 months</div>
-            </li>
-            <li class="content has-image">
-              <div>{product.title}</div>
-              <div class="secondary">{product.category}</div>
-            </li>
-            <li class="content">
-              <div>{product.desc}</div>
-              <div class="secondary">In stock</div>
-            </li>
-            <li class="content">
-              <div id="price">${product.price}</div>
-              <div class="secondary">2.3</div>
-            </li>
-            <li class="content">
-              <div class="icon-wrapper">
-                <span
-                  class="icon edit"
-                  data-tooltip="Edit"
-                  onClick={this.onProductEdit.bind(this, product._id, product)}
+
+    if (products) {
+      if (products.length > 0) {
+        productsContents = products.map(product => {
+          return (
+            <ul className="data col horizontal" key={product._id}>
+              <li className="content">
+                <div>Nov 3</div>
+                <div className="secondary">4 months</div>
+              </li>
+              <li className="content has-image ">
+                <img
+                  className="img"
+                  src={product.productImage}
+                  alt={product.desc}
                 />
-                <span
-                  class="icon delete"
-                  data-tooltip="Delete"
-                  onClick={this.onProductDelete}
-                />
-              </div>
-            </li>
-          </ul>
-        );
-      });
+                <div>{product.title}</div>
+                <div className="secondary">{product.category}</div>
+              </li>
+              <li className="content">
+                <div>{product.desc}</div>
+                <div className="secondary">In stock</div>
+              </li>
+              <li className="content">
+                <div id="price">${product.price}</div>
+                <div className="secondary">2.3</div>
+              </li>
+              <li className="content">
+                <div className="icon-wrapper">
+                  <span
+                    className="icon edit"
+                    data-tooltip="Edit"
+                    onClick={this.onProductEdit.bind(
+                      this,
+                      product._id,
+                      product
+                    )}
+                  />
+                  <span
+                    className="icon delete"
+                    data-tooltip="Delete"
+                    onClick={this.onProductDelete.bind(this, product._id)}
+                  />
+                </div>
+              </li>
+            </ul>
+          );
+        });
+      }
     }
 
     return (
       <div>
-        <div class="container">
-          <div class="header-wrapper">
-            <div class="title">Welcome back, {this.props.user.name}!</div>
-            <div class="note">
-              Recent: <span class="focus">$250 </span>to{" "}
-              <span class="focus">Best Buy</span> on Saturday, June 5.
+        <div className="container">
+          <div className="header-wrapper">
+            <div className="title">Welcome back, {this.props.user.name}!</div>
+            <div className="note">
+              Recent: <span className="focus">$250 </span>to{" "}
+              <span className="focus">Best Buy</span> on Saturday, June 5.
             </div>
-
-            <span class="material-button" onClick={this.onMaterialButtonclick}>
+            <div class="wrap">
+              <div class="search">
+                <input
+                  type="text"
+                  class="searchTerm"
+                  placeholder="Search products by name.."
+                />
+                <button type="submit" class="searchButton">
+                  <i class="fa fa-search" />
+                </button>
+              </div>
+            </div>
+            <span
+              className="material-button"
+              onClick={this.onMaterialButtonclick}
+            >
               <i className="fa fa-plus" />
             </span>
           </div>
-          <div class="content-wrapper">
+          <div className="content-wrapper">
             {this.state.editProduct ? (
               <EditProducts
                 title={this.state.title}
@@ -102,12 +137,12 @@ class ProductsContent extends Component {
                 productImage={this.state.productImage}
               />
             ) : (
-              <div class="table-wrapper">
-                <ul class="horizontal col header">
-                  <li class="content">Updated Date</li>
-                  <li class="content">Payee</li>
-                  <li class="content ">Description</li>
-                  <li class="content right">Remaining</li>
+              <div className="table-wrapper">
+                <ul className="horizontal col header">
+                  <li className="content">Updated Date</li>
+                  <li className="content">Payee</li>
+                  <li className="content ">Description</li>
+                  <li className="content right">Remaining</li>
                 </ul>
                 {productsContents}
               </div>
@@ -127,5 +162,5 @@ const mapStateToProp = state => {
 
 export default connect(
   mapStateToProp,
-  { getProductAction }
+  { getProductAction, deleteProductAction }
 )(ProductsContent);

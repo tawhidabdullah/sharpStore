@@ -34,7 +34,7 @@ export const addProductAction = PrductData => dispatch => {
     });
 };
 
-// Add Post
+// Get Posts
 export const getProductAction = () => dispatch => {
   axios
     .get("/api/products/getProduct")
@@ -53,4 +53,23 @@ export const getProductAction = () => dispatch => {
     );
 };
 
+
+// Get Posts
+export const deleteProductAction = (id) => dispatch => {
+  axios
+    .delete(`/api/admin/product/deleteProduct/${id}`)
+    .then(res => {
+      const products = res.data.product;
+      dispatch({
+        type: GET_PRODUCTS,
+        payload: products
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 
