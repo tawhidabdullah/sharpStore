@@ -1,33 +1,43 @@
-const mongoose = require('mongoose'); 
-const {Schema} = mongoose;
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-
-// creat user schema 
+// creat user schema
 const userSchema = new Schema({
-  name : {
+  name: {
     type: String,
-    required : true,
+    required: true
   },
-  email : {
-    type : String,
-    required : true
-  },
-  password : {
+  email: {
     type: String,
-    required : true
+    required: true
   },
-  avatar : String,
-  date : {
+  password: {
+    type: String,
+    required: true
+  },
+  avatar: String,
+  date: {
     type: Date,
     default: Date.now
   },
   isAdmin: {
     type: Boolean,
     default: false
-  }
-})
-
+  },
+  wishLists: [
+    {
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "products"
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
+});
 
 // with user schema , load the user model for User collection
-const User = mongoose.model('users', userSchema); 
-module.exports = User; 
+const User = mongoose.model("users", userSchema);
+module.exports = User;

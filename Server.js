@@ -51,11 +51,19 @@ app.use("/api/products", products);
 app.use("/api/admin/product", adminProducts);
 app.use("/api/admin/category", adminCategory);
 
+app.use((req, res, next) => {
+  res.status(404).send("<h1> Page not found! </h1>");
+});
+
 const port = process.env.PORT || 5000;
+
+
+; 
 
 app.listen(port, () => {
   console.log(
     `Tawhid Abdullah is a great programmer, server is runnig on ${port}...`
   );
 });
-   
+
+

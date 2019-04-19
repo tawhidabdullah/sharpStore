@@ -53,9 +53,8 @@ export const getProductAction = () => dispatch => {
     );
 };
 
-
 // Get Posts
-export const deleteProductAction = (id) => dispatch => {
+export const deleteProductAction = id => dispatch => {
   axios
     .delete(`/api/admin/product/deleteProduct/${id}`)
     .then(res => {
@@ -73,3 +72,46 @@ export const deleteProductAction = (id) => dispatch => {
     );
 };
 
+// Add Review
+export const addReview = (product_id, reviewData) => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`/api/products/review/${product_id}`, reviewData)
+    .then(res =>
+      dispatch({
+        type: GET_PRODUCT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Delete Review
+export const deleteReview = (product_id, reviewId) => dispatch => {
+  axios
+    .delete(`/api/admin/product/rmreview/${product_id}/${reviewId}`)
+    .then(res =>
+      dispatch({
+        type: GET_PRODUCT,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Clear errors
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
+};
