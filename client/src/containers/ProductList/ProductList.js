@@ -79,7 +79,7 @@ class ProductList extends Component {
         </div>
         <div className="row">
           {paginationPipe(this.props.products, this.state).map(product => {
-            let classes = `${this.state.colValue} col-md-6 mb-4`;
+            let classes = `${this.state.colValue} col-md-6 mb-3`;
             return (
               <div className={classes}>
                 <Product key={product.id} product={product} />

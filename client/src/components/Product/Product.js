@@ -11,9 +11,50 @@ import { addProductToCart } from "../../actions";
 const Product = props => {
   const { title, price, productImage, category, desc, _id } = props.product;
 
-
   return (
-    <div id="product_item">
+    <div className="card" id='my-card'>
+      <img
+        alt="Card image cap"
+        className="card-img-top img-fluid"
+        src={productImage}
+      />
+      <div className="card-body">
+        <p
+          className=""
+          style={{
+            fontSize: "15px",
+            color: "#333",
+            fontWeight: "500"
+          }}
+        >
+          {category}
+        </p>
+        <p
+          className="lead"
+          style={{
+            marginTop: "-20px",
+            fontSize: "22px"
+          }}
+        >
+          {title}
+        </p>
+        <div className="card-price__ratings">
+          <div className="card__price">
+            <p>${price}</p>
+          </div>
+          <div className="card__ratings">
+            3.24 <i className="fa fa-star" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default connect()(Product);
+
+/*
+ <div id="product_item">
       <figure class="snip1268">
         <div class="image">
           <Link to={`/products/${_id}`} className="product__link">
@@ -49,17 +90,7 @@ const Product = props => {
         <figcaption>
           <p class='pb-1'>{title} </p>
             <div id="bodyOfCard">
-            <div
-            style={{
-              background: "darkslategrey",
-              color: "white",
-              display: "inlineBlock",
-              padding : "2px 8px",
-              margin: "0"
-            }}
-          >
-            3.24 <i className='fa fa-star'></i>
-          </div>
+          
           <div class="price">   
             <h4>${`${formatMoney(price)}`}</h4>
           </div>
@@ -67,7 +98,7 @@ const Product = props => {
         </figcaption>
       </figure>
     </div>
-  );
-};
 
-export default connect()(Product);
+
+
+*/

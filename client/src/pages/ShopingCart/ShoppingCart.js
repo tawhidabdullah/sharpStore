@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { formatMoney } from "../../pipes/priceFormatter";
 import CartItem from "../../components/CartItem/CartItem";
+import "./ShoppingCart.scss";
 
 const ShoppingCart = props => {
   return (
     <>
       <div className="container" style={{ paddingTop: "6rem" }}>
         <div className="card shopping-cart">
-          <div className="card-header bg-dark text-light">
+          <div className="card-header bg-danger text-light">
             <i className="fa fa-shopping-cart pr-2" aria-hidden="true" />
             Shipping cart
             <div className="clearfix" />
@@ -19,7 +20,7 @@ const ShoppingCart = props => {
                 <CartItem {...cart} img={cart.productImage} />
               ))
             ) : (
-              <h1 className="display-4 mt-5 text-center">
+              <h1 className="display-4 mt-5 text-center text-danger">
                 There is no product in your cart
               </h1>
             )}

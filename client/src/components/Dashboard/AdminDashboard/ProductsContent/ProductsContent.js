@@ -15,7 +15,8 @@ class ProductsContent extends Component {
     desc: "",
     category: "",
     price: "",
-    productImage: ""
+    productImage: "",
+    searchInput: ""
   };
 
   onMaterialButtonclick = () => {
@@ -45,13 +46,21 @@ class ProductsContent extends Component {
     this.props.getProductAction();
   }
 
+  onSearchInputChange = e => {
+    this.setState({
+      searchInput: e.target.value.substr(0, 20)
+    });
+  };
+
   render() {
     const { products } = this.props.product;
-    let productsContents = <Spinner />;
+    let fileterProductContents = <Spinner />;
 
     if (products) {
       if (products.length > 0) {
-        productsContents = products.map(product => {
+        fileterProductContents = products.filter(
+          product => product.title.indexOf(this.state.searchInput) !== -1
+        ).map(product => {
           return (
             <ul className="data col horizontal" key={product._id}>
               <li className="content">
@@ -111,6 +120,8 @@ class ProductsContent extends Component {
             <div class="wrap">
               <div class="search">
                 <input
+                  onChange={this.onSearchInputChange}
+                  value={this.state.searchInput}
                   type="text"
                   class="searchTerm"
                   placeholder="Search products by name.."
@@ -144,7 +155,7 @@ class ProductsContent extends Component {
                   <li className="content ">Description</li>
                   <li className="content right">Remaining</li>
                 </ul>
-                {productsContents}
+                {fileterProductContents}
               </div>
             )}
           </div>

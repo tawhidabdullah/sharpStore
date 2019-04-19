@@ -81,7 +81,7 @@ a {
 
 .searchTerm {
   width: 100%;
-  border: 3px solid #00b4cc;
+  border: 3px solid #fb5555;
   border-right: none;
   padding: 15px;
   height: 20px;
@@ -91,14 +91,14 @@ a {
 }
 
 .searchTerm:focus {
-  color: #00b4cc;
+  color: #fb5555;
 }
 
 .searchButton {
   width: 40px;
   height: 36px;
-  border: 1px solid #00b4cc;
-  background: #00b4cc;
+  border: 1px solid #fb5555;
+  background: #fb5555;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;

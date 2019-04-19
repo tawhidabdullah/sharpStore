@@ -19,7 +19,7 @@ const BrandFilter = props => {
 
   return (
     <div className="card mb-3">
-      <div className="card-header bg-dark">
+      <div className="card-header bg-danger">
         <h3 className='text-white'>Brands</h3>
       </div>
       <ul className="list-group flex-row flex-wrap">
