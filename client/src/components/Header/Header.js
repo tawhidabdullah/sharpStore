@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authAction";
-
+import "./Header.scss";
 class Header extends Component {
+  state = {
+    dropdownToggle: false
+  };
+
+  toggleDrodown = () => {
+    const dt = this.state.dropdownToggle;
+    this.setState({
+      dropdownToggle: !dt
+    });
+  };
+
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser(); // firing the action here
@@ -19,21 +30,40 @@ class Header extends Component {
             Dashboard{" "}
           </Link>
         </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#" onClick={this.onLogoutClick}>
-            <img
-              src={user.avatar}
-              alt={user.name}
-              className="rounded-circle"
-              style={{
-                width: "25px",
-                marginRight: "5px"
-              }}
-              title="you must have a Gravatar connect to your email for displaying image"
-            />
-            Logout
-          </a>
-        </li>
+
+        <div class="header__avatar" onClick={this.toggleDrodown}>
+          <img
+            className="header__avatar-img"
+            src={user.avatar}
+            title="you must have a Gravatar connect to your email for displaying image"
+          />
+          <div
+            class={`dropdown ${
+              this.state.dropdownToggle ? "dropdown--active" : "deactive"
+            }`}
+          >
+            <ul class="dropdown__list ">
+              <li class="dropdown__list-item">
+                <span class="dropdown__icon">
+                  <i class="fa fa-user" />
+                </span>
+                <span class="dropdown__title">my profile</span>
+              </li>
+              <li class="dropdown__list-item">
+                <span class="dropdown__icon">
+                  <i class="fa fa-clipboard" />
+                </span>
+                <span class="dropdown__title">my account</span>
+              </li>
+              <li class="dropdown__list-item" onClick={this.onLogoutClick}>
+                <span class="dropdown__icon">
+                  <i class="fa fa-sign-out" />
+                </span>
+                <span class="dropdown__title">log out</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </React.Fragment>
     );
     const newUserLinks = (
@@ -59,7 +89,6 @@ class Header extends Component {
           <div>
             <ul className="navbar-nav ml-auto">
               {/* Conditional rendering */}
-              {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
               <li className="nav-item">
                 <NavLink className="nav-link" to={"/cart"}>
                   <i className="fa fa-shopping-cart mr-2" aria-hidden="true" />
@@ -67,6 +96,7 @@ class Header extends Component {
                   {this.props.cartLength ? `(${this.props.cartLength})` : ""}
                 </NavLink>
               </li>
+              {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
             </ul>
           </div>
         </div>

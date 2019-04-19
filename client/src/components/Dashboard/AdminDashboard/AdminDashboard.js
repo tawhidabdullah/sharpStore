@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import "../Dashboard.scss";
 import AddProducts from "../AddProducts";
 import Spinner from "../../commonFeilds/Spinner";
 import DashboardContent from "./DashboardContent/DashboardContent";
+import ProductsContent from "./ProductsContent/ProductsContent";
 import "./AdminDashboard.scss";
+import "../Dashboard.scss";
 
 // import ACTIONS
 import { getCurrentProfile } from "../../../actions/profileAction";
@@ -14,6 +15,7 @@ class AdminDashboard extends Component {
   state = {
     isDashboardClicked: true,
     isProductClicked: false,
+    isAddProductClicked: false,
     isUserClicked: false,
     isSettingClicked: false,
     isPaymentsClicked: false
@@ -26,6 +28,7 @@ class AdminDashboard extends Component {
   renderProducts = () => {
     this.setState({
       isProductClicked: true,
+      isAddProductClicked: false,
       isUserClicked: false,
       isSettingClicked: false,
       isPaymentsClicked: false,
@@ -33,31 +36,45 @@ class AdminDashboard extends Component {
     });
   };
 
+  renderAddProducts = () => {
+    this.setState({
+      isAddProductClicked: true,
+      isUserClicked: false,
+      isSettingClicked: false,
+      isPaymentsClicked: false,
+      isDashboardClicked: false,
+      isProductClicked: false
+    });
+  };
+
   renderUsers = () => {
     this.setState({
       isUserClicked: true,
-      isProductClicked: false,
+      isAddProductClicked: false,
       isSettingClicked: false,
       isPaymentsClicked: false,
-      isDashboardClicked: false
+      isDashboardClicked: false,
+      isProductClicked: false
     });
   };
   renderPayments = () => {
     this.setState({
       isPaymentsClicked: true,
       isUserClicked: false,
-      isProductClicked: false,
+      isAddProductClicked: false,
       isSettingClicked: false,
-      isDashboardClicked: false
+      isDashboardClicked: false,
+      isProductClicked: false
     });
   };
   renderSettings = () => {
     this.setState({
       isSettingClicked: true,
       isUserClicked: false,
-      isProductClicked: false,
+      isAddProductClicked: false,
       isPaymentsClicked: false,
-      isDashboardClicked: false
+      isDashboardClicked: false,
+      isProductClicked: false
     });
   };
   renderDashboard = () => {
@@ -65,8 +82,9 @@ class AdminDashboard extends Component {
       isDashboardClicked: true,
       isSettingClicked: false,
       isUserClicked: false,
-      isProductClicked: false,
-      isPaymentsClicked: false
+      isAddProductClicked: false,
+      isPaymentsClicked: false,
+      isProductClicked: false
     });
   };
 
@@ -110,14 +128,19 @@ class AdminDashboard extends Component {
     return (
       <div>
         <div id="nav" className="side-nav sidenav">
-          <div class="sidenav__profile">
-            <div class="sidenav__profile-avatar" />
-            <div class="sidenav__profile-title text-light">Tawhid</div>
+          <div className="sidenav__profile">
+            <img
+              className="profile-avatar sidenav__profile-avatar"
+              src={user.avatar}
+              alt="user's photo"
+            />
+
+            <div className="sidenav__profile-title text-light">Tawhid</div>
           </div>
           <ul>
-            <div class="search">
+            <div className="search">
               <input type="text" placeholder="Type here" />
-              <i class="fa fa-search" />
+              <i className="fa fa-search" />
             </div>
             <li
               className={this.state.isDashboardClicked ? "active" : "deactive"}
@@ -133,8 +156,17 @@ class AdminDashboard extends Component {
               onClick={this.renderProducts}
             >
               <a href="#">
-                <i className="fa fa-fw fa-pencil" />
+                <i className="fa fa-fw fa-edit" />
                 <span className="swatch light-grey">Products</span>
+              </a>
+            </li>
+            <li
+              className={this.state.isAddProductClicked ? "active" : "deactive"}
+              onClick={this.renderAddProducts}
+            >
+              <a href="#">
+                <i className="fa fa-fw fa-pencil" />
+                <span className="swatch light-grey">Add Products</span>
               </a>
             </li>
             <li
@@ -178,7 +210,12 @@ class AdminDashboard extends Component {
           </header>
           <div id="content">
             <div className="box">
-              {this.state.isProductClicked ? <AddProducts /> : ""}
+              {this.state.isProductClicked ? (
+                <ProductsContent user={user} clicked={this.renderAddProducts} />
+              ) : (
+                ""
+              )}
+              {this.state.isAddProductClicked ? <AddProducts /> : ""}
               {this.state.isDashboardClicked ? <DashboardContent /> : ""}
             </div>
           </div>
@@ -191,7 +228,8 @@ class AdminDashboard extends Component {
 const mapStateToProp = state => {
   return {
     auth: state.auth,
-    profile: state.profile
+    profile: state.profile,
+    products: state.product
   };
 };
 

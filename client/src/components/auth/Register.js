@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-
+import "../styles_components/submit.scss";
 // import formFeild
 import TextFeildGroup from "../commonFeilds/TextFeildGroup";
 
@@ -100,7 +100,13 @@ class Register extends Component {
                   errors={errors.password2}
                 />
 
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <div className="form">
+                  <input
+                    type="submit"
+                    value="Create Product"
+                    id="input-submit"
+                  />{" "}
+                </div>
               </form>
             </div>
           </div>

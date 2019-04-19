@@ -84,6 +84,18 @@ class FileUploads extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.title) {
+      this.setState({
+        title: this.props.title,
+        desc: this.props.desc,
+        category: this.props.category,
+        price: this.props.price,
+        productImage: this.props.productImage
+      });
+    }
+  }
+
   render() {
     const errors = this.state.errors;
     let productAlert;

@@ -2,68 +2,32 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const passport = require("passport");
-const expressValidator = require("express-validator");
 const multer = require("multer");
 const path = require("path");
 
-// relative import
 // importing the router of USERS
 const users = require("./routes/api/users");
+const products = require("./routes/api/products");
 const adminProducts = require("./routes/adminRoutes/adminProducts");
-const adminCategory = require("./routes/adminRoutes/adminCategory"); 
+const adminCategory = require("./routes/adminRoutes/adminCategory");
 // initialize app
 const app = express();
 app.use("/images", express.static("images"));
 
-// const fileStorage = multer.diskStorage({
-//   destination: function(req, file, cb) {
-//     cb(null, path.join(__dirname, "/images/"));
-//     multer.memoryStorage;
-//   },
-//   filename: function(req, file, cb) {
-//     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
-//   }
-// });
-
-const storage = multer.diskStorage({
-  destination: "images",
-  filename: function(req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-  if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
 // Body parser middleware
+
+const multersProperty = require("./validation/multer");
+
 app.use(
-  multer({ storage: storage, fileFilter: fileFilter }).single("productImage")
+  multer({
+    storage: multersProperty.storage,
+    fileFilter: multersProperty.fileFilter
+  }).single("productImage")
 );
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
-//file parsing a configuring ////////////////////////////////////////////
-// const fileStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "images");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, new Date().toISOString() + "-" + file.originalname);
-//   }
-// });
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Db config
@@ -83,6 +47,7 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
+app.use("/api/products", products);
 app.use("/api/admin/product", adminProducts);
 app.use("/api/admin/category", adminCategory);
 
@@ -93,3 +58,4 @@ app.listen(port, () => {
     `Tawhid Abdullah is a great programmer, server is runnig on ${port}...`
   );
 });
+   

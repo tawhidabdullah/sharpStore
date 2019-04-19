@@ -37,7 +37,7 @@ export const addProductAction = PrductData => dispatch => {
 // Add Post
 export const getProductAction = () => dispatch => {
   axios
-    .get("/api/admin/product/addProduct")
+    .get("/api/products/getProduct")
     .then(res => {
       const products = res.data.product;
       dispatch({
@@ -52,3 +52,5 @@ export const getProductAction = () => dispatch => {
       })
     );
 };
+
+
