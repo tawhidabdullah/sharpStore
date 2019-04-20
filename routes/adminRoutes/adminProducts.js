@@ -42,4 +42,4 @@ router.delete(
   productsControllers.deleteProductReview
 );
 
-module.exports = route;
+module.exports = router;

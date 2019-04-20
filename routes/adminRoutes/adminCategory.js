@@ -33,4 +33,4 @@ router.post(
   }
 );
 
-module.exports = route;
+module.exports = router;

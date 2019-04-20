@@ -53,7 +53,6 @@ app.use("/api/admin/category", adminCategory);
 
 // if production then server statice production
 if (process.env.NODE_ENV === "production") {
-  
   // set static folder
   app.use(express.static("client/build"));
 
@@ -61,9 +60,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
- 
+
 const port = process.env.PORT || 10000;
-app.listen(port, () => {   
+app.listen(port, () => {
   console.log(
     `Tawhid Abdullah is a great programmer, server is runnig on ${port}...`
   );
