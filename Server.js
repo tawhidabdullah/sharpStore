@@ -51,19 +51,21 @@ app.use("/api/products", products);
 app.use("/api/admin/product", adminProducts);
 app.use("/api/admin/category", adminCategory);
 
-app.use((req, res, next) => {
-  res.status(404).send("<h1> Page not found! </h1>");
-});
- 
 const port = process.env.PORT || 5000;
 
+// if production then server statice production
+if (process.env.NODE_ENV === "production") {
 
-; 
+  // set static folder
+  app.use(express.static("client/bluild"));
+  
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.listen(port, () => {
   console.log(
     `Tawhid Abdullah is a great programmer, server is runnig on ${port}...`
   );
 });
-
-
