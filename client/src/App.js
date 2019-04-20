@@ -51,7 +51,7 @@ class App extends Component {
                   return <Redirect to={"/products"} />;
                 }}
               />
-              <Route exact path={"/search"} component={ReactSearch} />
+
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path={"/products"} component={Home} />
