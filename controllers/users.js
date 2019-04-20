@@ -12,7 +12,7 @@ const validateRegisterInput = require(".././validation/registration");
 const validateLoginInput = require(".././validation/login");
 
 // load the user model
-const User = require(".././models/User");
+const User = require("../models/user");
 
 // REGISTER USER /////////////////////////////////////////////////////////////////////
 exports.registerUser = (req, res) => {

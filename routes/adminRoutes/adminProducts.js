@@ -6,7 +6,7 @@ const router = express.Router();
 const productsControllers = require("../../controllers/products");
 
 // GET CATEGORY MODEL
-const Catagory = require("../../models/Catagory");
+const Catagory = require("../../models/catagory");
 
 // @route POST /api/admin/products/addProducts
 // @decription add products and save to database

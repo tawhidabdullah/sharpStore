@@ -1,5 +1,5 @@
 // GET PRODUCT MODEL
-const Product = require(".././models/Product");
+const Product = require("../models/product");
 
 // LOAD VALIDATAION
 const validateProdctInput = require(".././validation/products");

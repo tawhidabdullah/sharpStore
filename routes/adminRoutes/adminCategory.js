@@ -2,7 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 
-const Category = require("../../models/Catagory");
+const Category = require("../../models/catagory");
 
 router.post(
   "/addCategory",
