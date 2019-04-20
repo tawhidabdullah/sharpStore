@@ -53,6 +53,7 @@ app.use("/api/admin/category", adminCategory);
 
 // if production then server statice production
 if (process.env.NODE_ENV === "production") {
+  
   // set static folder
   app.use(express.static("client/build"));
 

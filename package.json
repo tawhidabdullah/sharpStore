@@ -1,5 +1,5 @@
 {
-  "name": "sharpStore",
+  "name": "sharpestore",
   "version": "1.0.0",
   "description": "a store for products",
   "main": "server.js",
