@@ -12,6 +12,7 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import ShoppingCart from "./pages/ShopingCart/ShoppingCart";
 import Dashboard from "./components/Dashboard/Dashboard";
 import AddProducts from "./components/Dashboard/AddProducts";
+import ReactSearch from "./ReactSearch";
 
 // AUTH COMPONENTS
 import Register from "./components/auth/Register";
@@ -51,11 +52,13 @@ class App extends Component {
                   return <Redirect to={"/products"} />;
                 }}
               />
+               <Route exact path={"/search"} component={ReactSearch} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path={"/products"} component={Home} />
               <Route exact path={"/products/:id"} component={ProductDetail} />
               <Route exact path={"/cart"} component={ShoppingCart} />
+             
             </Switch>
             {/* <Switch>
               <PrivateRoute

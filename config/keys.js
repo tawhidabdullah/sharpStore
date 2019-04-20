@@ -1,5 +1,5 @@
-module.exports = {
-  mongoURI : 'mongodb://sharpstore:tawhid967021@ds237196.mlab.com:37196/sharpstore-prod',
-  secretOrKey : 'JWTsecretKey',
-  adiminKey: "myNameIsDestiny"
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./keys_prod");
+} else {
+  module.exports = require("./keys_dev");
 }

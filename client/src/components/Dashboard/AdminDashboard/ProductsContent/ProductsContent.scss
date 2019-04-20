@@ -14,6 +14,10 @@ a {
   text-decoration: none;
 }
 
+body{
+  font-size: 15px;
+}
+
 .table-wrapper > ul {
   opacity: 0;
   -webkit-animation: nav-fade 0.5s forwards;

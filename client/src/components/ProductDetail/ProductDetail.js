@@ -28,7 +28,7 @@ const ProductDetail = props => {
           </dd>
         </dl>
         <dl className="param param-feature">
-          <dt>Brand</dt>
+          <dt>Category</dt>
           <dd className="text-capitalize">{category}</dd>
         </dl>
 
@@ -36,7 +36,7 @@ const ProductDetail = props => {
         <hr />
         <button
           onClick={onCart}
-          className="btn btn-lg btn-outline-primary text-uppercase"
+          className="btn btn-lg btn-outline-danger text-uppercase"
         >
           <i className="fa fa-shopping-cart" /> Add to cart
         </button>

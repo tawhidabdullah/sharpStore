@@ -14,7 +14,7 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container-fluid" style={{ paddingTop: "6rem" }}>
+        <div className="container-fluid" style={{ paddingTop: "4rem" }}>
           <div className="row">
             <FilterBar />
             <ProductList />

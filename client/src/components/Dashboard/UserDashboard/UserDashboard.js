@@ -76,12 +76,21 @@ class UserDashboard extends Component {
 
     return (
       <div>
-        <div id="nav">
-          <div className="user-banner">
-            <img src="../../imgs/me.jpg" />
-            <h5 className="username">Tawhid Abdullah</h5>
+        <div id="nav" className="side-nav sidenav">
+          <div className="sidenav__profile">
+            <img
+              className="profile-avatar sidenav__profile-avatar"
+              src={user.avatar}
+              alt="user's photo"
+            />
+
+            <div className="sidenav__profile-title text-light">{user.name}</div>
           </div>
           <ul>
+            <div className="search">
+              <input type="text" placeholder="Type here" />
+              <i className="fa fa-search" />
+            </div>
             <li className="head">General</li>
             <li className="active">
               <Link to="/dashboard">

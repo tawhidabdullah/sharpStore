@@ -7,6 +7,7 @@ import { orderByFilter } from "../../pipes/orderByFilter";
 import LayoutMode from "../../components/LayoutMode/LayoutMode";
 import { paginationPipe } from "../../pipes/paginationFilter";
 import Pagination from "../../components/Pagination/Pagination";
+import Spinner from "../../components/commonFeilds/Spinner";
 
 class ProductList extends Component {
   state = {
@@ -56,11 +57,34 @@ class ProductList extends Component {
   render() {
     let isActive = this.state.colValue[this.state.colValue.length - 1];
 
+    let contents;
+
+    if (!this.props.products) {
+      contents = <Spinner />;
+    } else {
+      contents = paginationPipe(this.props.products, this.state).map(
+        product => {
+          let classes = `${this.state.colValue} col-md-6 mb-3`;
+          return (
+            <div className={classes}>
+              <Product key={product.id} product={product} />
+            </div>
+          );
+        }
+      );
+    }
+
     return (
       <div className="col-lg-9">
         <div className="row mb-3">
           <div className="col-12 d-none d-lg-block d-xl-block">
-            <div className="card ">
+            <div
+              className="card"
+              style={{
+                backgroundColor: "#fb5555",
+                color: "whitesmoke"
+              }}
+            >
               <div className="card-header d-flex justify-content-end">
                 <span className="mr-3">Change Layout: </span>
                 <LayoutMode
@@ -77,16 +101,7 @@ class ProductList extends Component {
             </div>
           </div>
         </div>
-        <div className="row">
-          {paginationPipe(this.props.products, this.state).map(product => {
-            let classes = `${this.state.colValue} col-md-6 mb-3`;
-            return (
-              <div className={classes}>
-                <Product key={product.id} product={product} />
-              </div>
-            );
-          })}
-        </div>
+        <div className="row">{contents}</div>
         <div className="d-flex justify-content-end">
           <Pagination
             totalItemsCount={this.props.products.length}
@@ -113,4 +128,7 @@ const mapStateToProps = state => {
   return { products: filterByOrderArr };
 };
 
-export default connect( mapStateToProps, null)(ProductList);
+export default connect(
+  mapStateToProps,
+  null
+)(ProductList);

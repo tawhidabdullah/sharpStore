@@ -4,10 +4,14 @@ import { NavLink, Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authAction";
 import "./Header.scss";
 import "../styles_components/searchBar.scss";
+
+
+
 class Header extends Component {
   state = {
     dropdownToggle: false,
-    fosttrapToggle: false
+    fosttrapToggle: false,
+    searchInput: ""
   };
 
   toggleDrodown = () => {
@@ -28,6 +32,8 @@ class Header extends Component {
       fosttrapToggle: !fosttrapToggle
     });
   };
+
+  onSearchInputChange  = () => {}
   render() {
     const { isAuthenticate, user } = this.props.auth;
 
@@ -70,6 +76,23 @@ class Header extends Component {
             </div>
           </div>
         </li>
+
+        <div id="styleSearchBar">
+          <div class="header-wrap">
+            <div class="search">
+              <input
+                onChange={this.onSearchInputChange}
+                value={this.state.searchInput}
+                type="text"
+                class="searchTerm searchTerm__white"
+                placeholder="Search products by name.."
+              />
+              <button type="submit" class="searchButton searchButton__white">
+                <i class="fa fa-search" />
+              </button>
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     );
     const newUserLinks = (
@@ -97,21 +120,21 @@ class Header extends Component {
             </li>
             <li>
               <a href="javascript:void(0)">
-                Web Design
+                Category
                 <span class="arrow-down" />
               </a>
               <ul class="dropdown">
                 <li>
-                  <a href="">HTML</a>
+                  <a href="">Computer</a>
                 </li>
                 <li>
-                  <a href="">CSS</a>
+                  <a href="">Phone</a>
                 </li>
                 <li>
-                  <a href="">Javascript</a>
+                  <a href="">Programming</a>
                 </li>
                 <li>
-                  <a href="">JQuery</a>
+                  <a href="">Gadgets</a>
                 </li>
               </ul>
             </li>
@@ -126,20 +149,6 @@ class Header extends Component {
                 </li>
                 <li>
                   <a href="">Tips</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="javascript:void(0)">
-                SEO
-                <span class="arrow-down" />
-              </a>
-              <ul class="dropdown">
-                <li>
-                  <a href="">Tools</a>
-                </li>
-                <li>
-                  <a href="">Backlink</a>
                 </li>
               </ul>
             </li>

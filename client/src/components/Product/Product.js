@@ -12,12 +12,15 @@ const Product = props => {
   const { title, price, productImage, category, desc, _id } = props.product;
 
   return (
-    <div className="card" id='my-card'>
-      <img
-        alt="Card image cap"
-        className="card-img-top img-fluid"
-        src={productImage}
-      />
+    <div className="card" id="my-card">
+      <Link to={`/products/${_id}`} className="product__link">
+        <img
+          alt="Card image cap"
+          className="card-img-top img-fluid"
+          src={productImage}
+        />
+      </Link>
+
       <div className="card-body">
         <p
           className=""

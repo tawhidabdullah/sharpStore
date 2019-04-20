@@ -1,8 +1,16 @@
-.wrap {
+.produc-wrap {
   width: 30%;
   position: absolute;
   top: 80%;
   left: 60%;
+  transform: translate(-50%, -50%);
+}
+
+.header-wrap {
+  width: 100%;
+  position: absolute;
+  top: 80%;
+  left: 40%;
   transform: translate(-50%, -50%);
 }
 
@@ -14,17 +22,28 @@
 
 .searchTerm {
   width: 100%;
-  border: 3px solid #fb5555;
+
   border-right: none;
   padding: 15px;
   height: 20px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #9dbfaf;
+
+  &__red {
+    border: 3px solid #fb5555;
+    color: #9dbfaf;
+  }
+  &__white {
+    border: 3px solid whitesmoke;
+    color: #fb5555;
+  }
 }
 
-.searchTerm:focus {
+.searchTerm__red:focus {
   color: #fb5555;
+}
+.searchTerm__white:focus {
+  color: #333;
 }
 
 .searchButton {
@@ -33,10 +52,22 @@
   border: 1px solid #fb5555;
   background: #fb5555;
   text-align: center;
-  color: #fff;
+  
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
+
+  &__red {
+    background: #fb5555;
+    border: 1px solid #fb5555;
+    color: #fff;
+  }
+
+  &__white {
+    background: white;
+    border: 1px solid white;
+    color: #fb5555;
+  }
 }
 
 /*Resize the wrap to see the search bar change!*/
