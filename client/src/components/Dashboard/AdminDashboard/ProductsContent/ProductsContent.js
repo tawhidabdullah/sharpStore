@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "../../../commonFeilds/Spinner";
 import EditProducts from "../../EditProducts";
+import "../../../styles_components/searchBar.scss";
 import {
   getProductAction,
   deleteProductAction
@@ -58,53 +59,55 @@ class ProductsContent extends Component {
 
     if (products) {
       if (products.length > 0) {
-        fileterProductContents = products.filter(
-          product => product.title.indexOf(this.state.searchInput) !== -1
-        ).map(product => {
-          return (
-            <ul className="data col horizontal" key={product._id}>
-              <li className="content">
-                <div>Nov 3</div>
-                <div className="secondary">4 months</div>
-              </li>
-              <li className="content has-image ">
-                <img
-                  className="img"
-                  src={product.productImage}
-                  alt={product.desc}
-                />
-                <div>{product.title}</div>
-                <div className="secondary">{product.category}</div>
-              </li>
-              <li className="content">
-                <div>{product.desc}</div>
-                <div className="secondary">In stock</div>
-              </li>
-              <li className="content">
-                <div id="price">${product.price}</div>
-                <div className="secondary">2.3</div>
-              </li>
-              <li className="content">
-                <div className="icon-wrapper">
-                  <span
-                    className="icon edit"
-                    data-tooltip="Edit"
-                    onClick={this.onProductEdit.bind(
-                      this,
-                      product._id,
-                      product
-                    )}
+        fileterProductContents = products
+          .filter(
+            product => product.title.indexOf(this.state.searchInput) !== -1
+          )
+          .map(product => {
+            return (
+              <ul className="data col horizontal" key={product._id}>
+                <li className="content">
+                  <div>Nov 3</div>
+                  <div className="secondary">4 months</div>
+                </li>
+                <li className="content has-image ">
+                  <img
+                    className="img"
+                    src={product.productImage}
+                    alt={product.desc}
                   />
-                  <span
-                    className="icon delete"
-                    data-tooltip="Delete"
-                    onClick={this.onProductDelete.bind(this, product._id)}
-                  />
-                </div>
-              </li>
-            </ul>
-          );
-        });
+                  <div>{product.title}</div>
+                  <div className="secondary">{product.category}</div>
+                </li>
+                <li className="content">
+                  <div>{product.desc}</div>
+                  <div className="secondary">In stock</div>
+                </li>
+                <li className="content">
+                  <div id="price">${product.price}</div>
+                  <div className="secondary">2.3</div>
+                </li>
+                <li className="content">
+                  <div className="icon-wrapper">
+                    <span
+                      className="icon edit"
+                      data-tooltip="Edit"
+                      onClick={this.onProductEdit.bind(
+                        this,
+                        product._id,
+                        product
+                      )}
+                    />
+                    <span
+                      className="icon delete"
+                      data-tooltip="Delete"
+                      onClick={this.onProductDelete.bind(this, product._id)}
+                    />
+                  </div>
+                </li>
+              </ul>
+            );
+          });
       }
     }
 

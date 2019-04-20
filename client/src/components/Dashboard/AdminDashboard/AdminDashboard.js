@@ -199,7 +199,7 @@ class AdminDashboard extends Component {
           </ul>
         </div>
         <div id="main">
-          <header>
+          {/* <header>
             <ol className="breadcrumb">
               <li>
                 {" "}
@@ -207,7 +207,7 @@ class AdminDashboard extends Component {
               </li>
               <li className="active">dashboard</li>
             </ol>
-          </header>
+          </header> */}
           <div id="content">
             <div className="box">
               {this.state.isProductClicked ? (

@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authAction";
 import "./Header.scss";
+import "../styles_components/searchBar.scss";
 class Header extends Component {
   state = {
-    dropdownToggle: false
+    dropdownToggle: false,
+    fosttrapToggle: false
   };
 
   toggleDrodown = () => {
@@ -19,86 +21,148 @@ class Header extends Component {
     e.preventDefault();
     this.props.logoutUser(); // firing the action here
   };
+
+  onnavFostrapclick = () => {
+    const fosttrapToggle = this.state.fosttrapToggle;
+    this.setState({
+      fosttrapToggle: !fosttrapToggle
+    });
+  };
   render() {
     const { isAuthenticate, user } = this.props.auth;
 
     const logedInUserLinks = (
       <React.Fragment>
-        <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
-            {" "}
-            Dashboard{" "}
-          </Link>
+        <li>
+          <Link to="/dashboard"> Dashboard </Link>
         </li>
 
-        <div className="header__avatar" onClick={this.toggleDrodown}>
+        <li className="header__avatar" onClick={this.toggleDrodown}>
           <img
             className="header__avatar-img"
             src={user.avatar}
             title="you must have a Gravatar connect to your email for displaying image"
           />
           <div
-            className={`dropdown ${
+            className={`dropdownx ${
               this.state.dropdownToggle ? "dropdown--active" : "deactive"
             }`}
           >
-            <ul className="dropdown__list ">
-              <li className="dropdown__list-item">
+            <div className="dropdown__list">
+              <a className="dropdown__list-item">
                 <span className="dropdown__icon">
                   <i className="fa fa-user" />
                 </span>
                 <span className="dropdown__title">my profile</span>
-              </li>
-              <li className="dropdown__list-item">
+              </a>
+              <a className="dropdown__list-item">
                 <span className="dropdown__icon">
                   <i className="fa fa-clipboard" />
                 </span>
                 <span className="dropdown__title">my account</span>
-              </li>
-              <li className="dropdown__list-item" onClick={this.onLogoutClick}>
+              </a>
+              <a className="dropdown__list-item" onClick={this.onLogoutClick}>
                 <span className="dropdown__icon">
                   <i className="fa fa-sign-out" />
                 </span>
                 <span className="dropdown__title">log out</span>
-              </li>
-            </ul>
+              </a>
+            </div>
           </div>
-        </div>
+        </li>
       </React.Fragment>
     );
     const newUserLinks = (
       <React.Fragment>
-        <li className="nav-item">
-          <Link className="nav-link" to="/register">
-            Sign Up
-          </Link>
+        <li>
+          <Link to="/register">Sign Up</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
+        <li>
+          <Link to="/login">Login</Link>
         </li>
       </React.Fragment>
     );
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
-        <div className="container">
-          <NavLink className="navbar-brand" to="/">
-            <span className="lead">SharpStore</span>
-          </NavLink>
-          <div>
-            <ul className="navbar-nav ml-auto">
-              {/* Conditional rendering */}
-              <li className="nav-item">
-                <NavLink className="nav-link" to={"/cart"}>
-                  <i className="fa fa-shopping-cart mr-2" aria-hidden="true" />
-                  Cart{" "}
-                  {this.props.cartLength ? `(${this.props.cartLength})` : ""}
-                </NavLink>
-              </li>
-              {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
-            </ul>
+      <nav className="fixed-top">
+        <div
+          class={
+            this.state.fosttrapToggle ? "nav-fostrap visible" : "nav-fostrap"
+          }
+        >
+          <ul>
+            <li>
+              <NavLink to="/">
+                <span className="lead">SharpStore</span>
+              </NavLink>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                Web Design
+                <span class="arrow-down" />
+              </a>
+              <ul class="dropdown">
+                <li>
+                  <a href="">HTML</a>
+                </li>
+                <li>
+                  <a href="">CSS</a>
+                </li>
+                <li>
+                  <a href="">Javascript</a>
+                </li>
+                <li>
+                  <a href="">JQuery</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                Blogger
+                <span class="arrow-down" />
+              </a>
+              <ul class="dropdown">
+                <li>
+                  <a href="">Widget</a>
+                </li>
+                <li>
+                  <a href="">Tips</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="javascript:void(0)">
+                SEO
+                <span class="arrow-down" />
+              </a>
+              <ul class="dropdown">
+                <li>
+                  <a href="">Tools</a>
+                </li>
+                <li>
+                  <a href="">Backlink</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="">Business</a>
+            </li>
+            <li>
+              <NavLink to={"/cart"}>
+                <i className="fa fa-shopping-cart mr-2" aria-hidden="true" />
+                Cart {this.props.cartLength ? `(${this.props.cartLength})` : ""}
+              </NavLink>
+            </li>
+            {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
+          </ul>
+        </div>
+        <div class="nav-bg-fostrap">
+          <div class="navbar-fostrap" onClick={this.onnavFostrapclick}>
+            {" "}
+            <span /> <span /> <span />{" "}
           </div>
+          <a href="" class="title-mobile">
+            SharpStore
+          </a>
         </div>
       </nav>
     );
@@ -116,3 +180,23 @@ export default connect(
   mapStateToProps,
   { logoutUser }
 )(Header);
+
+/*
+
+  <nav className="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
+        <div className="container">
+          <NavLink className="navbar-brand" to="/">
+            <span className="lead">SharpStore</span>
+          </NavLink>
+          <div>
+            <ul className="navbar-nav ml-auto">
+            
+             
+              {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+*/
