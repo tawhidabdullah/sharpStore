@@ -51,8 +51,6 @@ app.use("/api/products", products);
 app.use("/api/admin/product", adminProducts);
 app.use("/api/admin/category", adminCategory);
 
-const port = process.env.PORT || 5000;
-
 // if production then server statice production
 if (process.env.NODE_ENV === "production") {
   // set static folder
@@ -63,6 +61,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(
     `Tawhid Abdullah is a great programmer, server is runnig on ${port}...`
