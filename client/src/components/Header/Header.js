@@ -5,8 +5,6 @@ import { logoutUser } from "../../actions/authAction";
 import "./Header.scss";
 import "../styles_components/searchBar.scss";
 
-
-
 class Header extends Component {
   state = {
     dropdownToggle: false,
@@ -33,7 +31,7 @@ class Header extends Component {
     });
   };
 
-  onSearchInputChange  = () => {}
+  onSearchInputChange = () => {};
   render() {
     const { isAuthenticate, user } = this.props.auth;
 
@@ -125,16 +123,16 @@ class Header extends Component {
               </a>
               <ul class="dropdown">
                 <li>
-                  <a href="">Computer</a>
+                  <a>Computer</a>
                 </li>
                 <li>
-                  <a href="">Phone</a>
+                  <a>Phone</a>
                 </li>
                 <li>
-                  <a href="">Programming</a>
+                  <a>Programming</a>
                 </li>
                 <li>
-                  <a href="">Gadgets</a>
+                  <a>Gadgets</a>
                 </li>
               </ul>
             </li>
@@ -145,15 +143,15 @@ class Header extends Component {
               </a>
               <ul class="dropdown">
                 <li>
-                  <a href="">Widget</a>
+                  <a>Widget</a>
                 </li>
                 <li>
-                  <a href="">Tips</a>
+                  <a>Tips</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="">Business</a>
+              <a>Business</a>
             </li>
             <li>
               <NavLink to={"/cart"}>
@@ -169,9 +167,7 @@ class Header extends Component {
             {" "}
             <span /> <span /> <span />{" "}
           </div>
-          <a href="" class="title-mobile">
-            SharpStore
-          </a>
+          <a class="title-mobile">SharpStore</a>
         </div>
       </nav>
     );

@@ -100,13 +100,13 @@ class UserDashboard extends Component {
             </li>
 
             <li onClick={this.renderPayments}>
-              <a href="#">
+              <a>
                 <i className="fa fa-fw fa-money" />
                 <span>Payments</span>
               </a>
             </li>
             <li onClick={this.renderSettings}>
-              <a href="#">
+              <a>
                 <i className="fa fa-fw fa-cog" />
                 <span>Settings</span>
               </a>
@@ -118,7 +118,7 @@ class UserDashboard extends Component {
             <ol className="breadcrumb">
               <li>
                 {" "}
-                <a href="#">haus</a>
+                <a>haus</a>
               </li>
               <li className="active">dashboard</li>
             </ol>
@@ -156,19 +156,19 @@ export default connect(
 // <div class="dropdown">
 //   <div class="arrow"></div>
 
-//   <a href="#" class="row">
+//   <a class="row">
 //     <div class="text">Edit User</div>
 //     <i class="icon fa fa-user"></i>
 //   </a>
-//   <a href="#" class="row">
+//   <a class="row">
 //     <div class="text">Statistics</div>
 //     <i class="icon fa fa-home"></i>
 //   </a>
-//   <a href="#" class="row">
+//   <a class="row">
 //     <div class="text">Upload Settings</div>
 //     <i class="icon fa fa-upload"></i>
 //   </a>
-//   <a href="#" class="row">
+//   <a class="row">
 //     <div class="text">Edit Sliders</div>
 //     <i class="icon fa fa-pencil"></i>
 //   </a>
