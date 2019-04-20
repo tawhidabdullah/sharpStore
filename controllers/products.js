@@ -103,12 +103,12 @@ exports.deleteProductReview = (req, res) => {
 exports.addProductReview = (req, res) => {
   // bringing the validations : error , isValid
 
-  const { errors, isValid } = validatePostInput(req.body);
+  // const { errors, isValid } = validateProdctInput(req.body);
 
-  // if input is not valid then send and error response
-  if (!isValid) {
-    res.status(400).json(errors);
-  }
+  // // if input is not valid then send and error response
+  // if (!isValid) {
+  //   res.status(400).json(errors);
+  // }
 
   Post.findById(req.params.product_id)
     .then(product => {

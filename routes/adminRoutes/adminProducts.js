@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const route = express.Router();
+const router = express.Router();
 
 //IMPORT PRODUCTS CONSTROLLERS
 const productsControllers = require("../../controllers/products");
@@ -12,7 +12,7 @@ const Catagory = require("../../models/Catagory");
 // @decription add products and save to database
 // @access Private
 
-route.post(
+router.post(
   "/addProduct",
   passport.authenticate("jwt", { session: false }),
   productsControllers.addProduct
@@ -22,7 +22,7 @@ route.post(
 // @decription  DELETE a specific post by id
 // @access Private
 
-route.delete(
+router.delete(
   "/deleteProduct/:product_id",
   passport.authenticate("jwt", {
     session: false
@@ -34,7 +34,7 @@ route.delete(
 // @decription remove review
 // @access Private
 
-route.delete(
+router.delete(
   "/rmreview/:product_id/:rmreview_id",
   passport.authenticate("jwt", {
     session: false
