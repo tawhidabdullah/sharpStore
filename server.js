@@ -54,7 +54,7 @@ app.use("/api/admin/category", adminCategory);
 // if production then server statice production
 if (process.env.NODE_ENV === "production") {
   // set static folder
-  app.use(express.static(__dirname + "client/build"));
+  app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve("client", "build", "index.html"));
