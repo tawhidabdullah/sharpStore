@@ -1,43 +1,45 @@
 {
-  "name": "sharpOnline",
+  "name": "sharponline",
   "version": "1.0.0",
-  "description": "a store for products",
+  "description": "A store for products",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
     "start": "node server.js",
+    "client-install": "npm install --prefix client",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "author": "The great Tawhid Abdullah",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tawhidabdullah/sharpStore.git"
+  },
+  "author": "Tawhid Abdullah",
+  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
-    "express-fileupload": "^1.1.4",
-    "express-validator": "^5.3.1",
     "fs-extra": "^7.0.1",
     "gravatar": "^1.8.0",
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^8.4.0",
     "jwt-decode": "^2.2.0",
-    "mkdirp": "^0.5.1",
-    "moment": "^2.24.0",
     "mongoose": "^5.4.6",
-    "mongoose-algolia": "^1.8.0",
     "multer": "^1.4.1",
     "multer-gridfs-storage": "^3.2.3",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "react-moment": "^0.8.4",
     "request": "^2.88.0",
-    "resize-img": "^1.1.2",
     "validator": "^10.11.0"
   },
+  "bugs": {
+    "url": "https://github.com/tawhidabdullah/sharpStore/issues"
+  },
+  "homepage": "https://github.com/tawhidabdullah/sharpStore#readme",
   "devDependencies": {
     "nodemon": "^1.18.9"
   },
