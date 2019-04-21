@@ -49,7 +49,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
 app.use("/api/products", products);
 app.use("/api/admin/product", adminProducts);
-app.use("/api/admin/category", adminCategory);
+app.use("/api/admin/category", adminCategory);    
 
 // if production then server statice production
 if (process.env.NODE_ENV === "production") {
