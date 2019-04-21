@@ -3,7 +3,7 @@ const express = require("express");
 const passport = require("passport");
 
 //IMPORT USUERS CONSTROLLERS
-const usersControllers = require("../../controllers/users");
+const usersControllers = require("../../controllers/users"); 
 
 // initializing router middleware
 const router = express.Router();
