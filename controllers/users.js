@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
-
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
 // relative file import
 const keys = require(".././config/keys");
 
@@ -11,8 +12,45 @@ const validateRegisterInput = require(".././validation/registration");
 // load input login validation
 const validateLoginInput = require(".././validation/login");
 
-// load the user model
-const User = require("../models/user");
+// creat user schema
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  avatar: String,
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  wishLists: [
+    {
+      product: {
+        type: Schema.Types.ObjectId,
+        ref: "products"
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
+});
+
+// with user schema , load the user model for User collection
+const User = mongoose.model("users", userSchema);
 
 // REGISTER USER /////////////////////////////////////////////////////////////////////
 exports.registerUser = (req, res) => {
