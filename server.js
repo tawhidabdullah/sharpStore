@@ -49,7 +49,7 @@ require("./config/passport")(passport);
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
 app.use("/api/products", products);
 app.use("/api/admin/product", adminProducts);
-app.use("/api/admin/category", adminCategory);    
+app.use("/api/admin/category", adminCategory);
 
 // if production then server statice production
 if (process.env.NODE_ENV === "production") {
@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "client/build"));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve("client", "build", "index.html"));
   });
 }
 
