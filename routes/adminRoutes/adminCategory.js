@@ -23,11 +23,8 @@ router.post(
 // DELETE CATEGORY
 router.delete(
   "/deleteCategory/:category_id",
-  passport.authenticate(
-    "jwt",
-    { session: false },
-    categoryControllers.deleteCategoy
-  )
+  passport.authenticate("jwt", { session: false }),
+  categoryControllers.deleteCategory
 );
 
 module.exports = router;

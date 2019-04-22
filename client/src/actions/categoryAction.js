@@ -51,9 +51,9 @@ export const getCategoriesAction = () => dispatch => {
 
 
 // Get products
-export const deleteCategoyAction = id => dispatch => {
+export const deleteCategoryAction = id => dispatch => {
     axios
-      .delete(`/api/admin/categoy/deleteCategory/${id}`)
+      .delete(`/api/admin/category/deleteCategory/${id}`)
       .then(res => {
         const categories = res.data.categories;
         dispatch({

@@ -6,7 +6,7 @@ import ShowCategoryCotent from "./ShowCategoryCotent/ShowCategoryContent";
 // import actions
 import {
   addCategoryAction,
-  deleteCategoyAction
+  deleteCategoryAction
 } from "../../../../actions/categoryAction";
 
 class CategoriesContent extends Component {
@@ -45,8 +45,9 @@ class CategoriesContent extends Component {
   };
 
   onCategoryDelete = id => {
-    this.props.deleteCategoyAction(id);
+    this.props.deleteCategoryAction(id);
   };
+
 
   componentWillReceiveProps(nextprops) {
     if (nextprops.errors) {
@@ -141,5 +142,5 @@ const mapStateToProp = state => {
 
 export default connect(
   mapStateToProp,
-  { addCategoryAction, deleteCategoyAction }
+  { addCategoryAction, deleteCategoryAction }
 )(CategoriesContent);

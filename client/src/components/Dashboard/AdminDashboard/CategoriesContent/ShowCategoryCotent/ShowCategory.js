@@ -7,7 +7,7 @@ export default function ShowCategory({
   category_id
 }) {
   return (
-    <li className="list_shopping li_num_0_1" key={title}>
+    <li className="list_shopping li_num_0_1">
       <div className="col_md_1_list">
         <p>seeproducts</p>
       </div>
@@ -19,11 +19,11 @@ export default function ShowCategory({
         <h4>{title}</h4>
       </div>
       <div className="col_md_4_list">
-        <div
-          className="cont_trash"
-          onClick={onTrashClick.bind(this,category_id)}
-        >
-          <i className="fa fa-trash" />
+        <div className="cont_trash">
+          <i
+            onClick={onTrashClick.bind(this, category_id)}
+            className="fa fa-trash"
+          />
         </div>
       </div>
     </li>

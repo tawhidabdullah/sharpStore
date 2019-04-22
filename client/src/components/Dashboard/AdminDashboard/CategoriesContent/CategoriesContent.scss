@@ -129,8 +129,6 @@
   font-weight: 700;
 }
 
-
-
 .col_md_4_list {
   width: 471px;
   position: relative;
@@ -147,10 +145,17 @@
   font-weight: 700;
   color: #fb5555;
 }
+.col_md_4_list > .cont_trash:hover {
+  color: #9e0a0a;
+}
 
-
-
-
+.col_md_4_list > .cont_trash {
+  text-align: right;
+  font-family: "Open Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fb5555;
+}
 
 .list_shopping > .col_md_1_list {
   border-left: 4px solid #28a745;

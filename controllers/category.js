@@ -23,7 +23,7 @@ exports.addCatagory = (req, res) => {
     const newCategory = new Category({
       title: title
     });
- 
+
     newCategory.save().then(category => res.json({ category: category }));
   });
 };
@@ -31,10 +31,11 @@ exports.addCatagory = (req, res) => {
 // get categoris /////////////////////////////
 exports.getCategories = (req, res) => {
   Category.find().then(categories => {
-    if (categories) {
-      res.json({ categories: categories });
+    if (!categories) {
+      return res.status(404).json({ msgs: "There is no categories" });
     }
-    res.status(404).json({ msgs: "There is no categories" });
+
+    res.json({ categories: categories });
   });
 };
 
@@ -46,7 +47,7 @@ exports.deleteCategory = (req, res) => {
       // delete
       category.remove().then(() => console.log("product deleted successfully"));
     })
-    .catch(error => res.json(error));
+    .catch(error => res.json("eeeereee", error));
 
   Category.find().then(categories =>
     res.json({
