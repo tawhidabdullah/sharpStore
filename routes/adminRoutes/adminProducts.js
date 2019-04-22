@@ -5,8 +5,11 @@ const router = express.Router();
 //IMPORT PRODUCTS CONSTROLLERS
 const productsControllers = require("../../controllers/products");
 
-// GET CATEGORY MODEL
-const Catagory = require("../../models/catagory");
+// @route GET /api/admin/products/:category
+// @decription get products by category
+// @access public
+
+router.post("/:id", productsControllers.getProductsByCategory);
 
 // @route POST /api/admin/products/addProducts
 // @decription add products and save to database

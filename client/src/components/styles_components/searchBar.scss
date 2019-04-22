@@ -22,7 +22,6 @@
 
 .searchTerm {
   width: 100%;
-
   border-right: none;
   padding: 15px;
   height: 20px;
@@ -37,6 +36,10 @@
     border: 3px solid whitesmoke;
     color: #fb5555;
   }
+  &__green {
+    border: 3px solid #28a745;
+    color: #28a745;
+  }
 }
 
 .searchTerm__red:focus {
@@ -45,14 +48,15 @@
 .searchTerm__white:focus {
   color: #333;
 }
+.searchTerm__green:focus {
+  color: #333;
+}
 
 .searchButton {
   width: 40px;
   height: 36px;
-  border: 1px solid #fb5555;
   background: #fb5555;
   text-align: center;
-  
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
@@ -67,6 +71,11 @@
     background: white;
     border: 1px solid white;
     color: #fb5555;
+  }
+  &__green {
+    background: #28a745;
+    border: 1px solid #28a745;
+    color: white;
   }
 }
 

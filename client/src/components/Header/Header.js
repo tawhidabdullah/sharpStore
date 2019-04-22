@@ -76,17 +76,17 @@ class Header extends Component {
         </li>
 
         <div id="styleSearchBar">
-          <div class="header-wrap">
-            <div class="search">
+          <div className="header-wrap">
+            <div className="search">
               <input
                 onChange={this.onSearchInputChange}
                 value={this.state.searchInput}
                 type="text"
-                class="searchTerm searchTerm__white"
+                className="searchTerm searchTerm__white"
                 placeholder="Search products by name.."
               />
-              <button type="submit" class="searchButton searchButton__white">
-                <i class="fa fa-search" />
+              <button type="submit" className="searchButton searchButton__white">
+                <i className="fa fa-search" />
               </button>
             </div>
           </div>
@@ -106,7 +106,7 @@ class Header extends Component {
     return (
       <nav className="fixed-top">
         <div
-          class={
+          className={
             this.state.fosttrapToggle ? "nav-fostrap visible" : "nav-fostrap"
           }
         >
@@ -119,9 +119,9 @@ class Header extends Component {
             <li>
               <a href="javascript:void(0)">
                 Category
-                <span class="arrow-down" />
+                <span className="arrow-down" />
               </a>
-              <ul class="dropdown">
+              <ul className="dropdown">
                 <li>
                   <a>Computer</a>
                 </li>
@@ -139,9 +139,9 @@ class Header extends Component {
             <li>
               <a href="javascript:void(0)">
                 Blogger
-                <span class="arrow-down" />
+                <span className="arrow-down" />
               </a>
-              <ul class="dropdown">
+              <ul className="dropdown">
                 <li>
                   <a>Widget</a>
                 </li>
@@ -162,12 +162,12 @@ class Header extends Component {
             {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
           </ul>
         </div>
-        <div class="nav-bg-fostrap">
-          <div class="navbar-fostrap" onClick={this.onnavFostrapclick}>
+        <div className="nav-bg-fostrap">
+          <div className="navbar-fostrap" onClick={this.onnavFostrapclick}>
             {" "}
             <span /> <span /> <span />{" "}
           </div>
-          <a class="title-mobile">SharpStore</a>
+          <a className="title-mobile">SharpStore</a>
         </div>
       </nav>
     );

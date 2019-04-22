@@ -5,6 +5,7 @@ import AddProducts from "../AddProducts";
 import Spinner from "../../commonFeilds/Spinner";
 import DashboardContent from "./DashboardContent/DashboardContent";
 import ProductsContent from "./ProductsContent/ProductsContent";
+import CategoriesContent from './CategoriesContent/CategoriesContent'; 
 import "./AdminDashboard.scss";
 import "../Dashboard.scss";
 
@@ -18,7 +19,8 @@ class AdminDashboard extends Component {
     isAddProductClicked: false,
     isUserClicked: false,
     isSettingClicked: false,
-    isPaymentsClicked: false
+    isPaymentsClicked: false,
+    isCategoriesClicked: false,
   };
 
   componentDidMount() {
@@ -32,7 +34,8 @@ class AdminDashboard extends Component {
       isUserClicked: false,
       isSettingClicked: false,
       isPaymentsClicked: false,
-      isDashboardClicked: false
+      isDashboardClicked: false,
+      isCategoriesClicked: false
     });
   };
 
@@ -43,7 +46,8 @@ class AdminDashboard extends Component {
       isSettingClicked: false,
       isPaymentsClicked: false,
       isDashboardClicked: false,
-      isProductClicked: false
+      isProductClicked: false,
+      isCategoriesClicked: false
     });
   };
 
@@ -54,7 +58,8 @@ class AdminDashboard extends Component {
       isSettingClicked: false,
       isPaymentsClicked: false,
       isDashboardClicked: false,
-      isProductClicked: false
+      isProductClicked: false,
+      isCategoriesClicked: false
     });
   };
   renderPayments = () => {
@@ -64,7 +69,8 @@ class AdminDashboard extends Component {
       isAddProductClicked: false,
       isSettingClicked: false,
       isDashboardClicked: false,
-      isProductClicked: false
+      isProductClicked: false,
+      isCategoriesClicked: false
     });
   };
   renderSettings = () => {
@@ -74,12 +80,26 @@ class AdminDashboard extends Component {
       isAddProductClicked: false,
       isPaymentsClicked: false,
       isDashboardClicked: false,
-      isProductClicked: false
+      isProductClicked: false,
+      isCategoriesClicked: false
     });
   };
   renderDashboard = () => {
     this.setState({
       isDashboardClicked: true,
+      isSettingClicked: false,
+      isUserClicked: false,
+      isAddProductClicked: false,
+      isPaymentsClicked: false,
+      isProductClicked: false,
+      isCategoriesClicked: false
+    });
+  };
+
+  renderCategories = () => {
+    this.setState({
+      isCategoriesClicked: true,
+      isDashboardClicked: false,
       isSettingClicked: false,
       isUserClicked: false,
       isAddProductClicked: false,
@@ -170,6 +190,15 @@ class AdminDashboard extends Component {
               </a>
             </li>
             <li
+              className={this.state.isCategoriesClicked ? "active" : "deactive"}
+              onClick={this.renderCategories}
+            >
+              <a href="#">
+                <i className="fa fa-fw fa-pencil" />
+                <span className="swatch light-grey">Categories</span>
+              </a>
+            </li>
+            <li
               className={this.state.isUserClicked ? "active" : "deactive"}
               onClick={this.renderUsers}
             >
@@ -217,6 +246,7 @@ class AdminDashboard extends Component {
               )}
               {this.state.isAddProductClicked ? <AddProducts /> : ""}
               {this.state.isDashboardClicked ? <DashboardContent /> : ""}
+              {this.state.isCategoriesClicked ? <CategoriesContent /> : ""}
             </div>
           </div>
         </div>

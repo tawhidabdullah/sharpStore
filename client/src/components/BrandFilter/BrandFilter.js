@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./BrandFilter.scss";
-import { brands } from "../../data/brands";
+import { categories } from "../../data/brands";
 import { addBrandToFilter, removeBrandFromFilter } from "../../actions";
 
 const BrandFilter = props => {
@@ -20,17 +20,17 @@ const BrandFilter = props => {
   return (
     <div className="card mb-3">
       <div className="card-header bg-danger">
-        <h3 className='text-white'>Brands</h3>
+        <h3 className="text-white">Brands</h3>
       </div>
       <ul className="list-group flex-row flex-wrap">
-        {brands.map(brand => (
-          <li className="list-group-item flex-50" key={brand}>
+        {categories.map(category => (
+          <li className="list-group-item flex-50" key={category}>
             <label className="custom-checkbox text-capitalize">
               {" "}
-              {brand} ({brandItemsCount[brand]})
+              {category} ({brandItemsCount[category]})
               <input
                 type="checkbox"
-                name={brand}
+                name={category}
                 className="custom-checkbox__input"
                 onInput={handleSelectBox}
               />
@@ -47,10 +47,10 @@ const mapStateToProps = state => {
   const brandItemsCount = {};
 
   state.shop.products.forEach(p => {
-    brandItemsCount[p.brand] = brandItemsCount[p.brand] + 1 || 1;
+    brandItemsCount[p.category] = brandItemsCount[p.category] + 1 || 1;
   });
 
-  console.log(brandItemsCount)
+  console.log(brandItemsCount);
 
   return {
     brandItemsCount

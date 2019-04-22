@@ -27,10 +27,11 @@ export const PRODUCT_SUCCESSFULL = 'PRODUCT_SUCCESSFULL';
 // substribe user 
 export const SUBSCRIBE_USER = 'SUBSCRIBE_USER'; 
 
-
-
-
-
+// Category types
+export const ADD_CATEGORY = "ADD_CATEGORY"
+export const GET_CATEGORY = 'GET_PRODUCT'; 
+export const GET_CATEGORIES = 'GET_CATEGORIES'; 
+export const DELETE_CATEGORY= 'DELETE_CATEGORY'; 
 
 
 

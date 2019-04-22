@@ -1,5 +1,7 @@
 // GET PRODUCT MODEL
 const Product = require("../models/product");
+// GET CATEGORY MODEL
+const Category = require("../models/category");
 
 // LOAD VALIDATAION
 const validateProdctInput = require(".././validation/products");
@@ -156,4 +158,15 @@ exports.getAProduct = (req, res) => {
         noPostFound: "no product found with the given id"
       })
     );
+};
+
+// GET PRODUCTS BY CATEGORY /////////////////////////////////////////
+exports.getProductsByCategory = (req, res) => {
+  Product.find({ category: req.params.id })
+    .populate("category")
+    .exec()
+    .then(products => {
+      console.log(err);
+    })
+    .catch(err => console.log(err));
 };
