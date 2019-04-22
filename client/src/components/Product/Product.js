@@ -7,12 +7,19 @@ import { cumulativeOffSet } from "../../utilities/cumulativeOffset";
 import "./Product.scss";
 import SlideDots from "../SlideDots/SlideDots";
 import { addProductToCart } from "../../actions";
+import { withRouter } from "react-router-dom";
 
 const Product = props => {
   const { title, price, productImage, category, desc, _id } = props.product;
+  const onWishclick = () => {
+    props.history.push("/login");
+  };
 
   return (
     <div className="card" id="my-card">
+      <div className="heart" onClick={onWishclick}>
+        <i className="fa fa-heart" />
+      </div>
       <Link to={`/products/${_id}`} className="product__link">
         <img
           alt="Card image cap"
@@ -20,7 +27,6 @@ const Product = props => {
           src={productImage}
         />
       </Link>
-
       <div className="card-body">
         <p
           className=""
@@ -54,7 +60,7 @@ const Product = props => {
   );
 };
 
-export default connect()(Product);
+export default connect()(withRouter(Product));
 
 /*
  <div id="product_item">

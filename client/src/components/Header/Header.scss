@@ -17,6 +17,7 @@ a:hover {
 }
 
 .nav-fostrap {
+  padding-left: 350px;
   display: block;
   margin-bottom: 15px 0;
   background: #fb5555;
@@ -127,6 +128,7 @@ a:hover {
 }
 @media only screen and (max-width: 900px) {
   .nav-fostrap {
+    padding-left: 0px;
     background: #fff;
     width: 200px;
     height: 100%;
