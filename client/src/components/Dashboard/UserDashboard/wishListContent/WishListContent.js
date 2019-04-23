@@ -32,8 +32,13 @@ class WishListContent extends Component {
       wishLists: { wishLists }
     } = this.props.wishlist;
     let filterWishListContents = <Spinner />;
+
     if (wishLists) {
-      if (wishLists.length > 0) {
+      if (wishLists.length === 0) {
+        filterWishListContents = (
+          <h1 className="display-4 text-center"> Your don't have any wish list yet!</h1>
+        );
+      } else if (wishLists.length > 0) {
         filterWishListContents = wishLists
           .filter(
             wishList => wishList.title.indexOf(this.state.searchInput) !== -1
@@ -41,40 +46,49 @@ class WishListContent extends Component {
           .map(wishList => {
             console.log(wishList);
             return (
-              <ul className="data col horizontal" key={wishList._id}>
-                <li className="content">
-                  <div>Nov 3</div>
-                  <div className="secondary">4 months</div>
-                </li>
-                <li className="content has-image ">
-                  <img
-                    className="img"
-                    src={wishList.productImage}
-                    alt={wishList.desc}
-                  />
-                  <div>{wishList.title}</div>
-                  <div className="secondary">{wishList.category}</div>
-                </li>
-                <li className="content">
-                  <div>{wishList.desc}</div>
-                  <div className="secondary">In stock</div>
-                </li>
-                <li className="content">
-                  <div id="price">${wishList.price}</div>
-                  <div className="secondary">2.3</div>
-                </li>
-                <li className="content">
-                  <div
-                    className="icon-wrapper"
-                    onClick={this.onClickDeleteWishList.bind(
-                      this,
-                      wishList._id
-                    )}
-                  >
-                    <span className="icon delete" data-tooltip="Delete" />
-                  </div>
-                </li>
-              </ul>
+              <React.Fragment>
+                <ul className="horizontal col header">
+                  <li className="content">Date</li>
+                  <li className="content">TITLE</li>
+                  <li className="content ">Description</li>
+                  <li className="content right">PRICING </li>
+                </ul>
+
+                <ul className="data col horizontal" key={wishList._id}>
+                  <li className="content">
+                    <div>Nov 3</div>
+                    <div className="secondary">4 months</div>
+                  </li>
+                  <li className="content has-image ">
+                    <img
+                      className="img"
+                      src={wishList.productImage}
+                      alt={wishList.desc}
+                    />
+                    <div>{wishList.title}</div>
+                    <div className="secondary">{wishList.category}</div>
+                  </li>
+                  <li className="content">
+                    <div>{wishList.desc}</div>
+                    <div className="secondary">In stock</div>
+                  </li>
+                  <li className="content">
+                    <div id="price">${wishList.price}</div>
+                    <div className="secondary">2.3</div>
+                  </li>
+                  <li className="content">
+                    <div
+                      className="icon-wrapper"
+                      onClick={this.onClickDeleteWishList.bind(
+                        this,
+                        wishList._id
+                      )}
+                    >
+                      <span className="icon delete" data-tooltip="Delete" />
+                    </div>
+                  </li>
+                </ul>
+              </React.Fragment>
             );
           });
       }
@@ -112,15 +126,7 @@ class WishListContent extends Component {
             </span>
           </div>
           <div className="content-wrapper">
-            <div className="table-wrapper">
-              <ul className="horizontal col header">
-                <li className="content">Updated Date</li>
-                <li className="content">Payee</li>
-                <li className="content ">Description</li>
-                <li className="content right">Remaining</li>
-              </ul>
-              {filterWishListContents}
-            </div>
+            <div className="table-wrapper">{filterWishListContents}</div>
           </div>
         </div>
       </div>

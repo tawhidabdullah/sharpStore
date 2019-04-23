@@ -3,6 +3,10 @@ const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+
+// import models
+const Product = require("../models/product");
+const Profile = require("../models/profile");
 // relative file import
 const keys = require(".././config/keys");
 
@@ -37,14 +41,8 @@ const userSchema = new Schema({
   },
   wishLists: [
     {
-      product: {
-        type: Schema.Types.ObjectId,
-        ref: "products"
-      },
-      date: {
-        type: Date,
-        default: Date.now
-      }
+      type: Schema.Types.ObjectId,
+      ref: "products"
     }
   ]
 });
@@ -202,3 +200,56 @@ exports.getCurrentUser = (req, res) => {
 // on the example , we can see that when a user send a request to current / route ,
 // which is a private routes, because it is a private route so ,,
 // we told passport to authenticate that request by == jwt strategy
+
+exports.addWish = (req, res) => {
+  User.findById({ _id: req.user.id })
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ msgs: "user not found" });
+      }
+
+      Product.findById({ _id: req.params.product_id })
+        .then(product => {
+          if (product) {
+            user.wishLists.unshift(req.params.product_id);
+            user.save().then(post => res.json({ post }));
+          }
+        })
+        .catch(err => res.status(500).json({ msg: "something went wrong" }));
+    })
+
+    .catch(err => res.status(500).json({ err: err }));
+};
+
+exports.getWishLists = (req, res) => {
+  User.find({ _id: req.user.id })
+    .populate("wishLists")
+    .then(user => {
+      res.json({ wishLists: user[0].wishLists });
+    })
+    .catch(err => res.status(504).json({ msg: "something went wrong" }));
+};
+
+exports.deleteWishList = (req, res) => {
+  User.findById(req.user.id)
+    .then(user => {
+      if (
+        user.wishLists.filter(
+          wishList => wishList._id.toString() === req.params.product_id
+        ).length === 0
+      ) {
+        res.status(404).json({ wishListnofound: "wishList does not exist" });
+      }
+
+      // find out the removeIndex on the comment array
+      const removeIndex = user.wishLists
+        .map(wishList => wishList._id.toString())
+        .indexOf(req.params.product_id);
+
+      // then delete that wishLists from database
+      user.wishLists.splice(removeIndex, 1);
+      // then save the wishLists with new wishlists
+      user.save().then(user => res.json({ wishLists: user[0].wishLists }));
+    })
+    .catch(error => res.status(404).json(error));
+};

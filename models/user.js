@@ -17,23 +17,17 @@ const userSchema = new Schema({
   },
   avatar: String,
   date: {
-    type: Date,
+    type: Date, 
     default: Date.now
   },
   isAdmin: {
     type: Boolean,
     default: false
   },
-  wishLists: [
+  products: [
     {
-      product: {
-        type: Schema.Types.ObjectId,
-        ref: "products"
-      },
-      date: {
-        type: Date,
-        default: Date.now
-      }
+      type: Schema.Types.ObjectId,
+      ref: "Product"
     }
   ]
 });

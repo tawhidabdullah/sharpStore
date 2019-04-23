@@ -30,4 +30,31 @@ router.get(
   usersControllers.getCurrentUser
 );
 
+// @route GET /api/users/addWish/:product_id
+// @decription add wishlist
+// @access Private
+router.post(
+  "/addWish/:product_id",
+  passport.authenticate("jwt", { session: false }),
+  usersControllers.addWish
+);
+
+// @route GET /api/users/wishLists
+// @decription get all the wish lists
+// @access Private
+router.get(
+  "/wishLists",
+  passport.authenticate("jwt", { session: false }),
+  usersControllers.getWishLists
+);
+
+// @route DELTE /api/users/deleteWishList:product_id
+// @decription get all the wish lists
+// @access Private
+router.delete(
+  "/deleteWishList/:product_id",
+  passport.authenticate("jwt", { session: false }),
+  usersControllers.deleteWishList
+);
+
 module.exports = router;
