@@ -67,7 +67,7 @@ class ProductList extends Component {
           let classes = `${this.state.colValue} col-md-6 mb-3`;
           return (
             <div className={classes}>
-              <Product key={product.id} product={product} />
+              <Product key={product._id} product={product} />
             </div>
           );
         }

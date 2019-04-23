@@ -6,17 +6,27 @@ import { cumulativeOffSet } from "../../utilities/cumulativeOffset";
 
 import "./Product.scss";
 import { addProductToCart } from "../../actions";
-import { addWishListAction } from "../../actions/userAction";
+import {
+  addWishListAction,
+  getWishListsAction
+} from "../../actions/userAction";
 import { withRouter } from "react-router-dom";
 
 class Product extends Component {
-  onWishclick = (id) => {
+  onWishclick = id => {
     if (!this.props.user.isAuthenticate) {
       this.props.history.push("/login");
     } else {
       this.props.addWishListAction(id);
     }
   };
+
+  componentWillMount() {
+    this.props.getWishListsAction();
+  }
+
+  componentDidMount() {}
+
   render() {
     const {
       title,
@@ -27,9 +37,29 @@ class Product extends Component {
       _id
     } = this.props.product;
 
+    const {
+      wishLists: { wishLists }
+    } = this.props.wishList;
+
+    let wishClass = {};
+
+    if (wishLists) {
+      wishLists.forEach(wishList => {
+        if (wishList._id !== _id) {
+          wishClass.heart = 'heart'
+        }
+        else{
+          wishClass.red = "red-heart";
+        }
+      });
+    }
+
     return (
       <div className="card" id="my-card">
-        <div className="heart" onClick={this.onWishclick.bind(this, _id)}>
+        <div
+          className={wishClass.red ? wishClass.red : wishClass.heart}
+          onClick={this.onWishclick.bind(this, _id)}
+        >
           <i className="fa fa-heart" />
         </div>
         <Link to={`/products/${_id}`} className="product__link">
@@ -75,13 +105,14 @@ class Product extends Component {
 
 const mapStateToProp = state => {
   return {
-    user: state.auth
+    user: state.auth,
+    wishList: state.wishList
   };
 };
 
 export default connect(
   mapStateToProp,
-  { addWishListAction }
+  { addWishListAction, getWishListsAction }
 )(withRouter(Product));
 
 /*

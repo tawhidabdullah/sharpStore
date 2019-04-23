@@ -1,21 +1,27 @@
 #my-card {
   border: none;
-  transition: .5s;
+  transition: 0.5s;
   position: relative;
 }
 
-.heart{
+.heart {
   font-size: 30px;
-  color: rgb(238, 172, 172); 
+  color: rgb(238, 172, 172);
   position: absolute;
   right: 16px;
 }
-.fa-heart:hover{
-  color: rgb(187, 47, 47); 
-  cursor: pointer;
+
+.red-heart {
+  font-size: 30px;
+  color: rgb(187, 47, 47);
+  position: absolute;
+  right: 16px;
 }
 
-
+.fa-heart:hover {
+  color: rgb(187, 47, 47);
+  cursor: pointer;
+}
 
 #my-card:hover {
   -webkit-box-shadow: -7px 4px 36px -17px rgba(0, 0, 0, 0.75);

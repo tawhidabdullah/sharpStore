@@ -1,14 +1,70 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { getWishListsAction } from "../../../../actions/userAction";
 import "./WishListContent.scss";
+import Spinner from "../../../commonFeilds/Spinner";
 
 class WishListContent extends Component {
+  state = {
+    searchInput: ""
+  };
+
   componentWillMount() {
     this.props.getWishListsAction();
   }
+  onSearchInputChange = e => {
+    this.setState({
+      searchInput: e.target.value.substr(0, 20)
+    });
+  };
 
   render() {
+    const {
+      wishLists: { wishLists }
+    } = this.props.wishlist;
+    let filterWishListContents = <Spinner />;
+    if (wishLists) {
+      if (wishLists.length > 0) {
+        filterWishListContents = wishLists
+          .filter(
+            wishList => wishList.title.indexOf(this.state.searchInput) !== -1
+          )
+          .map(wishList => {
+            console.log(wishList);
+            return (
+              <ul className="data col horizontal" key={wishList._id}>
+                <li className="content">
+                  <div>Nov 3</div>
+                  <div className="secondary">4 months</div>
+                </li>
+                <li className="content has-image ">
+                  <img
+                    className="img"
+                    src={wishList.productImage}
+                    alt={wishList.desc}
+                  />
+                  <div>{wishList.title}</div>
+                  <div className="secondary">{wishList.category}</div>
+                </li>
+                <li className="content">
+                  <div>{wishList.desc}</div>
+                  <div className="secondary">In stock</div>
+                </li>
+                <li className="content">
+                  <div id="price">${wishList.price}</div>
+                  <div className="secondary">2.3</div>
+                </li>
+                <li className="content">
+                  <div className="icon-wrapper">
+                    <span className="icon delete" data-tooltip="Delete" />
+                  </div>
+                </li>
+              </ul>
+            );
+          });
+      }
+    }
     return (
       <div>
         <div className="container">
@@ -21,6 +77,8 @@ class WishListContent extends Component {
             <div class="produc-wrap ">
               <div class="search">
                 <input
+                  onChange={this.onSearchInputChange}
+                  value={this.state.searchInput}
                   type="text"
                   class="searchTerm searchTerm__red"
                   placeholder="search wish lists"
@@ -30,7 +88,12 @@ class WishListContent extends Component {
                 </button>
               </div>
             </div>
-            <span className="material-button">
+            <span
+              className="material-button"
+              onClick={() => {
+                this.props.history.push("/products");
+              }}
+            >
               <i className="fa fa-plus" />
             </span>
           </div>
@@ -42,6 +105,7 @@ class WishListContent extends Component {
                 <li className="content ">Description</li>
                 <li className="content right">Remaining</li>
               </ul>
+              {filterWishListContents}
             </div>
           </div>
         </div>
@@ -59,4 +123,4 @@ const mapStateToProp = state => {
 export default connect(
   mapStateToProp,
   { getWishListsAction }
-)(WishListContent);
+)(withRouter(WishListContent));
