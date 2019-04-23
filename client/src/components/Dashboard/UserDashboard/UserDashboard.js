@@ -4,6 +4,9 @@ import { Link, withRouter } from "react-router-dom";
 import Spinner from "../../commonFeilds/Spinner";
 import "../Dashboard.scss";
 
+/// IMPORT CONTENTS
+import ProfileContent from "./profileContent/ProfileContent";
+
 // import ACTIONS
 import { getCurrentProfile } from "../../../actions/profileAction";
 
@@ -12,7 +15,11 @@ class UserDashboard extends Component {
     isProductClicked: false,
     isUserClicked: false,
     isSettingClicked: false,
-    isPaymentsClicked: false
+    isPaymentsClicked: false,
+    isProfileClicked: true,
+    isOrderClicked: false,
+    isReviewClicked: false,
+    isWishListClicked: false
   };
 
   componentDidMount() {
@@ -24,7 +31,11 @@ class UserDashboard extends Component {
       isPaymentsClicked: true,
       isUserClicked: false,
       isProductClicked: false,
-      isSettingClicked: false
+      isSettingClicked: false,
+      isProfileClicked: false,
+      isOrderClicked: false,
+      isReviewClicked: false,
+      isWishListClicked: false
     });
   };
 
@@ -33,10 +44,63 @@ class UserDashboard extends Component {
       isSettingClicked: true,
       isUserClicked: false,
       isProductClicked: false,
-      isPaymentsClicked: false
+      isPaymentsClicked: false,
+      isProfileClicked: false,
+      isOrderClicked: false,
+      isReviewClicked: false,
+      isWishListClicked: false
+    });
+  };
+  renderProfile = () => {
+    this.setState({
+      isProfileClicked: true,
+      isSettingClicked: false,
+      isUserClicked: false,
+      isProductClicked: false,
+      isPaymentsClicked: false,
+      isOrderClicked: false,
+      isReviewClicked: false,
+      isWishListClicked: false
+    });
+  };
+  renderOrders = () => {
+    this.setState({
+      isOrderClicked: true,
+      isProfileClicked: false,
+      isSettingClicked: false,
+      isUserClicked: false,
+      isProductClicked: false,
+      isPaymentsClicked: false,
+      isReviewClicked: false,
+      isWishListClicked: false
     });
   };
 
+  renderReviews = () => {
+    this.setState({
+      isReviewClicked: true,
+      isOrderClicked: false,
+      isProfileClicked: false,
+      isSettingClicked: false,
+      isUserClicked: false,
+      isProductClicked: false,
+      isPaymentsClicked: false,
+      isWishListClicked: false
+    });
+  };
+
+  renderWishList = () => {
+    this.setState({
+      isWishListClicked: true,
+      isReviewClicked: false,
+      isOrderClicked: false,
+      isProfileClicked: false,
+      isSettingClicked: false,
+      isUserClicked: false,
+      isProductClicked: false,
+      isPaymentsClicked: false
+    });
+  };
   render() {
     let dashboardContents;
     let adminDashBoardContents;
@@ -44,34 +108,8 @@ class UserDashboard extends Component {
     const { user, isAdmin } = this.props.auth;
     const { profile, loading } = this.props.profile;
 
-    if (profile === null || loading) {
-      dashboardContents = <Spinner />;
-    } else {
-      if (Object.keys(profile).length > 0) {
-        //TODO: DISPLAY THE PROFILE
-        dashboardContents = (
-          <div>
-            <p className="lead text-muted">
-              {" "}
-              Welcome{" "}
-              <Link to={`/profile/${profile.handle}`}> {user.name} </Link>
-            </p>
-          </div>
-        );
-      } else {
-        dashboardContents = (
-          <div>
-            <p className=" text-muted">
-              Wecome <h3 className="text-muted">{user.name}</h3>
-            </p>
-            <p className="lead">Seems like you are enjoing are service!</p>
-          </div>
-        );
-      }
-
-      if (isAdmin) {
-        adminDashBoardContents = <h1>You must be The Great Tawhid Abdullah</h1>;
-      }
+    if (isAdmin) {
+      adminDashBoardContents = <h1>You must be The Great Tawhid Abdullah</h1>;
     }
 
     return (
@@ -91,40 +129,77 @@ class UserDashboard extends Component {
               <input type="text" placeholder="Type here" />
               <i className="fa fa-search" />
             </div>
-            <li className="head">General</li>
-            <li className="active">
-              <Link to="/dashboard">
-                <i className="fa fa-fw fa-dashboard" />
-                <span>Dashboard</span>
-              </Link>
-            </li>
 
-            <li onClick={this.renderPayments}>
+            <li
+              className={this.state.isProfileClicked ? "active" : "deactive"}
+              onClick={this.renderProfile}
+            >
               <a>
-                <i className="fa fa-fw fa-money" />
-                <span>Payments</span>
+                <i className="fa fa-fw fa-user" />
+                <span>PROFILE</span>
               </a>
             </li>
-            <li onClick={this.renderSettings}>
+            <li
+              className={this.state.isOrderClicked ? "active" : "deactive"}
+              onClick={this.renderOrders}
+            >
+              <a>
+                <i className="fa fa-fw fa-dashboard" />
+                <span>MY ORDERS</span>
+              </a>
+            </li>
+            <li
+              className={this.state.isReviewClicked ? "active" : "deactive"}
+              onClick={this.renderReviews}
+            >
+              <a>
+                <i className="fa fa-fw fa-comments" />
+                <span>MY Reviews</span>
+              </a>
+            </li>
+            <li
+              className={this.state.isWishListClicked ? "active" : "deactive"}
+              onClick={this.renderWishList}
+            >
+              <a>
+                <i className="fa fa-fw fa-heart" />
+                <span>MY WISHLISTS</span>
+              </a>
+            </li>
+
+            <li
+              className={this.state.isPaymentsClicked ? "active" : "deactive"}
+              onClick={this.renderPayments}
+            >
+              <a>
+                <i className="fa fa-fw fa-money" />
+                <span>PAYMENTS</span>
+              </a>
+            </li>
+            <li
+              className={this.state.isSettingClicked ? "active" : "deactive"}
+              onClick={this.renderSettings}
+            >
               <a>
                 <i className="fa fa-fw fa-cog" />
-                <span>Settings</span>
+                <span>SETTTINGS</span>
               </a>
             </li>
           </ul>
         </div>
         <div id="main">
-          <header>
-            <ol className="breadcrumb">
-              <li>
-                {" "}
-                <a>haus</a>
-              </li>
-              <li className="active">dashboard</li>
-            </ol>
-          </header>
           <div id="content">
-            <div className="box" />
+            <div className="box">
+              {this.state.isProfileClicked ? (
+                <ProfileContent
+                  profile={profile}
+                  user={user}
+                  loading={loading}
+                />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </div>

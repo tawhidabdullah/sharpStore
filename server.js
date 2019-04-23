@@ -8,6 +8,7 @@ const path = require("path");
 // importing the router of USERS
 const users = require("./routes/api/users");
 const products = require("./routes/api/products");
+const profile = require('./routes/api/profile'); 
 const adminProducts = require("./routes/adminRoutes/adminProducts");
 const adminCategory = require("./routes/adminRoutes/adminCategory");
 // initialize app
@@ -48,6 +49,7 @@ require("./config/passport")(passport);
 
 app.use("/api/users", users); // use Router() =>middleware (const router = express.Router());
 app.use("/api/products", products);
+app.use('/api/profile', profile); 
 app.use("/api/admin/product", adminProducts);
 app.use("/api/admin/category", adminCategory);
 
