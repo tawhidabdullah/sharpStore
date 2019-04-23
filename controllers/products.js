@@ -152,7 +152,7 @@ exports.getAProduct = (req, res) => {
   Product.findOne({
     _id: req.params.product_id
   })
-    .then(product => res.json(product))
+    .then(product => res.json({ product }))
     .catch(err =>
       res.status(404).json({
         noPostFound: "no product found with the given id"

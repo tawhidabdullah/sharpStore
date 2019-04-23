@@ -54,6 +54,24 @@ export const getProductAction = () => dispatch => {
 };
 
 // Get products
+export const getAProductAction = id => dispatch => {
+  axios
+    .get(`/api/products/getAProduct/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_PRODUCT,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Get products
 export const deleteProductAction = id => dispatch => {
   axios
     .delete(`/api/admin/product/deleteProduct/${id}`)

@@ -16,7 +16,7 @@ router.get("/getProduct", productsControllers.getProducts);
 // @decription  Get a specific post by id
 // @access Private
 
-router.get("/:product_id", productsControllers.getAProduct);
+router.get("/getAProduct/:product_id", productsControllers.getAProduct);
 
 // @router POST /api/products/review/:product_id
 // @decription Add review

@@ -1,37 +1,50 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductDetailComponent from "../../components/ProductDetail/ProductDetail";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
+import { getAProductAction } from "../../actions/productAction";
+import Spinner from "../../components/commonFeilds/Spinner";
 
-const ProductDetail = props => {
-  console.log(props);
-
-  const { productImage } = props.product;
-  return (
-    <div className="container" style={{ padding: "6rem 0" }}>
-      <div className="card">
+class ProductDetail extends Component {
+  componentDidMount() {
+    const productId = this.props.match.params.id;
+    this.props.getAProductAction(productId);
+  }
+  render() {
+    const { product } = this.props.product.product;
+    let ProductDetailContent = <Spinner />;
+    console.log(product); 
+    if (product) {
+      const { productImage } = product;
+      ProductDetailContent = (
         <div className="row">
-          <ProductSlider imgData={productImage} />
-          <ProductDetailComponent product={props.product} />
+          <ProductSlider imgData={product.productImage} />
+          <ProductDetailComponent product={product} />
         </div>
+      );
+    }
+    return (
+      <div className="container" style={{ padding: "6rem 0" }}>
+        <div className="card">{ProductDetailContent}</div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-const mapStateToProps = (state, props) => {
-  console.log("hey products", state.shop.products);
-
-  const product = state.shop.products.find(
-    product => product._id === props.match.params.id
-  );
-
+const mapStateToProps = state => {
   return {
-    product
+    product: state.product
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  { getAProductAction }
 )(ProductDetail);
+
+/* 
+
+
+
+
+*/

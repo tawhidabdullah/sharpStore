@@ -34,10 +34,8 @@ const ProductDetail = props => {
 
         <hr />
         <hr />
-        <button
-          onClick={onCart}
-          className="btn btn-lg btn-outline-danger text-uppercase"
-        >
+        <button className="btn btn-lg btn-outline-primary mr-4 ">Buy Now</button>
+        <button onClick={onCart} className="btn btn-lg btn-outline-danger ">
           <i className="fa fa-shopping-cart" /> Add to cart
         </button>
       </article>

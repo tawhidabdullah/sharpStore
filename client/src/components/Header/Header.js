@@ -38,7 +38,10 @@ class Header extends Component {
     const logedInUserLinks = (
       <React.Fragment>
         <li>
-          <Link to="/dashboard"> Dashboard </Link>
+          <Link to="/dashboard">
+            {" "}
+            <i className="fa fa-dashboard"> </i> Dashboard
+          </Link>
         </li>
 
         <li className="header__avatar" onClick={this.toggleDrodown}>
