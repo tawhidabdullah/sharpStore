@@ -8,7 +8,8 @@ import "./Product.scss";
 import { addProductToCart } from "../../actions";
 import {
   addWishListAction,
-  getWishListsAction
+  getWishListsAction,
+  deleteWishListAction
 } from "../../actions/userAction";
 import { withRouter } from "react-router-dom";
 
@@ -17,7 +18,26 @@ class Product extends Component {
     if (!this.props.user.isAuthenticate) {
       this.props.history.push("/login");
     } else {
-      this.props.addWishListAction(id);
+      const {
+        wishLists: { wishLists }
+      } = this.props.wishList;
+
+      if (wishLists) {
+        let counter = 0;
+        wishLists.forEach(wishList => {
+          if (wishList._id === id) {
+            counter++;
+          }
+        });
+        if (counter === 0) {
+          this.props.addWishListAction(id);
+        }
+        if(counter > 0){
+          this.props.deleteWishListAction(id);
+        }
+
+        console.log('counter:', counter); 
+      }
     }
   };
 
@@ -44,19 +64,23 @@ class Product extends Component {
     let wishClass = {};
 
     if (wishLists) {
-      wishLists.forEach(wishList => {
-        if (wishList._id !== _id) {
-          wishClass.heart = 'heart'
-        }
-        else{
-          wishClass.red = "red-heart";
-        }
-      });
+      if (!(wishLists.length > 0)) {
+        wishClass.heart = "heart";
+      } else {
+        wishLists.forEach(wishList => {
+          if (wishList._id !== _id) {
+            wishClass.heart = "heart";
+          } else {
+            wishClass.red = "red-heart";
+          }
+        });
+      }
     }
 
     return (
       <div className="card" id="my-card">
         <div
+          id="wish"
           className={wishClass.red ? wishClass.red : wishClass.heart}
           onClick={this.onWishclick.bind(this, _id)}
         >
@@ -112,7 +136,7 @@ const mapStateToProp = state => {
 
 export default connect(
   mapStateToProp,
-  { addWishListAction, getWishListsAction }
+  { addWishListAction, getWishListsAction, deleteWishListAction }
 )(withRouter(Product));
 
 /*

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getWishListsAction } from "../../../../actions/userAction";
+import {
+  getWishListsAction,
+  deleteWishListAction
+} from "../../../../actions/userAction";
 import "./WishListContent.scss";
 import Spinner from "../../../commonFeilds/Spinner";
 
@@ -17,6 +20,11 @@ class WishListContent extends Component {
     this.setState({
       searchInput: e.target.value.substr(0, 20)
     });
+  };
+
+  onClickDeleteWishList = id => {
+    this.props.deleteWishListAction(id);
+    this.props.getWishListsAction();
   };
 
   render() {
@@ -56,7 +64,13 @@ class WishListContent extends Component {
                   <div className="secondary">2.3</div>
                 </li>
                 <li className="content">
-                  <div className="icon-wrapper">
+                  <div
+                    className="icon-wrapper"
+                    onClick={this.onClickDeleteWishList.bind(
+                      this,
+                      wishList._id
+                    )}
+                  >
                     <span className="icon delete" data-tooltip="Delete" />
                   </div>
                 </li>
@@ -122,5 +136,5 @@ const mapStateToProp = state => {
 
 export default connect(
   mapStateToProp,
-  { getWishListsAction }
+  { getWishListsAction, deleteWishListAction }
 )(withRouter(WishListContent));

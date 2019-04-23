@@ -23,13 +23,31 @@ export const addWishListAction = id => dispatch => {
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
+        payload: {}
       });
       return false;
     });
 };
 
 // Get products
+export const deleteWishListAction = id => dispatch => {
+  axios
+    .delete(`/api/users/deleteWishList/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_WISHLISTS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Get wishLists actions
 export const getWishListsAction = () => dispatch => {
   axios
     .get("/api/users/wishLists")
