@@ -29,11 +29,16 @@ export const SUBSCRIBE_USER = 'SUBSCRIBE_USER';
 
 // Category types
 export const ADD_CATEGORY = "ADD_CATEGORY"
-export const GET_CATEGORY = 'GET_PRODUCT'; 
+export const GET_CATEGORY = 'GET_CATEGORY'; 
 export const GET_CATEGORIES = 'GET_CATEGORIES'; 
 export const DELETE_CATEGORY= 'DELETE_CATEGORY'; 
 
 
+// wish lists types  
+export const ADD_WISHLIST = "ADD_WISHLIST"
+export const GET_WISHLIST = 'GET_WISHLIST'; 
+export const GET_WISHLISTS = 'GET_WISHLISTS'; 
+export const DELETE_WISHLIST= 'DELETE_WISHLIST'; 
 
 
 

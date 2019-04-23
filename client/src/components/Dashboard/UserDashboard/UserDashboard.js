@@ -6,6 +6,7 @@ import "../Dashboard.scss";
 
 /// IMPORT CONTENTS
 import ProfileContent from "./profileContent/ProfileContent";
+import WishListContent from "./wishListContent/WishListContent";
 
 // import ACTIONS
 import { getCurrentProfile } from "../../../actions/profileAction";
@@ -199,6 +200,7 @@ class UserDashboard extends Component {
               ) : (
                 ""
               )}
+              {this.state.isWishListClicked ? <WishListContent /> : ""}
             </div>
           </div>
         </div>

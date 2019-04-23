@@ -1,66 +1,88 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatMoney } from "../../pipes/priceFormatter";
 import { cumulativeOffSet } from "../../utilities/cumulativeOffset";
 
 import "./Product.scss";
-import SlideDots from "../SlideDots/SlideDots";
 import { addProductToCart } from "../../actions";
+import { addWishListAction } from "../../actions/userAction";
 import { withRouter } from "react-router-dom";
 
-const Product = props => {
-  const { title, price, productImage, category, desc, _id } = props.product;
-  const onWishclick = () => {
-    props.history.push("/login");
+class Product extends Component {
+  onWishclick = (id) => {
+    if (!this.props.user.isAuthenticate) {
+      this.props.history.push("/login");
+    } else {
+      this.props.addWishListAction(id);
+    }
   };
+  render() {
+    const {
+      title,
+      price,
+      productImage,
+      category,
+      desc,
+      _id
+    } = this.props.product;
 
-  return (
-    <div className="card" id="my-card">
-      <div className="heart" onClick={onWishclick}>
-        <i className="fa fa-heart" />
-      </div>
-      <Link to={`/products/${_id}`} className="product__link">
-        <img
-          alt="Card image cap"
-          className="card-img-top img-fluid"
-          src={productImage}
-        />
-      </Link>
-      <div className="card-body">
-        <p
-          className=""
-          style={{
-            fontSize: "15px",
-            color: "#333",
-            fontWeight: "500"
-          }}
-        >
-          {category}
-        </p>
-        <p
-          className="lead"
-          style={{
-            marginTop: "-20px",
-            fontSize: "22px"
-          }}
-        >
-          {title}
-        </p>
-        <div className="card-price__ratings">
-          <div className="card__price">
-            <p>${price}</p>
-          </div>
-          <div className="card__ratings">
-            3.24 <i className="fa fa-star" />
+    return (
+      <div className="card" id="my-card">
+        <div className="heart" onClick={this.onWishclick.bind(this, _id)}>
+          <i className="fa fa-heart" />
+        </div>
+        <Link to={`/products/${_id}`} className="product__link">
+          <img
+            alt="Card image cap"
+            className="card-img-top img-fluid"
+            src={productImage}
+          />
+        </Link>
+        <div className="card-body">
+          <p
+            className=""
+            style={{
+              fontSize: "15px",
+              color: "#333",
+              fontWeight: "500"
+            }}
+          >
+            {category}
+          </p>
+          <p
+            className="lead"
+            style={{
+              marginTop: "-20px",
+              fontSize: "22px"
+            }}
+          >
+            {title}
+          </p>
+          <div className="card-price__ratings">
+            <div className="card__price">
+              <p>${price}</p>
+            </div>
+            <div className="card__ratings">
+              3.24 <i className="fa fa-star" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+const mapStateToProp = state => {
+  return {
+    user: state.auth
+  };
 };
 
-export default connect()(withRouter(Product));
+export default connect(
+  mapStateToProp,
+  { addWishListAction }
+)(withRouter(Product));
 
 /*
  <div id="product_item">

@@ -8,6 +8,7 @@ import errorReducer from "./errorReducer";
 import profileReducer from "./profileReducer";
 import productReducer from "./products.Reducer";
 import categoryReducer from "./category.reducer";
+import wishListReducer from "./wishList.reducer";
 
 export default combineReducers({
   shop,
@@ -18,5 +19,6 @@ export default combineReducers({
   errors: errorReducer,
   profile: profileReducer,
   product: productReducer,
-  category: categoryReducer
+  category: categoryReducer,
+  wishList: wishListReducer
 });
