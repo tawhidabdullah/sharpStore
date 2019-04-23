@@ -32,11 +32,11 @@ class Product extends Component {
         if (counter === 0) {
           this.props.addWishListAction(id);
         }
-        if(counter > 0){
+        if (counter > 0) {
           this.props.deleteWishListAction(id);
         }
 
-        console.log('counter:', counter); 
+        console.log("counter:", counter);
       }
     }
   };
@@ -63,17 +63,21 @@ class Product extends Component {
 
     let wishClass = {};
 
-    if (wishLists) {
-      if (!(wishLists.length > 0)) {
-        wishClass.heart = "heart";
-      } else {
-        wishLists.forEach(wishList => {
-          if (wishList._id !== _id) {
-            wishClass.heart = "heart";
-          } else {
-            wishClass.red = "red-heart";
-          }
-        });
+    if (!this.props.user.isAuthenticate) {
+      wishClass.heart = 'heart'
+    } else {
+      if (wishLists) {
+        if (wishLists.length === 0) {
+          wishClass.heart = "heart";
+        } else {
+          wishLists.forEach(wishList => {
+            if (wishList._id !== _id) {
+              wishClass.heart = "heart";
+            } else {
+              wishClass.red = "red-heart";
+            }
+          });
+        }
       }
     }
 

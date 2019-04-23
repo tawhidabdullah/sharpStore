@@ -36,7 +36,10 @@ class WishListContent extends Component {
     if (wishLists) {
       if (wishLists.length === 0) {
         filterWishListContents = (
-          <h1 className="display-4 text-center"> Your don't have any wish list yet!</h1>
+          <h1 className="display-4 text-center">
+            {" "}
+            Your don't have any wish list yet!
+          </h1>
         );
       } else if (wishLists.length > 0) {
         filterWishListContents = wishLists
