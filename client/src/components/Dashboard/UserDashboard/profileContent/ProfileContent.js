@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import isEmpty from "../../../../validation/isEmpty";
+import Moment from "react-moment";
 import {
   getCurrentProfile,
   createProfile
@@ -17,7 +18,7 @@ class ProfileContent extends Component {
     handle: "",
     gender: "",
     birthday: "",
-    mobile: "",
+    mobile: null,
     errors: {}
   };
 
@@ -45,11 +46,25 @@ class ProfileContent extends Component {
       profile.mobile = !isEmpty(profile.mobile) ? profile.mobile : "";
       profile.birthday = !isEmpty(profile.birthday) ? profile.birthday : "";
 
+      let bday = "";
+
+      for (let i = 0; i < profile.birthday.length; i++) {
+        if (profile.birthday[i] === "T") {
+          break;
+        } else {
+          if (profile.birthday[i] === "-") {
+            bday += "/";
+          } else {
+            bday += profile.birthday[i];
+          }
+        }
+      }
+
       this.setState({
         handle: profile.handle,
         gender: profile.gender,
         mobile: profile.mobile,
-        birthday: profile.birthday
+        birthday: bday
       });
     }
   }
@@ -64,7 +79,7 @@ class ProfileContent extends Component {
     let profileData = {};
     profileData.handle = this.state.handle;
     profileData.gender = this.state.gender;
-    profileData.moblie = this.state.moblie;
+    profileData.mobile = this.state.mobile;
     profileData.birthday = this.state.birthday;
 
     this.props.createProfile(profileData, this.props.history);
@@ -76,13 +91,14 @@ class ProfileContent extends Component {
     let dashboardContents;
     let createProfileContents;
     const { profile } = this.props.profile;
+
     const user = this.props.user;
     const loading = this.props.loading;
 
     if (profile === null || loading) {
       dashboardContents = <Spinner />;
     } else {
-      if (Object.keys(profile).length > 0) {
+      if (profile.handle !== "") {
         //TODO: DISPLAY THE PROFILE
         dashboardContents = (
           <section className="statistics">
@@ -117,7 +133,7 @@ class ProfileContent extends Component {
                   >
                     <i className="fa fa-plus fa-fw bg-danger" />
                     <div className="info">
-                      <h3>ADD PROFILE</h3>
+                      <h3>CREATE PROFILE</h3>
                       <p>Add profile to stay more connected with us</p>
                     </div>
                   </div>
@@ -157,16 +173,17 @@ class ProfileContent extends Component {
               errors={errors.gender}
             />
             <TextFeildGroup
+              placeholder="enter your mobile number"
               name="mobile"
-              placeholder="Enter your mobile number.."
               type="number"
               value={this.state.mobile}
               onChange={this.onChange}
               errors={errors.mobile}
             />
+
             <TextFeildGroup
               name="birthday"
-              type="date"
+              type="text"
               value={this.state.birthday}
               onChange={this.onChange}
               errors={errors.birthday}
