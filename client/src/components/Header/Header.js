@@ -34,6 +34,23 @@ class Header extends Component {
   onSearchInputChange = () => {};
   render() {
     const { isAuthenticate, user } = this.props.auth;
+    const cats = this.props.category.categories;
+    let categoryNavContents;
+    let categories;
+
+    if (cats) {
+      categories = cats.map(category => {
+        return category.title;
+      });
+    }
+
+    categoryNavContents = categories.map(category => {
+     return (
+        <li>
+          <a>{category}</a>
+        </li>
+      );
+    });
 
     const logedInUserLinks = (
       <React.Fragment>
@@ -126,20 +143,7 @@ class Header extends Component {
                 Category
                 <span className="arrow-down" />
               </a>
-              <ul className="dropdown">
-                <li>
-                  <a>Computer</a>
-                </li>
-                <li>
-                  <a>Phone</a>
-                </li>
-                <li>
-                  <a>Programming</a>
-                </li>
-                <li>
-                  <a>Gadgets</a>
-                </li>
-              </ul>
+              <ul className="dropdown">{categoryNavContents}</ul>
             </li>
             <li>
               <a href="javascript:void(0)">
@@ -184,7 +188,8 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     cartLength: state.shop.cart.length,
-    auth: state.auth
+    auth: state.auth,
+    category: state.category
   };
 };
 

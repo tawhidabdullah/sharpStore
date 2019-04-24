@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { addProductAction } from "../../actions/productAction";
 import "../../components/styles_components/submit.scss";
 import "../../components/styles_components/fileUpload.scss";
+import { getCategoriesAction } from "../../actions/categoryAction";
 
 class FileUploads extends Component {
   state = {
@@ -84,6 +85,8 @@ class FileUploads extends Component {
   }
 
   componentDidMount() {
+    this.props.getCategoriesAction();
+
     if (this.props.title) {
       this.setState({
         title: this.props.title,
@@ -105,11 +108,33 @@ class FileUploads extends Component {
         </div>
       );
     }
-    const options = [
-      { label: "Select Categories", value: 0 },
-      { label: "Phone", value: "Phone" },
-      { label: "Computer", value: "Computer" }
-    ];
+
+    const cats = this.props.category.categories;
+
+    console.log("fffffffffffff", categories);
+
+    let categories;
+
+    if (cats) {
+      categories = cats.map(category => {
+        return category.title;
+      });
+    }
+
+    console.log("ffff", categories);
+    let options = [{ label: "Select Categories", value: 0 }];
+
+    if (categories) {
+      categories.forEach(category => {
+        
+        options.push({
+          label: category,
+          value: category
+        });
+      });
+    }
+
+    console.log("options", options);
 
     return (
       <React.Fragment>
@@ -170,11 +195,12 @@ class FileUploads extends Component {
 const mapStateToProp = state => {
   return {
     errors: state.errors,
-    product: state.product
+    product: state.product,
+    category: state.category
   };
 };
 
 export default connect(
   mapStateToProp,
-  { addProductAction }
+  { addProductAction, getCategoriesAction }
 )(FileUploads);
