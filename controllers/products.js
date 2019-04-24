@@ -1,7 +1,5 @@
 // GET PRODUCT MODEL
 const Product = require("../models/product");
-// GET CATEGORY MODEL
-const Category = require("../models/category");
 
 // LOAD VALIDATAION
 const validateProdctInput = require(".././validation/products");
@@ -10,8 +8,10 @@ const validateProdctInput = require(".././validation/products");
 
 // ADD PRODUCTS //////////////////////////
 exports.addProduct = (req, res) => {
+  console.log(req.body.category);
   // bringing the validations : error , isValid
   const { errors, isValid } = validateProdctInput(req.body);
+  console.log(req.file);
 
   let image = req.file;
 
@@ -162,11 +162,11 @@ exports.getAProduct = (req, res) => {
 
 // GET PRODUCTS BY CATEGORY /////////////////////////////////////////
 exports.getProductsByCategory = (req, res) => {
-  Product.find({ category: req.params.id })
-    .populate("category")
-    .exec()
-    .then(products => {
-      console.log(err);
-    })
-    .catch(err => console.log(err));
+  // Product.find({ category: req.params.id })
+  //   .populate("category")
+  //   .exec()
+  //   .then(products => {
+  //     console.log(products);
+  //   })
+  //   .catch(err => console.log(err));
 };

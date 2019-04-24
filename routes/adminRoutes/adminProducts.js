@@ -9,7 +9,7 @@ const productsControllers = require("../../controllers/products");
 // @decription get products by category
 // @access public
 
-router.post("/:id", productsControllers.getProductsByCategory);
+router.get("/:id", productsControllers.getProductsByCategory);
 
 // @route POST /api/admin/products/addProducts
 // @decription add products and save to database

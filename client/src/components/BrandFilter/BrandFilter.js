@@ -27,7 +27,8 @@ const BrandFilter = props => {
           <li className="list-group-item flex-50" key={category}>
             <label className="custom-checkbox text-capitalize">
               {" "}
-              {category} ({brandItemsCount[category]})
+              {category}{" "}
+              <span class="badge badge-danger">{brandItemsCount[category]}</span>
               <input
                 type="checkbox"
                 name={category}
@@ -45,6 +46,8 @@ const BrandFilter = props => {
 
 const mapStateToProps = state => {
   const brandItemsCount = {};
+
+  console.log("shop======", state.shop.products);
 
   state.shop.products.forEach(p => {
     brandItemsCount[p.category] = brandItemsCount[p.category] + 1 || 1;
