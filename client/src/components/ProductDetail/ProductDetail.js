@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { formatMoney } from "../../pipes/priceFormatter";
 import { addProductToCart } from "../../actions";
-
+import './ProductDetail.scss'; 
 const ProductDetail = props => {
   const { title, category, price, desc } = props.product;
 
@@ -16,11 +16,23 @@ const ProductDetail = props => {
         <h3 className="title mb-3">{title}</h3>
 
         <p className="price-detail-wrap">
-          <span className="price h3 text-warning">
+          <span className="price h3 text-primary">
             <span className="currency">$</span>
             <span className="num">{price}</span>
           </span>
         </p>
+        <div class="product-rating">
+          <ul>
+            <li class="fa fa-fw fa-lg fa-star" />
+            <li class="fa fa-fw fa-lg fa-star" />
+            <li class="fa fa-fw fa-lg fa-star" />
+            <li class="fa fa-fw fa-lg fa-star" />
+            <li class="fa fa-fw fa-lg fa-star-half" />
+          </ul>
+          <span class="product-reviews">
+            <a href="#">10 Reviews</a>
+          </span>
+        </div>
         <dl className="item-property">
           <dt>Description</dt>
           <dd>
@@ -34,7 +46,9 @@ const ProductDetail = props => {
 
         <hr />
         <hr />
-        <button className="btn btn-lg btn-outline-primary mr-4 ">Buy Now</button>
+        <button className="btn btn-lg btn-outline-primary mr-4 ">
+          Buy Now
+        </button>
         <button onClick={onCart} className="btn btn-lg btn-outline-danger ">
           <i className="fa fa-shopping-cart" /> Add to cart
         </button>
