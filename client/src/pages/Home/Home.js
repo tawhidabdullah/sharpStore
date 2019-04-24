@@ -5,7 +5,6 @@ import Pagination from "../../components/Pagination/Pagination";
 import { getProductAction } from "../../actions/productAction";
 import { connect } from "react-redux";
 
-
 class Home extends Component {
   componentWillMount() {
     this.props.getProductAction();
@@ -15,6 +14,7 @@ class Home extends Component {
     return (
       <React.Fragment>
         <div className="container-fluid" style={{ paddingTop: "4rem" }}>
+          <div className="row" />
           <div className="row">
             <FilterBar />
             <ProductList />

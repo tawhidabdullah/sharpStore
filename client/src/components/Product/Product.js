@@ -64,7 +64,7 @@ class Product extends Component {
     let wishClass = {};
 
     if (!this.props.user.isAuthenticate) {
-      wishClass.heart = 'heart'
+      wishClass.heart = "heart";
     } else {
       if (wishLists) {
         if (wishLists.length === 0) {
@@ -124,6 +124,16 @@ class Product extends Component {
             <div className="card__ratings">
               3.24 <i className="fa fa-star" />
             </div>
+            <button
+              onClick={() => {
+                this.props.addProductToCart({ ...this.props.product });
+              }}
+              id="btn-invisible"
+              className=" ml-3 btn btn-outline-danger"
+            >
+              {" "}
+              Add To Cart
+            </button>
           </div>
         </div>
       </div>
@@ -140,7 +150,12 @@ const mapStateToProp = state => {
 
 export default connect(
   mapStateToProp,
-  { addWishListAction, getWishListsAction, deleteWishListAction }
+  {
+    addWishListAction,
+    getWishListsAction,
+    deleteWishListAction,
+    addProductToCart
+  }
 )(withRouter(Product));
 
 /*

@@ -72,3 +72,11 @@
   color: rgb(219, 83, 83);
   margin-left: 2px;
 }
+
+#my-card:hover #btn-invisible {
+  visibility: visible;
+}
+
+#btn-invisible {
+  visibility: hidden;
+}

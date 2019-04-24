@@ -28,7 +28,9 @@ const BrandFilter = props => {
             <label className="custom-checkbox text-capitalize">
               {" "}
               {category}{" "}
-              <span class="badge badge-danger">{brandItemsCount[category]}</span>
+              <span class="badge badge-danger">
+                {brandItemsCount[category]}
+              </span>
               <input
                 type="checkbox"
                 name={category}

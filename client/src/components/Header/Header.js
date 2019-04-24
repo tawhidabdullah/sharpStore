@@ -161,7 +161,9 @@ class Header extends Component {
             <li>
               <NavLink to={"/cart"}>
                 <i className="fa fa-shopping-cart mr-2" aria-hidden="true" />
-                Cart {this.props.cartLength ? `(${this.props.cartLength})` : ""}
+                <span class="mb-2 badge badge-primary">
+                  {this.props.cartLength ? ` ${this.props.cartLength}` : ""}
+                </span>
               </NavLink>
             </li>
             {isAuthenticate ? logedInUserLinks : newUserLinks}{" "}
