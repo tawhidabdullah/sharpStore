@@ -86,7 +86,7 @@ class ProductList extends Component {
               }}
             >
               <div className="card-header d-flex justify-content-end">
-                <span className="mr-3">Change Layout: </span>
+                <span className="mr-3" />
                 <LayoutMode
                   len={3}
                   isActive={this.state.gridValue === 3}
