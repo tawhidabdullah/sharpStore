@@ -44,8 +44,8 @@ const OrderFilter = ({ dispatch }) => {
 
   return (
     <div className="card">
-      <div className="card-header">
-        <h3>Price {removeSelected} </h3>
+      <div className="card-header bg-danger">
+        <h3 style={{ color: "white" }}>Price {removeSelected} </h3>
       </div>
       <ul className="list-group flex-row  flex-wrap">
         <li className="list-group-item flex-fill">

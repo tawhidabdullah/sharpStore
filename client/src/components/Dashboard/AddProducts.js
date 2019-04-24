@@ -8,12 +8,16 @@ class AddProducts extends Component {
   render() {
     return (
       <div>
-       <div style={{
-         background: "whitesmoke",
-         padding: "5px 20px"
-       }}>
-       <h4 className="display-3 text-center mb-4">Add your Product</h4>
-       </div>
+        <div
+          style={{
+            background: "whitesmoke",
+            padding: "5px 20px"
+          }}
+        >
+          <div className="add-product-heading">
+            <h4 className="display-3 text-center mb-4">Add your Product</h4>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-6">
             {" "}

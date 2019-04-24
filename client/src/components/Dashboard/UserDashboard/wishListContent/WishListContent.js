@@ -51,14 +51,14 @@ class WishListContent extends Component {
             return (
               <React.Fragment>
                 <ul className="horizontal col header">
-                  <li className="content">Date</li>
-                  <li className="content">TITLE</li>
-                  <li className="content ">Description</li>
-                  <li className="content right">PRICING </li>
+                  <li className="content  dated-content">Date</li>
+                  <li className="content titled-content">TITLE</li>
+                  <li className="content desced-content ">Description</li>
+                  <li className="content right Remained-content">PRICING </li>
                 </ul>
 
                 <ul className="data col horizontal" key={wishList._id}>
-                  <li className="content">
+                  <li className="content date-content">
                     <div>Nov 3</div>
                     <div className="secondary">4 months</div>
                   </li>
@@ -71,11 +71,11 @@ class WishListContent extends Component {
                     <div>{wishList.title}</div>
                     <div className="secondary">{wishList.category}</div>
                   </li>
-                  <li className="content">
+                  <li className="content desc-content">
                     <div>{wishList.desc}</div>
                     <div className="secondary">In stock</div>
                   </li>
-                  <li className="content">
+                  <li className="content Remain-content">
                     <div id="price">${wishList.price}</div>
                     <div className="secondary">2.3</div>
                   </li>
@@ -105,7 +105,7 @@ class WishListContent extends Component {
               Recent: <span className="focus">$250 </span>to{" "}
               <span className="focus">Best Buy</span> on Saturday, June 5.
             </div>
-            <div class="produc-wrap ">
+            <div class="produc-wrap searchwrap">
               <div class="search">
                 <input
                   onChange={this.onSearchInputChange}

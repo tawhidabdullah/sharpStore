@@ -1,42 +1,3 @@
-/** MAIN CSS **/
-.pull-left {
-  float: left;
-}
-
-.pull-right {
-  float: right;
-}
-
-.clear-all {
-  clear: both;
-}
-
-.clear-left {
-  clear: left;
-}
-
-.clear-right {
-  clear: right;
-}
-
-.user-banner {
-  width: 180px;
-  padding: 1px 0px 1px 0px;
-  background: #fff;
-  text-align: center;
-}
-.user-banner img {
-  display: inline-block;
-  vertical-align: middle;
-  margin-top: 5px;
-  width: 50px;
-  margin-right: 5px;
-  border-radius: 100%;
-}
-.user-banner .username {
-  font-weight: bold;
-}
-
 /** IMPORT HELPER CSS **/
 /** IMPORT BASE CSS **/
 html,
@@ -216,28 +177,10 @@ h2 {
 }
 
 @media (max-width: 767px) {
-  .user-banner {
-    width: 66px;
-    padding: 1px 0px 1px 0px;
-    background: #2dcc70;
-    text-align: center;
-  }
-  .user-banner img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: 5px;
-    width: 50px;
-    margin-right: 5px;
-    border-radius: 100%;
-  }
-  .user-banner .username {
-    font-size: 75%;
-    font-weight: bold;
-  }
-
   #nav {
     z-index: +10;
     width: 66px;
+    top: 50px;
   }
   #nav li.head,
   #nav li span {

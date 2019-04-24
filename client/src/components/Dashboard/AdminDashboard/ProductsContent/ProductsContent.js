@@ -71,7 +71,7 @@ class ProductsContent extends Component {
             return (
               <React.Fragment>
                 <ul className="data col horizontal" key={product._id}>
-                  <li className="content">
+                  <li className="content date-content">
                     <div>Nov 3</div>
                     <div className="secondary">4 months</div>
                   </li>
@@ -84,11 +84,11 @@ class ProductsContent extends Component {
                     <div>{product.title}</div>
                     <div className="secondary">{product.category}</div>
                   </li>
-                  <li className="content">
+                  <li className="content desc-content">
                     <div>{product.desc}</div>
                     <div className="secondary">In stock</div>
                   </li>
-                  <li className="content">
+                  <li className="content Remain-content">
                     <div id="price">${product.price}</div>
                     <div className="secondary">2.3</div>
                   </li>
@@ -119,14 +119,14 @@ class ProductsContent extends Component {
 
     return (
       <div>
-        <div className="container">
+        <div className="containerx">
           <div className="header-wrapper">
-            <div className="title">Welcome back, {this.props.user.name}!</div>
+            <div className="title">Here is your Products, {this.props.user.name}!</div>
             <div className="note">
               Recent: <span className="focus">$250 </span>to{" "}
               <span className="focus">Best Buy</span> on Saturday, June 5.
             </div>
-            <div class="produc-wrap ">
+            <div class="produc-wrap searchwrap">
               <div class="search">
                 <input
                   onChange={this.onSearchInputChange}
@@ -159,10 +159,10 @@ class ProductsContent extends Component {
             ) : (
               <div className="table-wrapper">
                 <ul className="horizontal col header">
-                  <li className="content">Updated Date</li>
-                  <li className="content">Payee</li>
-                  <li className="content ">Description</li>
-                  <li className="content right">Remaining</li>
+                  <li className="content dated-content">Updated Date</li>
+                  <li className="content titled-content">Titles</li>
+                  <li className="content desced-content ">Description</li>
+                  <li className="content right  Remained-content">Remaining</li>
                 </ul>
                 {fileterProductContents}
               </div>

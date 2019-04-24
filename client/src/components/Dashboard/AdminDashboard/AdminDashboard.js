@@ -228,15 +228,6 @@ class AdminDashboard extends Component {
           </ul>
         </div>
         <div id="main">
-          {/* <header>
-            <ol className="breadcrumb">
-              <li>
-                {" "}
-                <a href="#">haus</a>
-              </li>
-              <li className="active">dashboard</li>
-            </ol>
-          </header> */}
           <div id="content">
             <div className="box">
               {this.state.isProductClicked ? (
