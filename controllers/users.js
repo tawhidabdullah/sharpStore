@@ -249,7 +249,10 @@ exports.deleteWishList = (req, res) => {
       // then delete that wishLists from database
       user.wishLists.splice(removeIndex, 1);
       // then save the wishLists with new wishlists
-      user.save().then(user => res.json({ wishLists: user[0].wishLists }));
+      user
+        .save()
+        .then(user => res.json({ wishLists: user[0].wishLists }))
+        .catch(error => res.status(404).json(error));
     })
     .catch(error => res.status(404).json(error));
 };

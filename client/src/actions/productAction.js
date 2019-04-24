@@ -16,6 +16,7 @@ export const addProductAction = PrductData => dispatch => {
   axios
     .post("/api/admin/product/addProduct", PrductData)
     .then(res => {
+      dispatch(clearErrors());
       dispatch({
         type: ADD_PRODUCT,
         payload: res.data
@@ -39,7 +40,10 @@ export const getProductAction = () => dispatch => {
   axios
     .get("/api/products/getProduct")
     .then(res => {
-      const products = res.data.product;
+      let products;
+      if (res.data) {
+        products = res.data.product;
+      }
       dispatch({
         type: GET_PRODUCTS,
         payload: products

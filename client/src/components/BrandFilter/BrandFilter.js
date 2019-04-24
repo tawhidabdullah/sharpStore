@@ -38,27 +38,28 @@ class BrandFilter extends Component {
           <h3 className="text-white">Categories</h3>
         </div>
         <ul className="list-group flex-row flex-wrap">
-          {categories.map(category => {
-            console.log('cccccccccccccc',category); 
-            return (
-              <li className="list-group-item flex-50" key={category}>
-                <label className="custom-checkbox text-capitalize">
-                  {" "}
-                  {category}{" "}
-                  <span class="badge badge-danger">
-                    {brandItemsCount[category]}
-                  </span>
-                  <input
-                    type="checkbox"
-                    name={category}
-                    className="custom-checkbox__input"
-                    onInput={this.handleSelectBox}
-                  />
-                  <span className="custom-checkbox__span" />
-                </label>
-              </li>
-            );
-          })}
+          {categories
+            ? categories.map(category => {
+                return (
+                  <li className="list-group-item flex-50" key={category}>
+                    <label className="custom-checkbox text-capitalize">
+                      {" "}
+                      {category}{" "}
+                      <span class="badge badge-danger">
+                        {brandItemsCount[category]}
+                      </span>
+                      <input
+                        type="checkbox"
+                        name={category}
+                        className="custom-checkbox__input"
+                        onInput={this.handleSelectBox}
+                      />
+                      <span className="custom-checkbox__span" />
+                    </label>
+                  </li>
+                );
+              })
+            : ""}
         </ul>
       </div>
     );

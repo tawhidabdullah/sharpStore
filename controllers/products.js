@@ -8,10 +8,8 @@ const validateProdctInput = require(".././validation/products");
 
 // ADD PRODUCTS //////////////////////////
 exports.addProduct = (req, res) => {
-  console.log(req.body.category);
   // bringing the validations : error , isValid
   const { errors, isValid } = validateProdctInput(req.body);
-  console.log(req.file);
 
   let image = req.file;
 

@@ -60,7 +60,9 @@ class ProductsContent extends Component {
     if (products) {
       if (products.length === 0) {
         fileterProductContents = (
-          <h1 className="display-4">You haven't created any products yet!</h1>
+         <div className='haventCreatedProduct'>
+            <h1 className="display-4">You haven't created any products yet!</h1>
+         </div>
         );
       } else if (products.length > 0) {
         fileterProductContents = products

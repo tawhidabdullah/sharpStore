@@ -1,11 +1,12 @@
+.header__avatar-responsive {
+  visibility: hidden;
+}
 
-.cart-notification{
- 
+.cart-notification {
   height: 5px;
   width: 5px;
   background: rebeccapurple;
 }
-
 
 a {
   text-decoration: none;
@@ -133,6 +134,14 @@ a:hover {
   display: none;
 }
 @media only screen and (max-width: 900px) {
+
+.user-account{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
   .nav-fostrap {
     background: #fff;
     width: 200px;
@@ -304,7 +313,6 @@ a:hover {
 /*///////////////////////////////////////////////////////////////////////////////////*/
 
 .header__avatar {
-  position: relative;
   margin: 0 26px;
   width: 35px;
   height: 35px;

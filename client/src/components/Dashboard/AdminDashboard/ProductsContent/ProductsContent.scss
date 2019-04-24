@@ -334,11 +334,7 @@ li .img {
     margin-top: 10px;
   }
 
-  .containerx {
-    margin: 0;
-    min-width: 500px;
-    padding: 20px;
-  }
+
 
   .desced-content {
     visibility: hidden;
@@ -495,5 +491,35 @@ li .img {
 
     left: 50%;
     padding-bottom: 35px;
+  }
+}
+
+@media (max-width: 1177px) {
+  .haventCreatedProduct h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 960px) {
+  .haventCreatedProduct h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 818px) {
+  .haventCreatedProduct h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 495px) {
+  .haventCreatedProduct h1 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 355px) {
+  .haventCreatedProduct h1 {
+    font-size: 12px;
   }
 }

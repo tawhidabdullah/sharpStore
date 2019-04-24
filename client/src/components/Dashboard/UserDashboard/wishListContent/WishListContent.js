@@ -36,10 +36,12 @@ class WishListContent extends Component {
     if (wishLists) {
       if (wishLists.length === 0) {
         filterWishListContents = (
-          <h1 className="display-4 text-center">
-            {" "}
-            Your don't have any wish list yet!
-          </h1>
+          <div className="haventCreatedProduct">
+            <h1 className="display-4 text-center">
+              {" "}
+              Your don't have any wish list yet!
+            </h1>
+          </div>
         );
       } else if (wishLists.length > 0) {
         filterWishListContents = wishLists
@@ -98,7 +100,7 @@ class WishListContent extends Component {
     }
     return (
       <div>
-        <div className="container">
+        <div className="containerx">
           <div className="header-wrapper">
             <div className="title">All the Wish lists here !</div>
             <div className="note">
