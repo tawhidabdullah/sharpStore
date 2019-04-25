@@ -7,11 +7,7 @@ const categoryControllers = require("../../controllers/category");
 
 // GET CATEGORIES
 
-router.get(
-  "/getCategories",
-  passport.authenticate("jwt", { session: false }),
-  categoryControllers.getCategories
-);
+router.get("/getCategories", categoryControllers.getCategories);
 
 // POST CATEGORY
 router.post(
