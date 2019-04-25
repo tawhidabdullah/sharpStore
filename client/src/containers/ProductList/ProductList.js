@@ -16,7 +16,8 @@ class ProductList extends Component {
     perPage: 12,
     currentPage: 1,
     pagesToShow: 3,
-    gridValue: 3
+    gridValue: 3,
+    searchInput: ""
   };
 
   changeLayout = n => {
@@ -55,6 +56,12 @@ class ProductList extends Component {
     });
   };
 
+  onSearchInputChange = e => {
+    this.setState({
+      searchInput: e.target.value.substr(0, 20)
+    });
+  };
+
   render() {
     let isActive = this.state.colValue[this.state.colValue.length - 1];
 
@@ -63,16 +70,30 @@ class ProductList extends Component {
     if (!this.props.products) {
       contents = <Spinner />;
     } else {
-      contents = paginationPipe(this.props.products, this.state).map(
-        product => {
-          let classes = `${this.state.colValue} col-md-6 mb-3`;
-          return (
-            <div className={classes}>
-              <Product key={product._id} product={product} />
-            </div>
-          );
-        }
+      let fileterProductContents = this.props.products.filter(
+        product => product.title.indexOf(this.state.searchInput) !== -1
       );
+      if (fileterProductContents.length > 0) {
+        contents = paginationPipe(fileterProductContents, this.state).map(
+          product => {
+            let classes = `${this.state.colValue} col-md-6 mb-3`;
+            return (
+              <div className={classes}>
+                <Product key={product._id} product={product} />
+              </div>
+            );
+          }
+        );
+      } else if (fileterProductContents.length === 0) {
+        contents = (
+          <div class="error-page">
+            <div>
+              <h1 data-h1="404">404</h1>
+              <p data-p="PRODUCT NOT FOUND">PRODUCT NOT FOUND</p>
+            </div>
+          </div>
+        );
+      }
     }
 
     return (
@@ -87,6 +108,25 @@ class ProductList extends Component {
               }}
             >
               <div className="card-header d-flex justify-content-end">
+                <div id="styleProductSearchBar">
+                  <div className="header-wrap">
+                    <div className="search">
+                      <input
+                        onChange={this.onSearchInputChange}
+                        value={this.state.searchInput}
+                        type="text"
+                        className="searchTerm searchTerm__white"
+                        placeholder="Search products here.."
+                      />
+                      <button
+                        type="submit"
+                        className="searchButton searchButton__white"
+                      >
+                        <i className="fa fa-search" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
                 <span className="mr-3" />
                 <LayoutMode
                   len={3}
