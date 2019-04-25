@@ -28,4 +28,14 @@ router.post(
   productsControllers.addProductReview
 );
 
+
+// @router GET /api/products/getReviews/:product_id
+// @decription Add review
+// @access Private
+
+router.get(
+  "/getReviews/:product_id",productsControllers.getReviews
+);
+
+
 module.exports = router;

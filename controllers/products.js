@@ -110,7 +110,7 @@ exports.addProductReview = (req, res) => {
   //   res.status(400).json(errors);
   // }
 
-  Post.findById(req.params.product_id)
+  Product.findById(req.params.product_id)
     .then(product => {
       if (!product) {
         res.status(404).json({
@@ -167,4 +167,19 @@ exports.getProductsByCategory = (req, res) => {
   //     console.log(products);
   //   })
   //   .catch(err => console.log(err));
+};
+
+// GET REVIEWS BY PRODUC_ID
+exports.getReviews = (req, res) => {
+  Product.findOne({
+    _id: req.params.product_id
+  })
+    .then(product => {
+      res.json({ reviews: product.reviews });
+    })
+    .catch(err =>
+      res.status(404).json({
+        noProductFound: "no product found with the given id"
+      })
+    );
 };

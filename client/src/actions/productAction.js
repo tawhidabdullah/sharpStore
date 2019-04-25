@@ -8,7 +8,8 @@ import {
   GET_PRODUCT,
   PRODUCT_LOADING,
   DELETE_PRODUCT,
-  PRODUCT_SUCCESSFULL
+  PRODUCT_SUCCESSFULL,
+  GET_REVIEWS
 } from "./types";
 
 // Add Post
@@ -95,10 +96,10 @@ export const deleteProductAction = id => dispatch => {
 };
 
 // Add Review
-export const addReview = (product_id, reviewData) => dispatch => {
+export const addProductReview = (product_id, reviewData) => dispatch => {
   dispatch(clearErrors());
   axios
-    .post(`/api/products/review/${product_id}`, reviewData)
+    .post(`/api/products/addProductReview/${product_id}`, reviewData)
     .then(res =>
       dispatch({
         type: GET_PRODUCT,
@@ -130,6 +131,27 @@ export const deleteReview = (product_id, reviewId) => dispatch => {
       })
     );
 };
+
+
+// Delete Review
+export const getProductReviews = (product_id) => dispatch => {
+  axios
+    .get(`/api/products/getReviews/${product_id}`)
+    .then(res =>
+      dispatch({
+        type: GET_REVIEWS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+
 
 // Clear errors
 export const clearErrors = () => {

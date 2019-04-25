@@ -9,7 +9,7 @@ import profileReducer from "./profileReducer";
 import productReducer from "./products.Reducer";
 import categoryReducer from "./category.reducer";
 import wishListReducer from "./wishList.reducer";
-
+import reviewReducer from "./review.reducer";
 export default combineReducers({
   shop,
   brandFilter: brandFilterReducer,
@@ -20,5 +20,6 @@ export default combineReducers({
   profile: profileReducer,
   product: productReducer,
   category: categoryReducer,
-  wishList: wishListReducer
+  wishList: wishListReducer,
+  review: reviewReducer
 });
