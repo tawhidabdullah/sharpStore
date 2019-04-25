@@ -3,7 +3,22 @@ import "./ReviewItem.scss";
 import Moment from "react-moment";
 export default class ReviewItem extends Component {
   render() {
-    const { avatar, name, date, text } = this.props.review;
+    const { avatar, name, date, text, _id } = this.props.review;
+    const { isAdmin } = this.props;
+
+    let isAdminContent = "";
+
+    if (isAdmin) {
+      isAdminContent = (
+        <div
+          className=" icon-wrapper-review"
+          onClick={this.props.deleteReview.bind(this, _id)}
+        >
+          <span className="icon delete" data-tooltip="Delete" />
+        </div>
+      );
+    }
+
     return (
       <div class="content-wrap">
         <div class="comment-item">
@@ -14,6 +29,7 @@ export default class ReviewItem extends Component {
               </figure>
             </div>
             <div class="is-right">
+              {isAdminContent}
               <div class="is-right--inner">
                 <a href="" class="name">
                   {name}

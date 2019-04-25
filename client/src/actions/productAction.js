@@ -120,7 +120,7 @@ export const deleteReview = (product_id, reviewId) => dispatch => {
     .delete(`/api/admin/product/rmreview/${product_id}/${reviewId}`)
     .then(res =>
       dispatch({
-        type: GET_PRODUCT,
+        type: GET_REVIEWS,
         payload: res.data
       })
     )
@@ -132,9 +132,8 @@ export const deleteReview = (product_id, reviewId) => dispatch => {
     );
 };
 
-
 // Delete Review
-export const getProductReviews = (product_id) => dispatch => {
+export const getProductReviews = product_id => dispatch => {
   axios
     .get(`/api/products/getReviews/${product_id}`)
     .then(res =>
@@ -150,8 +149,6 @@ export const getProductReviews = (product_id) => dispatch => {
       })
     );
 };
-
-
 
 // Clear errors
 export const clearErrors = () => {

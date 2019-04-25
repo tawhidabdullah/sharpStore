@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./ReviewContent.scss";
 import { connect } from "react-redux";
-import { getProductReviews } from "../../actions/productAction";
+import { getProductReviews, deleteReview } from "../../actions/productAction";
 import ReviewItem from "./ReviewItem";
 import Spinner from "../commonFeilds/Spinner";
 
@@ -15,16 +15,26 @@ class ReviewContent extends Component {
     const productId = this.props.productId;
     this.props.getProductReviews(productId);
   }
+  onClickDeleteReview = reviewId => {
+    const productId = this.props.productId;
+    this.props.deleteReview(productId, reviewId);
+  };
 
   render() {
     const { reviews } = this.props.reviews;
+    const { isAdmin } = this.props.user;
 
     let reviewItemContent = <Spinner />;
 
     if (reviews.reviews) {
-      console.log(reviews.reviews);
       reviewItemContent = reviews.reviews.map(review => {
-        return <ReviewItem review={review} />;
+        return (
+          <ReviewItem
+            review={review}
+            isAdmin={isAdmin}
+            deleteReview={this.onClickDeleteReview}
+          />
+        );
       });
     }
 
@@ -34,11 +44,12 @@ class ReviewContent extends Component {
 
 const mapStateToProps = state => {
   return {
-    reviews: state.review
+    reviews: state.review,
+    user: state.auth
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getProductReviews }
+  { getProductReviews, deleteReview }
 )(ReviewContent);
