@@ -1,20 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import ProductDetailComponent from "../../components/ProductDetail/ProductDetail";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
 import { getAProductAction } from "../../actions/productAction";
 import Spinner from "../../components/commonFeilds/Spinner";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
+import AddReview from "../../components/AddReview/AddReview";
 
 import "./ProductDetail.scss";
 
 class ProductDetail extends Component {
+  state = {
+    clickedAddReview: false
+  };
+
   componentDidMount() {
     const productId = this.props.match.params.id;
     this.props.getAProductAction(productId);
   }
+
+  onAddRateButtonClick = () => {
+    const { isAuthenticate } = this.props.user;
+    if (!isAuthenticate) {
+      this.props.history.push("/login");
+    } else {
+      const clickedAddReview = this.state.clickedAddReview;
+      this.setState({
+        clickedAddReview: !clickedAddReview
+      });
+    }
+  };
+
   render() {
     const { product } = this.props.product.product;
+
+    console.log();
     let ProductDetailContent = <Spinner />;
     console.log(product);
     if (product) {
@@ -29,7 +50,7 @@ class ProductDetail extends Component {
     return (
       <div className="container" style={{ padding: "6rem 0" }}>
         <div className="card">{ProductDetailContent}</div>
-        <div class="row mt-2">
+        <div class="row mt-2 no-pad">
           <div class="col-sm-9">
             <div className="card">
               <nav aria-label="breadcrumb">
@@ -41,10 +62,19 @@ class ProductDetail extends Component {
                     <a href="#">Add Reviews</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">
-                  Reviews
+                    Reviews
+                  </li>
+                  <li class="rate-product">
+                    <button
+                      className="rate-product-button"
+                      onClick={this.onAddRateButtonClick}
+                    >
+                      Rate Product
+                    </button>
                   </li>
                 </ol>
               </nav>
+              {this.state.clickedAddReview ? <AddReview /> : ""}
               <ReviewContent />
             </div>
           </div>
@@ -67,7 +97,7 @@ class ProductDetail extends Component {
                     }}
                   >
                     category
-                  </p>  
+                  </p>
                   <p
                     className="lead"
                     style={{
@@ -97,14 +127,15 @@ class ProductDetail extends Component {
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.auth
   };
 };
 
 export default connect(
   mapStateToProps,
   { getAProductAction }
-)(ProductDetail);
+)(withRouter(ProductDetail));
 
 /* 
 
