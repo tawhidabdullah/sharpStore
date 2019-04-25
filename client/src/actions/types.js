@@ -36,5 +36,6 @@ export const DELETE_WISHLIST = "DELETE_WISHLIST";
 // PRODUCT REVIEWS TYPES
 export const GET_REVIEWS = "GET_REVIEWS";
 export const DELETE_REVIEW = "GET_REVIEWS";
+export const ADD_REVIEW = "ADD_REVIEW";
 
 // i love my life ,

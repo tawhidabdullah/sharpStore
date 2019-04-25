@@ -102,7 +102,7 @@ export const addProductReview = (product_id, reviewData) => dispatch => {
     .post(`/api/products/addProductReview/${product_id}`, reviewData)
     .then(res =>
       dispatch({
-        type: GET_PRODUCT,
+        type: GET_REVIEWS,
         payload: res.data
       })
     )
