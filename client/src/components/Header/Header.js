@@ -111,7 +111,7 @@ class Header extends Component {
       </React.Fragment>
     );
     return (
-      <nav className="fixed-top">
+      <nav className="fixed-top navbarheader">
         <div
           className={
             this.state.fosttrapToggle ? "nav-fostrap visible" : "nav-fostrap"
@@ -123,25 +123,7 @@ class Header extends Component {
                 <span className="lead">SharpStore</span>
               </NavLink>
             </li>
-            <div id="styleSearchBar">
-              <div className="header-wrap">
-                <div className="search">
-                  <input
-                    onChange={this.onSearchInputChange}
-                    value={this.state.searchInput}
-                    type="text"
-                    className="searchTerm searchTerm__white"
-                    placeholder="Search products by name.."
-                  />
-                  <button
-                    type="submit"
-                    className="searchButton searchButton__white"
-                  >
-                    <i className="fa fa-search" />
-                  </button>
-                </div>
-              </div>
-            </div>
+           
             <li>
               <a href="javascript:void(0)">
                 Category
