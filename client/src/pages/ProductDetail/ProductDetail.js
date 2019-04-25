@@ -4,9 +4,11 @@ import { withRouter } from "react-router-dom";
 import ProductDetailComponent from "../../components/ProductDetail/ProductDetail";
 import ProductSlider from "../../components/ProductSlider/ProductSlider";
 import Breadcrumb from "../../components/styles_components/Breadcrumb";
+import Product from "../../components/Product/Product";
 import {
   getAProductAction,
-  addProductReview
+  addProductReview,
+  getProductAction
 } from "../../actions/productAction";
 import Spinner from "../../components/commonFeilds/Spinner";
 import ReviewContent from "../../components/ReviewContent/ReviewContent";
@@ -22,6 +24,7 @@ class ProductDetail extends Component {
   componentDidMount() {
     const productId = this.props.match.params.id;
     this.props.getAProductAction(productId);
+    this.props.getProductAction();
   }
 
   onAddRateButtonClick = () => {
@@ -39,6 +42,16 @@ class ProductDetail extends Component {
   render() {
     const productId = this.props.match.params.id;
     const { product } = this.props.product.product;
+    let bestSellerContent = "";
+
+    if (this.props.product.products) {
+      const products = this.props.product.products.splice(0, 5);
+      bestSellerContent = products.map(product => {
+        console.log(product);
+        return <Product product={product} />;
+      });
+    }
+
     let ProductDetailContent = <Spinner />;
     if (product) {
       const { productImage } = product;
@@ -51,7 +64,7 @@ class ProductDetail extends Component {
     }
 
     return (
-      <div className="container" style={{ padding: "6rem 0" }}>
+      <div className="container fill" style={{ padding: "6rem 0" }}>
         <div className="card">{ProductDetailContent}</div>
         <div class="row mt-2 no-pad">
           <div class="col-sm-9">
@@ -70,6 +83,7 @@ class ProductDetail extends Component {
               <div class="card-header text-center font-weight-bold">
                 Best Sellers
               </div>
+              {bestSellerContent}
             </div>
           </div>
         </div>
@@ -87,7 +101,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getAProductAction, addProductReview }
+  { getAProductAction, addProductReview, getProductAction }
 )(withRouter(ProductDetail));
 
 /* 

@@ -1,5 +1,14 @@
+.row.reduce-pad {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .row.reduce-pad > [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 0;
+  }
 
-// $body-bg: #000;
-
-@import '~bootstrap/scss/bootstrap.scss';
+  
+  .addToCardButton{
+      
+  }
 

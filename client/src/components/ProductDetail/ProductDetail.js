@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { formatMoney } from "../../pipes/priceFormatter";
 import { addProductToCart } from "../../actions";
-import './ProductDetail.scss'; 
+import "./ProductDetail.scss";
 const ProductDetail = props => {
-  const { title, category, price, desc } = props.product;
+  const { title, category, price, desc, reviews } = props.product;
 
   const onCart = () => {
     props.dispatch(addProductToCart(props.product));
@@ -30,7 +30,7 @@ const ProductDetail = props => {
             <li class="fa fa-fw fa-lg fa-star-half" />
           </ul>
           <span class="product-reviews">
-            <a href="#">10 Reviews</a>
+            <a href="#">{reviews.length} Reviews</a>
           </span>
         </div>
         <dl className="item-property">

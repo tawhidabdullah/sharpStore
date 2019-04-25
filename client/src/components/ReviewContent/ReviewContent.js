@@ -27,17 +27,22 @@ class ReviewContent extends Component {
     let reviewItemContent = <Spinner />;
 
     if (reviews.reviews) {
-      reviewItemContent = reviews.reviews.map(review => {
-        return (
-          <ReviewItem
-            review={review}
-            isAdmin={isAdmin}
-            deleteReview={this.onClickDeleteReview}
-          />
+      if (reviews.reviews.length > 0) {
+        reviewItemContent = reviews.reviews.map(review => {
+          return (
+            <ReviewItem
+              review={review}
+              isAdmin={isAdmin}
+              deleteReview={this.onClickDeleteReview}
+            />
+          );
+        });
+      } else if (reviews.reviews.length === 0) {
+        reviewItemContent = (
+          <h2 className="display-5 text-center">No Reviews</h2>
         );
-      });
+      }
     }
-
     return <div>{reviewItemContent}</div>;
   }
 }

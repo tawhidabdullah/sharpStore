@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Product from "../../components/Product/Product";
+import "./ProductList.scss";
 
 import { brandFilter } from "../../pipes/brandFilter";
 import { orderByFilter } from "../../pipes/orderByFilter";
@@ -101,7 +102,7 @@ class ProductList extends Component {
             </div>
           </div>
         </div>
-        <div className="row">{contents}</div>
+        <div className="row reduce-pad">{contents}</div>
         <div className="d-flex justify-content-end">
           <Pagination
             totalItemsCount={this.props.products.length}

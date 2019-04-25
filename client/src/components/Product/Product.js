@@ -94,7 +94,7 @@ class Product extends Component {
           <img
             alt="Card image cap"
             className="card-img-top img-fluid"
-            src={productImage}
+            src={`/${productImage}`}
           />
         </Link>
         <div className="card-body">
@@ -124,16 +124,21 @@ class Product extends Component {
             <div className="card__ratings">
               3.24 <i className="fa fa-star" />
             </div>
-            <button
-              onClick={() => {
-                this.props.addProductToCart({ ...this.props.product });
-              }}
-              id="btn-invisible"
-              className=" ml-3 btn btn-outline-danger"
-            >
-              {" "}
-              Add To Cart
-            </button>
+
+            <div className="addToCardButton">
+            
+              <button
+                onClick={() => {
+                  this.props.addProductToCart({ ...this.props.product });
+                }}
+                id="btn-invisible"
+                className="rate-product-button"
+              >
+                {" "}
+               
+               ADD TO CART
+              </button>
+            </div>
           </div>
         </div>
       </div>
