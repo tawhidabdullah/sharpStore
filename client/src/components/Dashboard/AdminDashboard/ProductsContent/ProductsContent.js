@@ -128,20 +128,7 @@ class ProductsContent extends Component {
               Recent: <span className="focus">$250 </span>to{" "}
               <span className="focus">Best Buy</span> on Saturday, June 5.
             </div>
-            <div class="produc-wrap searchwrap">
-              <div class="search">
-                <input
-                  onChange={this.onSearchInputChange}
-                  value={this.state.searchInput}
-                  type="text"
-                  class="searchTerm searchTerm__red"
-                  placeholder="Search products by name.."
-                />
-                <button type="submit" class="searchButton searchButton__red">
-                  <i class="fa fa-search" />
-                </button>
-              </div>
-            </div>
+           
             <span
               className="material-button"
               onClick={this.onMaterialButtonclick}

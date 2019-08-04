@@ -30,6 +30,8 @@ class FileUploads extends Component {
       productImage: productImage
     });
   };
+
+  
   onInputChange = e => {
     this.setState({
       [e.target.name]: e.target.value
