@@ -13,12 +13,15 @@ An easy to use and beautiful Online store for owners
 * Customer support
 
 
-#key Technology
+## key Technologies
 * reactjs,redux
 * node,express,mongoDB
 
 ## Getting Started
+``` 
 npm run dev
+
+```
 
 ### Installing
 
