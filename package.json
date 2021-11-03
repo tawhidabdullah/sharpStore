@@ -34,7 +34,7 @@
     "passport-jwt": "^4.0.0",
     "react-moment": "^0.8.4",
     "request": "^2.88.0",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "bugs": {
     "url": "https://github.com/tawhidabdullah/sharpStore/issues"
